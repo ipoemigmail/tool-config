@@ -1,0 +1,17 @@
+stty stop ''
+stty start ''
+stty -ixon
+stty -ixoff
+
+if [ -f ~/.profile_kakao ]; then
+  . ~/.profile_kakao
+fi
+
+export PATH=$HOME/Bin:$PATH
+
+export PERSONAL="$HOME/Develop/Personal"
+
+#alias intellij="open -a \"IntelliJ IDEA\""
+alias vscode="open -a \"Visual Studio Code\""
+
+export SBT_OPTS="-Xmx2G -Xss2M"

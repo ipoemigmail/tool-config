@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+SCALA_VERSION="2.12.10"
+#SCALA_VERSION="2.13.0"
+AMMONITE_VERSION="1.8.1"
+
+RUNNER=ammonite.Main
+CACHE_DIR="$HOME/.cache"
+CACHE_FILE_NAME="$CACHE_DIR/.ammonite_${SCALA_VERSION}-${AMMONITE_VERSION}-classpath-cache"
+COURSIER_OPTS="-A src,javadoc,jar,bundle"
+
+cache_classpath() {
+    if [[ ! -d $CACHE_DIR ]]; then
+        mkdir -p $CACHE_DIR
+    fi
+    #CLASSPATH=$(echo $JAVA_HOME/jre/lib/rt.jar)
+    CLASSPATH=$(coursier fetch $COURSIER_OPTS com.lihaoyi:ammonite_${SCALA_VERSION}:${AMMONITE_VERSION} -p)
+    CLASSPATH=$CLASSPATH:$(coursier fetch $COURSIER_OPTS org.scala-lang:scala-compiler:${SCALA_VERSION} -p)
+    CLASSPATH=$CLASSPATH:$(coursier fetch $COURSIER_OPTS org.scala-lang:scala-library:${SCALA_VERSION} -p)
+    #echo $CLASSPATH
+    echo $CLASSPATH > $CACHE_FILE_NAME
+}
+
+if [[ ! -e $CACHE_FILE_NAME ]]; then
+    cache_classpath
+fi
+CLASSPATH=$(cat $CACHE_FILE_NAME)
+
+java $JAVA_OPTS -cp $CLASSPATH -Dscala.usejavacp=true -Dfile.encoding=UTF-8 $RUNNER "$@"
