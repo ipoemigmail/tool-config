@@ -2,12 +2,14 @@ export STORY_SPEC_OPT="/Users/ben.jeong/.story-spec/opt"
 export RUBY_HOME="$STORY_SPEC_OPT/ruby"
 export PLAY_HOME="$STORY_SPEC_OPT/play"
 export PATH="$STORY_SPEC_OPT:$RUBY_HOME/bin:$PLAY_HOME:$PATH"
-export JAVA11_HOME="`/usr/libexec/java_home -v 11`"
+#export JAVA11_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
+export JAVA11_HOME=$GRAALVM19_JAVA11_HOME
 export JAVA12_HOME="`/usr/libexec/java_home -v 12`"
-export GRAALVM19_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.1/Contents/Home"
+export GRAALVM19_JAVA8_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-java8-19.3.0/Contents/Home"
+export GRAALVM19_JAVA11_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-java11-19.3.0/Contents/Home"
 #export JAVA8_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home"
 #export JAVA8_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"
-export JAVA8_HOME=$GRAALVM19_HOME
+export JAVA8_HOME=$GRAALVM19_JAVA8_HOME
 export JAVA7_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home"
 export JAVA_HOME=$JAVA8_HOME
 

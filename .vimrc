@@ -11,7 +11,6 @@
 inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<Esc>'
 noremap p p`[
 noremap P P`[
-:imap jk <Esc>
 
 "function! RestoreRegister()
 "  let @" = s:restore_reg
