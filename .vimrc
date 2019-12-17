@@ -117,7 +117,9 @@ call vundle#begin()
 call vundle#end()
 Plugin 'Chiel92/vim-autoformat'
 let g:autoformat_verbosemode=1
-let g:formatdef_scalafmt = "'scalafmt --assume-filename a.sc --stdin 2>/dev/null'"
+let g:formatdef_scalafmt = "'scalafmt --stdin 2>/dev/null'"
+let g:formatdef_sbtfmt = "'scalafmt --stdin --assume-filename a.sbt 2>/dev/null'"
 let g:formatters_scala = ['scalafmt']
+let g:formatters_sbt = ['sbtfmt']
 filetype plugin indent on
 set shell=/bin/bash
