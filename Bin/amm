@@ -2,7 +2,7 @@
 
 SCALA_VERSION="2.12.10"
 #SCALA_VERSION="2.13.0"
-AMMONITE_VERSION="1.8.2"
+AMMONITE_VERSION="1.9.2"
 
 RUNNER=ammonite.Main
 CACHE_DIR="$HOME/.cache"
@@ -15,10 +15,13 @@ cache_classpath() {
     fi
     #CLASSPATH=$(echo $JAVA_HOME/jre/lib/rt.jar)
     CLASSPATH=$(coursier fetch $COURSIER_OPTS com.lihaoyi:ammonite_${SCALA_VERSION}:${AMMONITE_VERSION} -p)
-    CLASSPATH=$CLASSPATH:$(coursier fetch $COURSIER_OPTS org.scala-lang:scala-compiler:${SCALA_VERSION} -p)
-    CLASSPATH=$CLASSPATH:$(coursier fetch $COURSIER_OPTS org.scala-lang:scala-library:${SCALA_VERSION} -p)
-    #echo $CLASSPATH
-    echo $CLASSPATH > $CACHE_FILE_NAME
+    RESULT=$?
+    if [[ $RESULT == 0 ]]; then
+      CLASSPATH=$CLASSPATH:$(coursier fetch $COURSIER_OPTS org.scala-lang:scala-compiler:${SCALA_VERSION} -p)
+      CLASSPATH=$CLASSPATH:$(coursier fetch $COURSIER_OPTS org.scala-lang:scala-library:${SCALA_VERSION} -p)
+      #echo $CLASSPATH
+      echo $CLASSPATH > $CACHE_FILE_NAME
+    fi
 }
 
 if [[ ! -e $CACHE_FILE_NAME ]]; then
