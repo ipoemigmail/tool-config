@@ -13,4 +13,4 @@ export PERSONAL="$HOME/Develop/Personal"
 
 #alias intellij="open -a \"IntelliJ IDEA\""
 
-export SBT_OPTS="-Xmx1G -Xss2M"
+export SBT_OPTS="-Xmx2G -Xss2M"
