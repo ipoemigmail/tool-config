@@ -9,8 +9,8 @@
 "set langmenu=cp949
 "imap <C-L> <Esc>
 inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<Esc>'
-noremap p p`[
-noremap P P`[
+"noremap p p`[
+"noremap P P`[
 
 "function! RestoreRegister()
 "  let @" = s:restore_reg
