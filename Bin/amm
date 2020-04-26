@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-SCALA_VERSION="2.12.10"
-#SCALA_VERSION="2.13.0"
-AMMONITE_VERSION="2.0.4"
+SCALA_VERSION="2.12.11"
+#SCALA_VERSION="2.13.2"
+AMMONITE_VERSION="2.1.0"
 
 RUNNER=ammonite.Main
 CACHE_DIR="$HOME/.cache"
@@ -31,6 +31,6 @@ if [[ ! -e $CACHE_FILE_NAME ]]; then
 fi
 CLASSPATH=$(cat $CACHE_FILE_NAME)
 
-export JAVA_HOME=$GRAALVM19_JAVA11_HOME
+export JAVA_HOME=$GRAALVM20_JAVA11_HOME
 
 java $JAVA_OPTS -cp $CLASSPATH -Dscala.usejavacp=true -Dfile.encoding=UTF-8 $RUNNER "$@"

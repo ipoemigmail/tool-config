@@ -16,7 +16,7 @@ export JAVA7_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Ho
 export JAVA_HOME=$JAVA8_HOME
 
 export WORKS="${HOME}/Develop/Works"
-export STORY_HOME="$WORKS/story"
+export STORY_HOME="$WORKS/Kakao/story"
 export SPEC="$STORY_HOME/story-spec"
 export APP="$STORY_HOME/story-app-server"
 export WEB="$STORY_HOME/story-webapp"
