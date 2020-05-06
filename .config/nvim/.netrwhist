@@ -1,10 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =8
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/Users/ben.jeong'
+let g:netrw_dirhist_1='/Users/ben.jeong/Desktop'
+let g:netrw_dirhist_0='/Users/ben.jeong/Desktop/재배치된 항목'
+let g:netrw_dirhist_9='/Users/ben.jeong/Desktop'
 let g:netrw_dirhist_8='/Users/ben.jeong/Develop/Personal/tool-config/.config/qBittorrent'
 let g:netrw_dirhist_7='/Users/ben.jeong'
 let g:netrw_dirhist_6='/Users/ben.jeong/.cache'
 let g:netrw_dirhist_5='/Users/ben.jeong'
 let g:netrw_dirhist_4='/Users/ben.jeong/.ammonite'
 let g:netrw_dirhist_3='/Users/ben.jeong'
-let g:netrw_dirhist_2='/Users/ben.jeong/Downloads/embulk-excel-bigquery'
-let g:netrw_dirhist_1='/Users/ben.jeong/Bin'

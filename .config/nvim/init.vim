@@ -24,8 +24,9 @@ inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<Esc>'
 "
 "vnoremap <silent> <expr> p <sid>pRepl()
 
-lang C
-"set enc=utf-8
+"lang C
+lang en_US.UTF-8
+set enc=utf-8
 set lcs=conceal:\ ,nbsp:\ ,tab:¦·,eol:¶,trail:·,extends:…,precedes:…
 set backspace=indent,eol,start
 "set columns=160
@@ -55,7 +56,7 @@ let python_highlight_all=1
 "set cino=h0+0(0,W2m1g1
 let g:netrw_liststyle=1
 "set guioptions+=b
-"set fencs=cp949,ucs-bom,utf-8
+set fencs=utf-8
 set background=dark
 if has("gui_vimr")
   color evening
