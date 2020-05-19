@@ -4,7 +4,7 @@
 "onoremap Y Y'[
 "onoremap y y'[
 "onoremap d d'[
-"set tenc=korea
+set tenc=utf-8
 "set enc=utf-8
 "set langmenu=cp949
 "imap <C-L> <Esc>
