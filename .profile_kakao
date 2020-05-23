@@ -58,6 +58,6 @@ export KS_HADOOP2="story-hadoop-cmd2"
 
 alias cap="bundle exec cap"
 
-export GOPATH=$GOPATH:$WORKS/golang
+export GOPATH=$WORKS/golang
 export DEPLOY=$WORKS/story/story-deploy
-export PATH="/usr/local/opt/thrift@0.9/bin:$PATH"
+export PATH="/usr/local/opt/thrift@0.9/bin:$PATH:$GOPATH/bin"

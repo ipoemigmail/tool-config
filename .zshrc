@@ -126,8 +126,8 @@ left join places on history.place_id = places.rowid
 where commands.argv LIKE '$(sql_escape $1)%'
 and exit_status = 0
 and commands.argv != 'cd ..'
-group by commands.argv
-order by history.session != ${HISTDB_SESSION}, places.dir NOT LIKE '$(sql_escape $PWD)%', count(*) desc, start_time desc limit 1"
+group by history.session, places.dir, commands.argv
+order by history.session != ${HISTDB_SESSION}, places.dir LIKE '$(sql_escape $PWD)%' desc, max(start_time) desc, count(*) desc limit 1"
     suggestion=$(_histdb_query "$query")
 }
 
@@ -148,8 +148,8 @@ where places.dir LIKE '$(sql_escape $PWD)%'
 and commands.argv LIKE '$(sql_escape $1)%'
 and exit_status = 0
 and commands.argv != 'cd ..'
-group by commands.argv
-order by history.session != ${HISTDB_SESSION}, count(*) desc, start_time desc limit 1"
+group by history.session, start_time, commands.argv
+order by history.session != ${HISTDB_SESSION}, max(start_time) desc, count(*) desc limit 1"
     suggestion=$(_histdb_query "$query")
 }
 
