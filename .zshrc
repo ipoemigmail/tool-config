@@ -162,3 +162,6 @@ setopt rmstarsilent
 autoload -U compinit && compinit
 
 bindkey \^U backward-kill-line
+
+RPROMPT="[%D{%F}|%@]"
+

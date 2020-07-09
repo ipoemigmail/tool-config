@@ -13,4 +13,5 @@ export PERSONAL="$HOME/Develop/Personal"
 
 #alias intellij="open -a \"IntelliJ IDEA\""
 
-export SBT_OPTS="-Xmx3G"
+export SBT_OPTS="-Xmx4G"
+#alias vimr="vimr -s"
