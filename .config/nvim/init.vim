@@ -128,3 +128,5 @@ set shell=/bin/bash
 
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
+let g:airline_theme='one'
+
