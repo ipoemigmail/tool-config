@@ -31,10 +31,10 @@ set backspace=indent,eol,start
 "set columns=160
 "set lines=40
 set nowrap
-set ts=2
-set sw=2
-set sts=2
-set et
+set ts=4
+set sw=4
+set sts=4
+set noet
 set ru
 set si
 set ai
@@ -60,8 +60,8 @@ let g:netrw_liststyle=1
 color default
 "set background=dark
 highlight OverLength term=reverse cterm=reverse gui=reverse
-highlight SpecialKey ctermfg=Gray guifg=Gray guibg=background
-highlight NonText ctermfg=Gray guifg=Gray guibg=background
+highlight SpecialKey ctermfg=DarkGray guifg=DarkGray guibg=background
+highlight NonText ctermfg=DarkGray guifg=DarkGray guibg=background
 "match OverLength /\%80v/
 set directory=/tmp
 set backupdir=/tmp

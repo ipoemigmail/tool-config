@@ -3,11 +3,11 @@ export RUBY_HOME="$STORY_SPEC_OPT/ruby"
 export PLAY_HOME="$STORY_SPEC_OPT/play"
 export PATH="$STORY_SPEC_OPT:$RUBY_HOME/bin:$PLAY_HOME:$PATH"
 #export JAVA11_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
-export JAVA11_HOME=$GRAALVM19_JAVA11_HOME
 export JAVA12_HOME="`/usr/libexec/java_home -v 12`"
 export JAVA13_HOME="`/usr/libexec/java_home -v 13`"
 export GRAALVM20_JAVA8_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-java8-20.1.0/Contents/Home"
 export GRAALVM20_JAVA11_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home"
+export JAVA11_HOME=$GRAALVM20_JAVA11_HOME
 export GRAALVM_HOME=$GRAALVM20_JAVA8_HOME
 #export JAVA8_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home"
 #export JAVA8_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"
@@ -61,8 +61,3 @@ alias kinit='kinit ben.jeong'
 #alias cap='bundle exec cap'
 alias scp="scp -o user=deploy"
 
-alias vim="nvim"
-alias vi="nvim"
-alias vimdiff="nvim -d"
-alias vimr="vimr -s"
-export EDITOR=/usr/local/bin/nvim
