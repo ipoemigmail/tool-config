@@ -26,7 +26,7 @@ inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<Esc>'
 
 lang C
 "set enc=utf-8
-set lcs=conceal:\ ,nbsp:\ ,tab:¦·,eol:¶,trail:·,extends:…,precedes:…
+set lcs=conceal:\ ,nbsp:\ ,tab:»\ ,eol:¶,trail:·,extends:…,precedes:…
 set backspace=indent,eol,start
 "set columns=160
 "set lines=40
