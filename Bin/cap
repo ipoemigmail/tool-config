@@ -1,0 +1,7 @@
+#!/bin/bash
+
+RUBY_HOME=$STORY_SPEC_OPT/ruby
+PATH=$RUBY_HOME/bin:$PATH
+
+
+bundle exec cap $@

@@ -1,7 +1,6 @@
 export STORY_SPEC_OPT="/Users/ben.jeong/.story-spec/opt"
-export RUBY_HOME="$STORY_SPEC_OPT/ruby"
 export PLAY_HOME="$STORY_SPEC_OPT/play"
-export PATH="$STORY_SPEC_OPT:$RUBY_HOME/bin:$PLAY_HOME:$PATH"
+export PATH="$STORY_SPEC_OPT:$PLAY_HOME:$PATH"
 #export JAVA11_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
 export JAVA12_HOME="`/usr/libexec/java_home -v 12`"
 export JAVA13_HOME="`/usr/libexec/java_home -v 13`"
@@ -51,13 +50,10 @@ export SPARK_HOME="/usr/local/opt/spark"
 export KS_HADOOP1="story-hadoop-cmd1"
 export KS_HADOOP2="story-hadoop-cmd2"
 
-alias cap="bundle exec cap"
-
 export GOPATH=$WORKS/golang
 export DEPLOY=$WORKS/story/story-deploy
 export PATH="/usr/local/opt/thrift@0.9/bin:$PATH:$GOPATH/bin"
 
 alias kinit='kinit ben.jeong'
-#alias cap='bundle exec cap'
 alias scp="scp -o user=deploy"
 
