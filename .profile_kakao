@@ -51,7 +51,6 @@ export KS_HADOOP1="story-hadoop-cmd1"
 export KS_HADOOP2="story-hadoop-cmd2"
 
 export GOPATH=$WORKS/golang
-export DEPLOY=$WORKS/story/story-deploy
 export PATH="/usr/local/opt/thrift@0.9/bin:$PATH:$GOPATH/bin"
 
 alias kinit='kinit ben.jeong'
