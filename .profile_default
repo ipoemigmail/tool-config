@@ -15,3 +15,5 @@ export PERSONAL="$HOME/Develop/Personal"
 
 export SBT_OPTS="-Xmx4G"
 #alias vimr="vimr -s"
+
+export EDITOR=vim
