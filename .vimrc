@@ -31,10 +31,10 @@ set backspace=indent,eol,start
 "set columns=160
 "set lines=40
 set nowrap
-set ts=4
-set sw=4
-set sts=4
-set et
+set ts=2
+set sw=2
+set sts=2
+set noet
 set ru
 set si
 set ai
@@ -59,9 +59,6 @@ let g:netrw_liststyle=1
 "set fencs=cp949,ucs-bom,utf-8
 color default
 "set background=dark
-highlight OverLength term=reverse cterm=reverse gui=reverse
-highlight SpecialKey ctermfg=DarkGray guifg=DarkGray guibg=background
-highlight NonText ctermfg=DarkGray guifg=DarkGray guibg=background
 "match OverLength /\%80v/
 set directory=/tmp
 set backupdir=/tmp
@@ -89,27 +86,6 @@ let clj_highlight_builtine = 1
 let clj_perform_rainbow = 1
 set hlsearch
 "set fileformat=dos
-"let g:indent_guides_auto_colors = 0
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=White   ctermbg=3
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=LightGray ctermbg=4
-"autocmd VimEnter * IndentGuidesEnable
-"let g:indentLine_color_gui = LightGray
-let g:indentLine_char = '¦'
-let g:indentLine_concealcursor = 'vc'
-let g:indentLine_conceallevel = 0
-let g:indentLine_showFirstIndentLevel = 1
-"let g:indentLine_leadingSpaceEnabled = 1
-
-"let _curfile = expand("%:t")
-"if _curfile =~ "pascal"
-"			\|| _curfile =~ "Pascal"
-"			\|| _curfile =~ ".*\.pas"
-"			\|| _curfile =~ ".*\.sql"
-"			\|| _curfile =~ ".*\.dfm"
-"	set et
-"else
-"	set noet
-"endif
 autocmd FileType netrw setl bufhidden=wipe
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -122,4 +98,11 @@ let g:formatdef_sbtfmt = "'scalafmt --stdin --assume-filename a.sbt 2>/dev/null'
 let g:formatters_scala = ['scalafmt']
 let g:formatters_sbt = ['sbtfmt']
 filetype plugin indent on
-set shell=/bin/bash
+Plugin 'nathanaelkane/vim-indent-guides'
+"let g:indent_guides_auto_colors = 0
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guifg=DarkGray ctermfg=DarkGray
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guifg=DarkGray ctermfg=DarkGray
+let g:indent_guides_enable_on_vim_startup = 1
+autocmd VimEnter,Colorscheme * :hi OverLength term=reverse cterm=reverse gui=reverse
+autocmd VimEnter,Colorscheme * :hi SpecialKey ctermfg=DarkGray guifg=DarkGray guibg=background
+autocmd VimEnter,Colorscheme * :hi NonText ctermfg=DarkGray guifg=DarkGray guibg=background
