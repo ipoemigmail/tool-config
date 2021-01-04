@@ -1,8 +1,15 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/ben.jeong/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -73,9 +80,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(
   git
   zsh-completions
+  zsh-autosuggestions
   docker
   docker-compose
   fzf
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -119,21 +128,14 @@ zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
 source $HOME/.profile_default
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source $HOME/.oh-my-zsh/custom/plugins/zsh-histdb/sqlite-history.zsh
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd histdb-update-outcome
+#add-zsh-hook precmd histdb-update-outcome
 
 _zsh_autosuggest_strategy_histdb_top() {
-#    local query="select commands.argv from
-#history left join commands on history.command_id = commands.rowid
-#left join places on history.place_id = places.rowid
-#where commands.argv LIKE '$(sql_escape $1)%'
-#and exit_status = 0
-#group by commands.argv
-#order by places.dir != '$(sql_escape $PWD)', count(*) desc limit 1"
     local query="select commands.argv from
 history left join commands on history.command_id = commands.rowid
 left join places on history.place_id = places.rowid
@@ -141,29 +143,7 @@ where commands.argv LIKE '$(sql_escape $1)%'
 and exit_status = 0
 and commands.argv != 'cd ..'
 group by history.session, places.dir, commands.argv
-order by history.session != ${HISTDB_SESSION}, places.dir LIKE '$(sql_escape $PWD)%' desc, max(start_time) desc, count(*) desc limit 1"
-    suggestion=$(_histdb_query "$query")
-}
-
-_zsh_autosuggest_strategy_histdb_top_here() {
-#    local query="select commands.argv from
-#history left join commands on history.command_id = commands.rowid
-#left join places on history.place_id = places.rowid
-#where places.dir LIKE '$(sql_escape $PWD)%'
-#and commands.argv LIKE '$(sql_escape $1)%'
-#and exit_status = 0
-#and commands.argv != 'cd ..'
-#group by commands.argv
-#order by count(*) desc limit 1"
-    local query="select commands.argv from
-history left join commands on history.command_id = commands.rowid
-left join places on history.place_id = places.rowid
-where places.dir LIKE '$(sql_escape $PWD)%'
-and commands.argv LIKE '$(sql_escape $1)%'
-and exit_status = 0
-and commands.argv != 'cd ..'
-group by history.session, start_time, commands.argv
-order by history.session != ${HISTDB_SESSION}, max(start_time) desc, count(*) desc limit 1"
+order by history.session != '${HISTDB_SESSION}', places.dir LIKE '$(sql_escape $PWD)%' desc, max(start_time) desc, count(*) desc limit 1"
     suggestion=$(_histdb_query "$query")
 }
 
@@ -179,6 +159,5 @@ bindkey \^U backward-kill-line
 
 RPROMPT="[%D{%F}|%@]"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+#To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-

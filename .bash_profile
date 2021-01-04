@@ -199,3 +199,4 @@ alias intellij="open -a \"IntelliJ IDEA\""
 alias vscode="open -a \"Visual Studio Code\""
 
 export SBT_OPTS="-Xmx2G -Xss2M"
+source "$HOME/.cargo/env"

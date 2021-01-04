@@ -1,7 +1,7 @@
-stty stop ''
-stty start ''
-stty -ixon
-stty -ixoff
+#stty stop ''
+#stty start ''
+#stty -ixon
+#stty -ixoff
 
 if [ -f ~/.profile_kakao ]; then
   . ~/.profile_kakao

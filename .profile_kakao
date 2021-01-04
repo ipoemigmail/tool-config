@@ -1,52 +1,13 @@
-export STORY_SPEC_OPT="/Users/ben.jeong/.story-spec/opt"
-export PLAY_HOME="$STORY_SPEC_OPT/play"
-export PATH="$STORY_SPEC_OPT:$PLAY_HOME:$PATH"
-export JAVA12_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-12.jdk/Contents/Home"
-export JAVA13_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-13.jdk/Contents/Home"
+export JAVA15_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-15.jdk/Contents/Home"
 export JAVA11_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
 export JAVA8_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"
 export JAVA7_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home"
 export JAVA_HOME=$JAVA8_HOME
 
 export WORKS="${HOME}/Develop/Works"
-export STORY_HOME="$WORKS/Kakao/Story"
-export SPEC="$STORY_HOME/story-spec"
-export APP="$STORY_HOME/story-app-server"
-export WEB="$STORY_HOME/story-webapp"
-export DEPLOY="$STORY_HOME/story-deploy"
-export COMM="$STORY_HOME/story-common"
-export SPARK_JOB2="$STORY_HOME/story-spark-job2"
-export SPARK="$STORY_HOME/story-spark"
-export DOCKER="$STORY_HOME/story-docker"
 
-export PATH="$PATH:$JAVA_HOME/bin"
-export MAVEN_OPTS='-Dfile.encoding=UTF-8 -Xdebug -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n'
+export PATH="$JAVA_HOME/bin:$PATH"
 
-export LOCAL_IVY_REPO="~/.ivy2_sbt/cache"
-
-export SPARK_HOME="/usr/local/opt/spark"
-#
-#export HADOOP_USER_NAME=deploy
-##export HADOOP_CONF_DIR="$SPARK_JOB2/project-core/base/src/main/resources/ks/batch"
-#export HADOOP_CONF_DIR="$SPARK_HOME/conf/hadoop"
-#
-#export DRIVER_CLASSPATH="$SPARK_JOB2/project-submodule/escher-common/model/target/scala-2.11/classes"
-#export DRIVER_CLASSPATH="$DRIVER_CLASSPATH:$SPARK_JOB2/project-core/log-model/target/scala-2.11/classes"
-#export DRIVER_CLASSPATH="$DRIVER_CLASSPATH:$SPARK_JOB2/project-core/etl/target/scala-2.11/classes"
-##export DRIVER_CLASSPATH="$DRIVER_CLASSPATH:$LOCAL_IVY_REPO/org.joda/joda-convert/jars/joda-convert-1.8.1.jar"
-##export DRIVER_CLASSPATH="$DRIVER_CLASSPATH:$LOCAL_IVY_REPO/joda-time/joda-time/jars/joda-time-2.9.7.jar"
-#export DRIVER_CLASSPATH="$DRIVER_CLASSPATH:$LOCAL_IVY_REPO/com.kakao.mango/mango-core_2.11/jars/mango-core_2.11-0.5.0.jar"
-#
-#SPARK_OPTS="--executor-memory 2G --num-executors 8 --driver-class-path $DRIVER_CLASSPATH"
-#
-#alias spark-shell="$SPARK_HOME/bin/spark-shell $SPARK_OPTS local[*]"
-
-export KS_HADOOP1="story-hadoop-cmd1"
-export KS_HADOOP2="story-hadoop-cmd2"
-
-export GOPATH=$WORKS/golang
-export PATH="/usr/local/opt/thrift@0.9/bin:$PATH:$GOPATH/bin"
-
-alias kinit='kinit ben.jeong'
+alias kinit='kinit ben.jung'
 alias scp="scp -o user=deploy"
 
