@@ -31,6 +31,4 @@ if [[ ! -e $CACHE_FILE_NAME ]]; then
 fi
 CLASSPATH=$(cat $CACHE_FILE_NAME)
 
-export JAVA_HOME=$GRAALVM20_JAVA11_HOME
-
 java $JAVA_OPTS -cp $CLASSPATH -Dscala.usejavacp=true -Dfile.encoding=UTF-8 $RUNNER "$@"

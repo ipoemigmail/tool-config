@@ -7,13 +7,13 @@ if [ -f ~/.profile_kakao ]; then
   . ~/.profile_kakao
 fi
 
-export PATH=$HOME/Bin:$PATH
-
 export PERSONAL="$HOME/Develop/Personal"
+export GOPATH="$HOME/Develop/Go"
 
-#alias intellij="open -a \"IntelliJ IDEA\""
+export EVCXR_CONFIG_DIR=$HOME/.config/evcxr
+export RUSTC_WRAPPER="$HOME/.cargo/bin/sccache"
+export PATH="$HOME/Bin:$PATH:$GOPATH/bin"
 
 export SBT_OPTS="-Xmx4G"
-#alias vimr="vimr -s"
 
 export EDITOR=vim
