@@ -5,7 +5,7 @@ export JAVA7_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Ho
 export JAVA_HOME=$JAVA8_HOME
 
 export WORKS="${HOME}/Develop/Works"
-export COMMERCE="${HOME}/Develop/Works/Commerce"
+export COMMERCE="${HOME}/Develop/Works/KakaoCommerce"
 export SPARK="$COMMERCE/kc-spark"
 
 export PATH="$JAVA_HOME/bin:$PATH"
