@@ -1,0 +1,45 @@
+#!/bin/bash
+
+host=$1
+shift
+
+if [[ "$host" == *@* ]]; then
+	user=$(echo $host | cut -d @ -f 1)
+	host=$(echo $host | cut -d @ -f 2)
+fi
+  
+user=${user:-"deploy"}
+
+postfixes=(
+	.dakao.io
+	.pg1.krane.9rum.cc
+	.ay1.krane.9rum.cc
+	.s1.krane.9rum.cc
+	.s2.krane.9rum.cc
+	.krane.9rum.cc
+	.9rum.cc
+	.iwilab.com
+	.krane.iwilab.com
+)
+
+for postfix in "" ${postfixes[@]}
+do
+	domain="$host$postfix"
+	host $domain > /dev/null 2>&1
+	if [ "$?" == 0 ]; then
+		klist -s > /dev/null 2>&1 || kinit ben.jeong
+
+		klist -s > /dev/null 2>&1
+		if [ "$?" == 1 ]; then
+			exit 1
+		fi
+
+		echo "# Trying connect to $domain"
+
+		ssh -o 'StrictHostKeyChecking no' $SSHOPT $user@$domain $@
+		exit 0
+	fi
+done
+
+echo "Not found hostname for '$host'."
+exit 1
