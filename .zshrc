@@ -163,7 +163,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-#SPACESHIP_PROMPT_ORDER=("${(@)SPACESHIP_PROMPT_ORDER:#kubectl}")
 SPACESHIP_PROMPT_ORDER=(
   #time          # Time stamps section
   user          # Username section

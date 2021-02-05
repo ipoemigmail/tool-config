@@ -26,7 +26,7 @@ inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<Esc>'
 
 lang C
 "set enc=utf-8
-set lcs=conceal:\ ,nbsp:\ ,tab:»\ ,eol:¶,trail:·,extends:…,precedes:…
+set lcs=conceal:\ ,nbsp:\ ,tab:├\ ,eol:¶,trail:·,extends:…,precedes:…
 set backspace=indent,eol,start
 "set columns=160
 "set lines=40
@@ -34,7 +34,7 @@ set nowrap
 set ts=2
 set sw=2
 set sts=2
-set noet
+set et
 set ru
 set si
 set ai
@@ -97,12 +97,15 @@ let g:formatdef_scalafmt = "'scalafmt --stdin 2>/dev/null'"
 let g:formatdef_sbtfmt = "'scalafmt --stdin --assume-filename a.sbt 2>/dev/null'"
 let g:formatters_scala = ['scalafmt']
 let g:formatters_sbt = ['sbtfmt']
+Plugin 'Yggdroot/indentLine'
+"let g:indentLine_char = '¦'
+let g:indentLine_color_term = 100
+let g:indentLine_color_gui = '#888888'
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+"let g:indentLine_concealcursor = 'vc'
+"let g:indentLine_conceallevel = 0
+let g:indentLine_showFirstIndentLevel = 1
 filetype plugin indent on
-Plugin 'nathanaelkane/vim-indent-guides'
-"let g:indent_guides_auto_colors = 0
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guifg=DarkGray ctermfg=DarkGray
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guifg=DarkGray ctermfg=DarkGray
-let g:indent_guides_enable_on_vim_startup = 1
 autocmd VimEnter,Colorscheme * :hi OverLength term=reverse cterm=reverse gui=reverse
 autocmd VimEnter,Colorscheme * :hi SpecialKey ctermfg=DarkGray guifg=DarkGray guibg=background
 autocmd VimEnter,Colorscheme * :hi NonText ctermfg=DarkGray guifg=DarkGray guibg=background
