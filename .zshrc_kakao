@@ -1,0 +1,10 @@
+function prompt_cluster_on_kc_spark() {
+  if [ "$(pwd)" = "${SPARK}" ]; then
+    p10k segment -f 208 -t "${CLUSTER_NAME}"
+  else
+    p10k segment -f 208 -t ""
+  fi
+}
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=cluster_on_kc_spark
+

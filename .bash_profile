@@ -188,6 +188,10 @@ stty -ixoff
 #eval $(docker-machine env default)
 
 if [ -f ~/.profile_kakao ]; then
+  . ~/.profile_default
+fi
+
+if [ -f ~/.profile_kakao ]; then
   . ~/.profile_kakao
 fi
 
