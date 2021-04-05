@@ -46,7 +46,7 @@ set sc
 set nu
 set list
 set nocompatible
-set guifont=Fira\ Code\ Han:h13
+set guifont=FiraCodeHanNF:h13
 "set guifont=Roboto\ Mono:h9:cHANGEUL
 set cb=autoselect,exclude:cons\|linux
 syntax on
@@ -109,3 +109,4 @@ filetype plugin indent on
 autocmd VimEnter,Colorscheme * :hi OverLength term=reverse cterm=reverse gui=reverse
 autocmd VimEnter,Colorscheme * :hi SpecialKey ctermfg=DarkGray guifg=DarkGray guibg=background
 autocmd VimEnter,Colorscheme * :hi NonText ctermfg=DarkGray guifg=DarkGray guibg=background
+
