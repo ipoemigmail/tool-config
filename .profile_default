@@ -12,7 +12,6 @@ export EXTERNAL="$HOME/Develop/External"
 export GOPATH="$HOME/Develop/Go"
 
 export EVCXR_CONFIG_DIR=$HOME/.config/evcxr
-export RUSTC_WRAPPER="$HOME/.cargo/bin/sccache"
 export PATH="$HOME/Bin:$PATH:$GOPATH/bin"
 
 export SBT_OPTS="-Xmx4G"
