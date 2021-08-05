@@ -1,0 +1,4 @@
+:sccache true
+:opt 0
+:timing
+:dep chrono = "*"
