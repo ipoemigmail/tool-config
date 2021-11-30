@@ -46,7 +46,7 @@ set sc
 set nu
 set list
 set nocompatible
-set guifont=FiraCodeHanNF:h13
+set guifont=KHackNerd:h13
 "set guifont=Roboto\ Mono:h9:cHANGEUL
 set cb=autoselect,exclude:cons\|linux
 syntax on

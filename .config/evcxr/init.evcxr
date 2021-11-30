@@ -1,4 +1,7 @@
 :sccache true
-:opt 0
 :timing
 :dep chrono = "*"
+:dep itertools = "*"
+:dep urlencoding = "*"
+:dep uuid = { version = "*", features = ["serde", "v4"] }
+
