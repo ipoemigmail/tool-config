@@ -17,3 +17,8 @@ export PATH="$HOME/Bin:$PATH:$GOPATH/bin"
 export SBT_OPTS="-Xmx4G"
 
 export EDITOR=vim
+
+if [[ "$(uname -m)" == "x86_64" ]]; then
+  alias brew='/usr/local/bin/brew'
+fi
+

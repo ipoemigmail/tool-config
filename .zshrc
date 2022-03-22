@@ -7,6 +7,13 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+if [[ "$(uname -m)" == "x86_64" ]]; then
+  export PATH="/usr/local/Homebrew/bin:$PATH"
+else
+  export PATH="/opt/homebrew/bin:$PATH"
+fi
+
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -186,3 +193,9 @@ if [ -f ~/.zshrc_kakao ]; then
   source ~/.zshrc_kakao
 fi
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+#eval "$(starship init zsh)"

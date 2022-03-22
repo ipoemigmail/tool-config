@@ -2,3 +2,14 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=go_version
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=rust_version
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=java_version
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=node_version
+
+function prompt_machtype() {
+  MTYPE=$(uname -m)
+  if [ "${MTYPE}" = 'x86_64' ]; then
+    p10k segment -f 200 -t "$MTYPE"
+  else
+    p10k segment -f 208 -t "$MTYPE"
+  fi
+}
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=machtype

@@ -11,4 +11,3 @@ function prompt_cluster_on_kc_spark() {
 }
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=cluster_on_kc_spark
-
