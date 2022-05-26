@@ -95,11 +95,11 @@ plugins=(
   npm
   node
   zsh-completions
-  zsh-autosuggestions
   docker
   docker-compose
   fzf
-  zsh-syntax-highlighting
+  fast-syntax-highlighting
+  zsh-autosuggestions
 )
 
 DISABLE_MAGIC_FUNCTIONS=true
@@ -199,3 +199,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 #eval "$(starship init zsh)"
+
+export UPDATE_ZSH_DAYS=1
+
