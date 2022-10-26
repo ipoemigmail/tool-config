@@ -2,11 +2,25 @@
 
 asdf plugin update --all
 
-asdf install rust latest && asdf global rust latest
-asdf install golang latest && asdf global golang latest
-asdf install kotlin latest && asdf global kotlin latest
-asdf install zig latest && asdf global zig latest
-asdf install python latest && asdf global python latest
+function update() {
+  PLUGIN=$1
 
-asdf install java $(asdf latest java zulu-17) && asdf global java $(asdf latest java zulu-17)
+  CURRENT_VER=$(asdf current $PLUGIN | awk '{print $2}')
+  LATEST_VER=$(asdf latest $PLUGIN)
+
+  if [[ "${CURRENT_VER}" != "${LATEST_VER}" ]]; then
+    asdf install $PLUGIN latest
+    asdf global $PLUGIN latest
+  else
+    echo "$PLUGIN already updated (current: $CURRENT_VER, latest: $LATEST_VER)"
+  fi
+}
+
+update "rust"
+update "golang"
+update "kotlin"
+update "zig"
+update "python"
+update "java zulu-17"
+
 asdf install java $(asdf latest java zulu-8)
