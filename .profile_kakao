@@ -1,7 +1,3 @@
-export JAVA11_HOME="/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home"
-export JAVA8_HOME="/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home"
-export JAVA_HOME=$JAVA8_HOME
-
 export WORKS="${HOME}/Develop/Works"
 export COMMERCE="${HOME}/Develop/Works/KakaoCommerce"
 export SPARK="$COMMERCE/kc-spark"

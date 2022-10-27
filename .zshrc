@@ -34,19 +34,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-if [ -f ~/.profile_default ]; then
-  source ~/.profile_default
-fi
-if [ -f ~/.profile_kakao ]; then
-  source ~/.profile_kakao
-fi
-if [ -f ~/.zshrc_default ]; then
-  source ~/.zshrc_default
-fi
-if [ -f ~/.zshrc_kakao ]; then
-  source ~/.zshrc_kakao
-fi
-
 export PATH=$HOME/.asdf/shims:$PATH
 
 # Set list of themes to pick from when loading at random
@@ -123,6 +110,7 @@ plugins=(
   fast-syntax-highlighting
   zsh-autosuggestions
   rust
+  node
 )
 
 DISABLE_MAGIC_FUNCTIONS=true
@@ -194,14 +182,19 @@ bindkey \^U backward-kill-line
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+if [ -f ~/.profile_default ]; then
+  source ~/.profile_default
+fi
+if [ -f ~/.zshrc_default ]; then
+  source ~/.zshrc_default
+fi
+if [ -f ~/.zshrc_kakao ]; then
+  source ~/.zshrc_kakao
+fi
 
 #eval "$(starship init zsh)"
 
 export UPDATE_ZSH_DAYS=1
-
 
 . $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
 . ~/.asdf/plugins/java/set-java-home.zsh
