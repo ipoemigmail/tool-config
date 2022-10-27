@@ -12,7 +12,7 @@ export EXTERNAL="$HOME/Develop/External"
 export GOPATH="$HOME/Develop/Go"
 
 export EVCXR_CONFIG_DIR=$HOME/.config/evcxr
-export PATH="$HOME/Bin:$PATH:$GOPATH/bin"
+export PATH="$HOME/Bin:$HOME/.cargo/bin:$PATH:$GOPATH/bin"
 
 export SBT_OPTS="-Xmx4G"
 
