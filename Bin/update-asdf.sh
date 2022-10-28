@@ -22,5 +22,6 @@ update "kotlin"
 update "zig"
 update "python"
 update "java zulu-17"
+update "nodejs"
 
 asdf install java $(asdf latest java zulu-8)
