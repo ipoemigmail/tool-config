@@ -1,6 +1,6 @@
 export WORKS="${HOME}/Develop/Works"
 export COMMERCE="${HOME}/Develop/Works/KakaoCommerce"
-export SPARK="$COMMERCE/kc-spark"
+export KCSPARK="$COMMERCE/kc-spark"
 
 export PATH="$JAVA_HOME/bin:$PATH"
 

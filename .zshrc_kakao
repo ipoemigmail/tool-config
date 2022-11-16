@@ -1,5 +1,5 @@
 function prompt_cluster_on_kc_spark() {
-  if [ "$(pwd)" = "${SPARK}" ]; then
+  if [ "$(pwd)" = "${KCSPARK}" ]; then
     if [ "${CLUSTER_NAME}" = 'hadoop-dev' ]; then
       p10k segment -f 208 -t "${CLUSTER_NAME}"
     else
