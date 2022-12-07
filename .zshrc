@@ -199,4 +199,4 @@ export UPDATE_ZSH_DAYS=1
 . $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
 . ~/.asdf/plugins/java/set-java-home.zsh
 
-export CARGO_INSTALL_ROOT=$HOME/.cargo/bin
+export CARGO_INSTALL_ROOT=$HOME/.cargo
