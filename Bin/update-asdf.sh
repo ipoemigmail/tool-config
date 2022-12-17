@@ -11,6 +11,7 @@ function update() {
   if [[ "${CURRENT_VER}" != "${LATEST_VER}" ]]; then
     asdf install $PLUGIN latest
     asdf global $PLUGIN latest
+    asdf reshim $PLUGIN latest
   else
     echo "$PLUGIN already updated (current: $CURRENT_VER, latest: $LATEST_VER)"
   fi
