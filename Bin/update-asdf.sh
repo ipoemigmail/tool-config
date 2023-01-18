@@ -8,10 +8,12 @@ function update() {
   CURRENT_VER=$(asdf current $PLUGIN | awk '{print $2}')
   LATEST_VER=$(asdf latest $PLUGIN)
 
+  RAW_PLUGIN=$(echo ${PLUGIN} | sed -E 's/(.+) .+/\1/g')
+
   if [[ "${CURRENT_VER}" != "${LATEST_VER}" ]]; then
-    asdf install $PLUGIN latest
-    asdf global $PLUGIN latest
-    asdf reshim $PLUGIN latest
+    asdf install $RAW_PLUGIN ${LATEST_VER}
+    asdf global $RAW_PLUGIN ${LATEST_VER}
+    asdf reshim $RAW_PLUGIN ${LATEST_VER}
   else
     echo "$PLUGIN already updated (current: $CURRENT_VER, latest: $LATEST_VER)"
   fi
