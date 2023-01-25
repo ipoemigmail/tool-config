@@ -19,10 +19,7 @@ function update() {
   fi
 }
 
-update "rust" &
-update "golang" &
 update "kotlin" &
-update "zig" &
 update "python" &
 update "java zulu-17" &
 update "nodejs" &
