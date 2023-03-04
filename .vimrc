@@ -91,13 +91,14 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 call vundle#end()
-Plugin 'Chiel92/vim-autoformat'
+Plugin 'vim-autoformat/vim-autoformat'
 let g:autoformat_verbosemode=1
 let g:formatdef_scalafmt = "'scalafmt --stdin 2>/dev/null'"
 let g:formatdef_sbtfmt = "'scalafmt --stdin --assume-filename a.sbt 2>/dev/null'"
 let g:formatters_scala = ['scalafmt']
 let g:formatters_sbt = ['sbtfmt']
 Plugin 'Yggdroot/indentLine'
+Plugin 'berdandy/ansiesc.vim'
 "let g:indentLine_char = '¦'
 let g:indentLine_color_term = 100
 let g:indentLine_color_gui = '#888888'
