@@ -22,3 +22,4 @@ if [[ "$(uname -m)" == "x86_64" ]]; then
   alias brew='/usr/local/bin/brew'
 fi
 
+export PIPENV_VENV_IN_PROJECT=1
