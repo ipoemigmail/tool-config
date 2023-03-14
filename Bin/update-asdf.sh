@@ -19,7 +19,6 @@ function update() {
   fi
 }
 
-update "kotlin" &
 update "python" &
 update "java zulu-17" &
 asdf install java $(asdf latest java zulu-8) &
