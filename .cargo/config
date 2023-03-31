@@ -1,0 +1,6 @@
+[build]
+rustc-wrapper = "/usr/local/bin/sccache"
+
+[alias]
+br = "build --release"
+rr = "run --release"
