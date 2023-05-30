@@ -1,5 +1,7 @@
-:sccache true
+:opt 1
+:sccache 1
 :timing
+:dep tokio = { version = "*", features = ["full"] }
 :dep chrono = "*"
 :dep itertools = "*"
 :dep urlencoding = "*"
