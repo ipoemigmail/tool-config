@@ -7,10 +7,8 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-if [[ "$(uname -m)" == "x86_64" ]]; then
-  export PATH="/usr/local/Homebrew/bin:$PATH"
-else
-  export PATH="/opt/homebrew/bin:$PATH"
+if [ -f ~/.profile_default ]; then
+  source ~/.profile_default
 fi
 
 # Path to your oh-my-zsh installation.
@@ -182,9 +180,6 @@ bindkey \^U backward-kill-line
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if [ -f ~/.profile_default ]; then
-  source ~/.profile_default
-fi
 if [ -f ~/.zshrc_default ]; then
   source ~/.zshrc_default
 fi

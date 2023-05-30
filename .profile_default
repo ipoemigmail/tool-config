@@ -3,6 +3,12 @@
 #stty -ixon
 #stty -ixoff
 
+if [[ "$(uname -m)" == "x86_64" ]]; then
+  export PATH="/usr/local/Homebrew/bin:$PATH"
+else
+  export PATH="/opt/homebrew/bin:$PATH"
+fi
+
 if [ -f ~/.profile_kakao ]; then
   . ~/.profile_kakao
 fi
