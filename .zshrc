@@ -32,7 +32,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-export PATH=$PATH:$HOME/.asdf/shims
+export PATH=$HOME/.asdf/shims:$PATH
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

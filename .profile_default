@@ -3,10 +3,10 @@
 #stty -ixon
 #stty -ixoff
 
-if [[ "$(uname -m)" == "x86_64" ]]; then
-  export PATH="/usr/local/Homebrew/bin:$PATH"
+if [ "$(arch)" = "arm64" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 else
-  export PATH="/opt/homebrew/bin:$PATH"
+    eval "$(/usr/local/bin/brew shellenv)"
 fi
 
 if [ -f ~/.profile_kakao ]; then
@@ -23,9 +23,5 @@ export PATH="$HOME/Bin:$HOME/.cargo/bin:$PATH:$GOPATH/bin"
 export SBT_OPTS="-Xmx4G"
 
 export EDITOR=vim
-
-if [[ "$(uname -m)" == "x86_64" ]]; then
-  alias brew='/usr/local/bin/brew'
-fi
 
 export PIPENV_VENV_IN_PROJECT=1
