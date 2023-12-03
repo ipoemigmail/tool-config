@@ -5,4 +5,3 @@ export KCSPARK="$COMMERCE/kc-spark"
 export PATH="$JAVA_HOME/bin:$PATH"
 
 alias scp="scp -o user=deploy"
-

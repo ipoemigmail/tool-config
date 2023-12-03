@@ -9,6 +9,7 @@
 "set langmenu=cp949
 "imap <C-L> <Esc>
 inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<Esc>'
+
 "noremap p p`[
 "noremap P P`[
 
@@ -110,4 +111,6 @@ filetype plugin indent on
 autocmd VimEnter,Colorscheme * :hi OverLength term=reverse cterm=reverse gui=reverse
 autocmd VimEnter,Colorscheme * :hi SpecialKey ctermfg=DarkGray guifg=DarkGray guibg=background
 autocmd VimEnter,Colorscheme * :hi NonText ctermfg=DarkGray guifg=DarkGray guibg=background
+
+Plugin 'udalov/kotlin-vim'
 

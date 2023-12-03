@@ -25,3 +25,6 @@ export SBT_OPTS="-Xmx4G"
 export EDITOR=vim
 
 export PIPENV_VENV_IN_PROJECT=1
+
+alias ls=lsd
+

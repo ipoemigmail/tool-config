@@ -20,7 +20,9 @@ function update() {
 }
 
 update "python" &
-update "java zulu-17" &
+update "nodejs" &
+update "java zulu" &
 asdf install java $(asdf latest java zulu-8) &
+asdf install java $(asdf latest java zulu-17) &
 
 wait
