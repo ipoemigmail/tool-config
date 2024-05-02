@@ -192,7 +192,4 @@ if [ -f ~/.profile_default ]; then
   source ~/.profile_default
 fi
 
-. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
-. ~/.asdf/plugins/java/set-java-home.zsh
 
-export PATH=$HOME/.asdf/shims:$PATH
