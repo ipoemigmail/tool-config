@@ -3,3 +3,4 @@ rustc-wrapper = "/opt/homebrew/bin/sccache"
 
 [profile.dev]
 opt-level = 1
+debug = 1
