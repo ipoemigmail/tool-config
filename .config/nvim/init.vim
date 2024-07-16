@@ -1,4 +1,4 @@
 if exists('g:vscode')
-    nnoremap <silent> u :<C-u>call VSCodeNotify('undo')<CR>
-    nnoremap <silent> <C-r> :<C-u>call VSCodeNotify('redo')<CR>
+    nnoremap <silent> u :undo<CR>
+    nnoremap <silent> <C-r> :redo<CR>
 endif
