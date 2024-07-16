@@ -1,5 +1,4 @@
 if exists('g:vscode')
-    " Keep undo/redo lists in sync with VSCode
-    nmap <silent> u <Cmd>call VSCodeNotify('undo')<CR>
-    nmap <silent> <C-r> <Cmd>call VSCodeNotify('redo')<CR>
+    nnoremap <silent> u :<C-u>call VSCodeNotify('undo')<CR>
+    nnoremap <silent> <C-r> :<C-u>call VSCodeNotify('redo')<CR>
 endif
