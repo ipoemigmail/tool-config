@@ -182,8 +182,6 @@ if [ -f ~/.zshrc_kakao ]; then
   source ~/.zshrc_kakao
 fi
 
-eval "$(starship init zsh)"
-
 export UPDATE_ZSH_DAYS=1
 
 export CARGO_INSTALL_ROOT=$HOME/.cargo
@@ -192,4 +190,5 @@ if [ -f ~/.profile_default ]; then
   source ~/.profile_default
 fi
 
+eval "$(starship init zsh)"
 
