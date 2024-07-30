@@ -1,3 +1,4 @@
+#command_timeout = 3000
 format = """
 $username\
 $hostname\
@@ -17,7 +18,7 @@ $hg_branch\
 $pijul_channel\
 $docker_context\
 $kubernetes\
-$custom\n\
+${custom.kc-spark}\n\
 $package\
 $c\
 $cmake\
@@ -56,7 +57,6 @@ $rlang\
 $red\
 $ruby\
 $rust\
-$scala\
 $solidity\
 $swift\
 $terraform\
@@ -64,6 +64,7 @@ $typst\
 $vlang\
 $vagrant\
 $zig\
+${custom.scala}\
 $buf\
 $nix_shell\
 $conda\
@@ -100,5 +101,12 @@ disabled = false
 [custom.kc-spark]
 command = "echo $CLUSTER_NAME"
 when = ''' [[ $PWD = $KCSPARK && "$CLUSTER_NAME" != "" ]] '''
-format = 'on ⭐️ kc-spark \([$output]($style)\) '
+format = 'on  ⭐️ kc-spark \([$output]($style)\) '
+
+[custom.scala]
+command = "echo v$(sbt scalaVersion | tail -1 | awk '{print $2}')"
+detect_extensions = ['sbt', 'scala']
+detect_files = ['.scalaenv', '.sbtenv', 'build.sbt']
+symbol = '🆂'
+format = 'via [$symbol($output )](red) '
 
