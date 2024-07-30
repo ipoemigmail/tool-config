@@ -16,6 +16,8 @@ $git_status\
 $hg_branch\
 $pijul_channel\
 $docker_context\
+$kubernetes\
+$custom\n\
 $package\
 $c\
 $cmake\
@@ -75,9 +77,7 @@ $azure\
 $nats\
 $direnv\
 $env_var\
-$crystal\n\
-$kubernetes\
-$custom\
+$crystal\
 $sudo\
 $cmd_duration\
 $line_break\
@@ -100,5 +100,5 @@ disabled = false
 [custom.kc-spark]
 command = "echo $CLUSTER_NAME"
 when = ''' [[ $PWD = $KCSPARK && "$CLUSTER_NAME" != "" ]] '''
-format = 'on ⭐️ kc-spark \([$output]($style)\)'
+format = 'on ⭐️ kc-spark \([$output]($style)\) '
 
