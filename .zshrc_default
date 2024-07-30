@@ -13,3 +13,7 @@ function prompt_machtype() {
 }
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=machtype
+
+function st() {
+    eval "$(starship init zsh)"
+}

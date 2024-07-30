@@ -19,11 +19,12 @@ export EXTERNAL="$HOME/Develop/External"
 export EVCXR_CONFIG_DIR=$HOME/.config/evcxr
 export PATH="$HOME/Bin:$HOME/.cargo/bin:$PATH"
 
-export SBT_OPTS="-Xmx4G"
+export SBT_OPTS="-Xmx8G"
 
 export EDITOR=vim
 
 export PIPENV_VENV_IN_PROJECT=1
 
 alias ls=lsd
-
+alias vim=nvim
+alias gvim=vimr
