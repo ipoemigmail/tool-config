@@ -16,9 +16,6 @@ $git_metrics\
 $git_status\
 $hg_branch\
 $pijul_channel\
-$docker_context\
-$kubernetes\
-${custom.kc-spark}\n\
 $package\
 $c\
 $cmake\
@@ -71,6 +68,9 @@ $conda\
 $meson\
 $spack\
 $memory_usage\
+\n$docker_context\
+$kubernetes\
+${custom.kc-spark}\
 $aws\
 $gcloud\
 $openstack\
@@ -98,10 +98,13 @@ disabled = false
 [kubernetes.context_aliases]
 "dev.local.cluster.k8s" = "dev"
 
+[cmd_duration]
+min_time = 1_000
+
 [custom.kc-spark]
 command = "echo $CLUSTER_NAME"
 when = ''' [[ $PWD = $KCSPARK && "$CLUSTER_NAME" != "" ]] '''
-format = 'on  ⭐️ kc-spark \([$output]($style)\) '
+format = 'on ⭐️ kc-spark \([$output]($style)\) '
 
 [custom.scala]
 command = "echo v$(sbt scalaVersion | tail -1 | awk '{print $2}')"
