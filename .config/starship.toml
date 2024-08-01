@@ -61,7 +61,7 @@ $typst\
 $vlang\
 $vagrant\
 $zig\
-${custom.scala}\
+$scala\
 $buf\
 $nix_shell\
 $conda\
@@ -101,15 +101,11 @@ disabled = false
 [cmd_duration]
 min_time = 1_000
 
+[scala]
+detect_folders = []
+
 [custom.kc-spark]
 command = "echo $CLUSTER_NAME"
 when = ''' [[ $PWD = $KCSPARK && "$CLUSTER_NAME" != "" ]] '''
 format = 'on ⭐️ kc-spark \([$output]($style)\) '
-
-[custom.scala]
-command = "echo v$(sbt scalaVersion | tail -1 | awk '{print $2}')"
-detect_extensions = ['sbt', 'scala']
-detect_files = ['.scalaenv', '.sbtenv', 'build.sbt']
-symbol = '🆂'
-format = 'via [$symbol($output )](red) '
 
