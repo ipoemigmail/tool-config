@@ -3,13 +3,6 @@ if exists('g:vscode')
     nnoremap <silent> <C-r> :redo<CR>
 endif
 
-"  vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
-"  vim.keymap.set('v', '<D-c>', '"+y')    -- Copy
-"  vim.keymap.set('n', '<D-v>', '"+P')    -- Paste normal mode
-"  vim.keymap.set('v', '<D-v>', '"+P')    -- Paste visual mode
-"  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
-"  vim.keymap.set('i', '<D-v>', '<C-R>+') -- Paste insert mode
-
 if exists("g:neovide")
     nnoremap <silent> <D-w> :q<CR>
     vnoremap <silent> <D-w> <ESC>:q<CR>
@@ -21,6 +14,8 @@ if exists("g:neovide")
     vnoremap <silent> <D-v> "+P<CR>
     cnoremap <silent> <D-v> <ESC>"+P<CR>
     inoremap <silent> <D-v> <ESC>"+P<CR>
+
+    nnoremap <silent> <D-n> :!neovide<CR>
 endif
 
 
@@ -83,7 +78,7 @@ let python_highlight_all=1
 let g:netrw_liststyle=1
 "set guioptions+=b
 "set fencs=cp949,ucs-bom,utf-8
-color default
+color evening
 "set background=dark
 "match OverLength /\%80v/
 set directory=/tmp
