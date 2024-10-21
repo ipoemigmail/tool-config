@@ -1,0 +1,14 @@
+fork = false
+frame = "full"
+idle = true
+maximized = false
+neovim-bin = "/opt/homebrew/bin/nvim" # in reality found dynamically on $PATH if unset
+no-multigrid = false
+srgb = false
+tabs = true
+theme = "auto"
+mouse-cursor-icon = "arrow"
+title-hidden = false
+vsync = true
+wsl = true
+
