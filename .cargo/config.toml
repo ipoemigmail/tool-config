@@ -1,7 +1,9 @@
 [build]
-rustc-wrapper = ".cargo/bin/sccache"
-incremental = false # for sccache
+rustflags = ["-Zthreads=14", "-Zshare-generics"]
+incremental = true
 
 [profile.dev]
-opt-level = 1
+opt-level = "z"
 debug = 1
+codegen-units = 1024
+
