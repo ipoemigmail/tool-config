@@ -26,3 +26,6 @@ export EDITOR=vim
 export PIPENV_VENV_IN_PROJECT=1
 
 alias ls=lsd
+alias intellij="open -a \"IntelliJ IDEA\""
+alias vscode="open -a \"Visual Studio Code\""
+

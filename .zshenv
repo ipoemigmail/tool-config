@@ -5,7 +5,7 @@ if [ -f ~/.profile_default ]; then
 fi
 
 export PATH="${PATH}:${HOME}/.krew/bin"
-export PATH="/Users/ben.jeong1/.local/share/mise/shims:$PATH"
+export PATH="$HOME/.local/bin:/Users/ben.jeong1/.local/share/mise/shims:$PATH"
 export MISE_SHELL=zsh
 export __MISE_ORIG_PATH="$PATH"
 
@@ -58,3 +58,7 @@ if [ -z "${_mise_cmd_not_found:-}" ]; then
         fi
     }
 fi
+
+#export CLAUDE_CODE_MAX_OUTPUT_TOKENS=32000
+export K9S_FEATURE_GATE_NODE_SHELL=true
+ulimit -n 4096
