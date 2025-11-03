@@ -1,26 +1,3 @@
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=go_version
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=rust_version
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=java_version
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=node_version
-
-function prompt_machtype() {
-  MTYPE=$(uname -m)
-  if [ "${MTYPE}" = 'x86_64' ]; then
-    p10k segment -f 200 -t "$MTYPE"
-  else
-    p10k segment -f 208 -t "$MTYPE"
-  fi
-}
-
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=machtype
-
-function st() {
-    eval "$(starship init zsh)"
-}
-
-
-#############################################################################################################
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -209,4 +186,30 @@ export CARGO_INSTALL_ROOT=$HOME/.cargo
 if [ -f ~/.profile_default ]; then
   source ~/.profile_default
 fi
+
+eval "$(starship init zsh)"
+
+##############################################################################
+##############################################################################
+
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=go_version
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=rust_version
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=java_version
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=node_version
+
+function prompt_machtype() {
+  MTYPE=$(uname -m)
+  if [ "${MTYPE}" = 'x86_64' ]; then
+    p10k segment -f 200 -t "$MTYPE"
+  else
+    p10k segment -f 208 -t "$MTYPE"
+  fi
+}
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=machtype
+
+function st() {
+    eval "$(starship init zsh)"
+}
 
