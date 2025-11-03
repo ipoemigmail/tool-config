@@ -70,7 +70,8 @@ $spack\
 $memory_usage\
 \n$docker_context\
 $kubernetes\
-${custom.kc-spark}\
+${custom.kc-spark-real}\
+${custom.kc-spark-dev}\
 $aws\
 $gcloud\
 $openstack\
@@ -104,8 +105,15 @@ min_time = 1_000
 [scala]
 detect_folders = []
 
-[custom.kc-spark]
+[custom.kc-spark-real]
 command = "echo $CLUSTER_NAME"
-when = ''' [[ $PWD = $KCSPARK && "$CLUSTER_NAME" != "" ]] '''
+style = "bold red"
+when = ''' [[ $PWD = $KCSPARK && "$CLUSTER_NAME" != "" && "$CLUSTER_NAME" != "hadoop-dev" ]] '''
+format = 'on ⭐️ kc-spark \([$output]($style)\) '
+
+[custom.kc-spark-dev]
+command = "echo $CLUSTER_NAME"
+style = "bold green"
+when = ''' [[ $PWD = $KCSPARK && "$CLUSTER_NAME" == "hadoop-dev" ]] '''
 format = 'on ⭐️ kc-spark \([$output]($style)\) '
 
