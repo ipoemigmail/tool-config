@@ -1,5 +1,6 @@
 #command_timeout = 3000
 format = """
+${custom.m-type-x86}\
 $username\
 $hostname\
 $localip\
@@ -116,4 +117,10 @@ command = "echo $CLUSTER_NAME"
 style = "bold green"
 when = ''' [[ $PWD = $KCSPARK && "$CLUSTER_NAME" == "hadoop-dev" ]] '''
 format = 'on ⭐️ kc-spark \([$output]($style)\) '
+
+[custom.m-type-x86]
+command = "uname -m"
+style = "bold red"
+when = ''' [[ "$(uname -m)" = "x86_64" ]] '''
+format = '\[[$output]($style)\] '
 
