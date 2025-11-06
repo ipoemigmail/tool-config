@@ -1,9 +1,5 @@
 . "$HOME/.cargo/env"
 
-if [ -f ~/.profile_default ]; then
-  source ~/.profile_default
-fi
-
 export PATH="${PATH}:${HOME}/.krew/bin"
 export PATH="$HOME/.local/bin:/Users/ben.jeong1/.local/share/mise/shims:$PATH"
 export MISE_SHELL=zsh
