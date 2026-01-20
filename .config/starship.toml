@@ -109,18 +109,18 @@ detect_folders = []
 [custom.kc-spark-real]
 command = "echo $CLUSTER_NAME"
 style = "bold red"
-when = ''' [[ $PWD = $KCSPARK && "$CLUSTER_NAME" != "" && "$CLUSTER_NAME" != "hadoop-dev" ]] '''
+when = ''' [[ $PWD == $KCSPARK && "$CLUSTER_NAME" != "" && "$CLUSTER_NAME" != "hadoop-dev" ]] '''
 format = 'on ⭐️ kc-spark \([$output]($style)\) '
 
 [custom.kc-spark-dev]
 command = "echo $CLUSTER_NAME"
 style = "bold green"
-when = ''' [[ $PWD = $KCSPARK && "$CLUSTER_NAME" == "hadoop-dev" ]] '''
+when = ''' [[ $PWD == $KCSPARK && "$CLUSTER_NAME" == "hadoop-dev" ]] '''
 format = 'on ⭐️ kc-spark \([$output]($style)\) '
 
 [custom.m-type-x86]
 command = "uname -m"
 style = "bold red"
-when = ''' [[ "$(uname -m)" = "x86_64" ]] '''
+when = ''' [[ "$(uname -m)" == "x86_64" ]] '''
 format = '\[[$output]($style)\] '
 
