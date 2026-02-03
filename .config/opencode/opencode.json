@@ -10,7 +10,7 @@
   },
   "keybinds": {
     "command_list": "<leader>p",
-    "history_previous": "ctrl+p",
-    "history_next": "ctrl+n"
+    "history_previous": "ctrl+p,up",
+    "history_next": "ctrl+n,down"
   }
 }
