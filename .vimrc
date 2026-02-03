@@ -113,4 +113,4 @@ autocmd VimEnter,Colorscheme * :hi SpecialKey ctermfg=DarkGray guifg=DarkGray gu
 autocmd VimEnter,Colorscheme * :hi NonText ctermfg=DarkGray guifg=DarkGray guibg=background
 
 Plugin 'udalov/kotlin-vim'
-
+let g:vim_json_conceal=0
