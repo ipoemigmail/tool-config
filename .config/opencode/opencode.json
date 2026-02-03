@@ -9,7 +9,7 @@
     }
   },
   "keybinds": {
-    "command_list": "ctrl+shift+p",
+    "command_list": "<leader>p",
     "history_previous": "ctrl+p",
     "history_next": "ctrl+n"
   }
