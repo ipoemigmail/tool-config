@@ -213,3 +213,9 @@ function st() {
     eval "$(starship init zsh)"
 }
 
+if [ "$(arch)" != "arm64" ]; then
+    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+else
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+fi
+
