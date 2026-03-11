@@ -1,0 +1,13 @@
+#!/bin/bash
+
+P="$(PWD)"
+
+osascript -e "tell application \"iTerm\"
+    activate
+    tell current window
+        create tab with default profile
+        tell current session
+            write text \"cd $P; $@\"
+        end tell
+    end tell
+end tell"

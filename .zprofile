@@ -106,3 +106,11 @@ if [ -z "${_mise_cmd_not_found:-}" ]; then
     }
 fi
 
+alias op="opencode"
+alias cl="claude --allow-dangerously-skip-permissions"
+alias ge="gemini"
+
+nop() { new-iterm "op $*" }
+nge() { new-iterm "ge $*" }
+ncl() { new-iterm "cl $*" }
+
