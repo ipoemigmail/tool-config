@@ -1,0 +1,43 @@
+{
+  "ide": {
+    "hasSeenNudge": true,
+    "enabled": true
+  },
+  "general": {
+    "preferredEditor": "vim",
+    "previewFeatures": true,
+    "sessionRetention": {
+      "enabled": true,
+      "maxAge": "30d",
+      "warningAcknowledged": true
+    }
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "theme": "Default"
+  },
+  "tools": {
+    "shell": {
+      "enableInteractiveShell": false
+    }
+  },
+  "experimental": {
+    "plan": true,
+    "enableAgents": true
+  },
+  "agents": {
+    "overrides": {
+      "generalist": {
+        "runConfig": {},
+        "enabled": true
+      }
+    }
+  },
+  "model": {
+    "name": "auto-gemini-3"
+  }
+}
