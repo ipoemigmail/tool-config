@@ -10,20 +10,26 @@
       "enabled": true,
       "maxAge": "30d",
       "warningAcknowledged": true
-    }
+    },
+    "plan": {
+      "directory": ""
+    },
+    "enableNotifications": true,
+    "maxAttempts": 3
   },
   "security": {
     "auth": {
       "selectedType": "oauth-personal"
+    },
+    "environmentVariableRedaction": {
+        "enabled": false
     }
   },
   "ui": {
     "theme": "Default"
   },
   "tools": {
-    "shell": {
-      "enableInteractiveShell": false
-    }
+    "shell": {}
   },
   "experimental": {
     "plan": true,
@@ -39,5 +45,8 @@
   },
   "model": {
     "name": "auto-gemini-3"
+  },
+  "context": {
+    "discoveryMaxDirs": 100
   }
 }
