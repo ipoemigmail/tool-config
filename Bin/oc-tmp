@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd ~/Tmp/dummy
-opencode
+opencode -c
