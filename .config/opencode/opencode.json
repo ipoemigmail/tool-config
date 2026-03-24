@@ -1,16 +1,24 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-gemini-auth@latest"],
+  "plugin": ["opencode-anthropic-oauth"],
   "provider": {
-    "google": {
+    "myprovider": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "kakao-ai-platform",
       "options": {
-        "projectId": "commerce-api-325402"
+        "baseURL": "https://api-inference-internal.kap.9rum.cc/v1",
+        "apiKey": "kap_7gQ2a3wwxkuXh89CRfFaFnuBRb3kZcinHB2ZElDAcrwok5lvTpnUcR9AdtAMSyOT"
+      },
+      "models": {
+        "qwen3-coder-480b-instruct": {
+          "name": "qwen3-coder-480b-instruct"
+        }
       }
     }
   },
-  "keybinds": {
-    "command_list": "<leader>p",
-    "history_previous": "ctrl+p,up",
-    "history_next": "ctrl+n,down"
+  "permission": {
+    "external_directory": {
+      "/tmp/**": "allow"
+    }
   }
 }
