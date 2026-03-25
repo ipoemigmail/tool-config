@@ -22,11 +22,13 @@
       "selectedType": "oauth-personal"
     },
     "environmentVariableRedaction": {
-        "enabled": false
-    }
+      "enabled": false
+    },
+    "allowedExtensions": []
   },
   "ui": {
-    "theme": "Default"
+    "theme": "Default",
+    "inlineThinkingMode": "full"
   },
   "tools": {
     "shell": {}
