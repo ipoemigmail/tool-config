@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/zsh
 
+source ~/.zprofile
 cd ~/Tmp/dummy
-claude --allow-dangerously-skip-permissions -c
+cl -c

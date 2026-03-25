@@ -106,9 +106,49 @@ if [ -z "${_mise_cmd_not_found:-}" ]; then
     }
 fi
 
-alias oc="opencode"
+#alias oc="opencode"
 alias cl="claude --allow-dangerously-skip-permissions"
 alias ge="gemini"
+
+oc() {
+  local db dir esc session arg
+  local want_continue=0
+  local -a args
+  for arg in "$@"; do
+    case "$arg" in
+      -c|--continue)
+        want_continue=1
+        ;;
+      *)
+        args+=("$arg")
+        ;;
+    esac
+  done
+  if [ "$want_continue" -eq 0 ]; then
+    command opencode "${args[@]}"
+    return
+  fi
+  db="$(command opencode db path 2>/dev/null)" || {
+    command opencode "${args[@]}"
+    return
+  }
+  dir="$(pwd)"
+  esc=${dir//\'/\'\'}
+  session="$(
+    sqlite3 "$db" "
+      select id
+      from session
+      where directory = '$esc'
+      order by time_updated desc
+      limit 1;
+    "
+  )"
+  if [ -n "$session" ]; then
+    command opencode -s "$session" "${args[@]}"
+  else
+    command opencode "${args[@]}"
+  fi
+}
 
 noc() { new-iterm "oc $*" }
 nge() { new-iterm "ge $*" }
