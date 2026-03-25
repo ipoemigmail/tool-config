@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/zsh
 
+source ~/.zprofile
 cd ~/Tmp/dummy
-opencode -c
+oc -c
