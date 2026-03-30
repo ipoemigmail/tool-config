@@ -6,19 +6,24 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "kakao-ai-platform",
       "options": {
-        "baseURL": "https://api-inference-internal.kap.9rum.cc/v1",
+        //"baseURL": "https://api-inference-internal.kap.9rum.cc/v1",
+        "baseURL": "http://localhost:8801/v1",
         "apiKey": "kap_7gQ2a3wwxkuXh89CRfFaFnuBRb3kZcinHB2ZElDAcrwok5lvTpnUcR9AdtAMSyOT"
       },
       "models": {
         "qwen3-coder-480b-instruct": {
           "name": "qwen3-coder-480b-instruct"
+        },
+        "glm-5-fp8": {
+          "name": "glm-5-fp8"
         }
       }
     }
   },
   "permission": {
     "external_directory": {
-      "/tmp/**/*": "allow"
+      "/tmp/**/*": "allow",
+      "/tmp/*": "allow"
     }
   }
 }
