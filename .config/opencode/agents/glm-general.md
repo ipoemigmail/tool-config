@@ -1,7 +1,7 @@
 ---
-description: General-purpose subagent using Sonnet 4.6
+description: General-purpose subagent using GLM 5
 mode: subagent
-model: anthropic/claude-sonnet-4-6
+model: kakao-ai-platform/glm-5-fp8
 permission:
   edit: allow
   bash: allow
