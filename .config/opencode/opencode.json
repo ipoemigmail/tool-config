@@ -19,6 +19,8 @@
   },
   "permission": {
     "external_directory": {
+      "/private/tmp/**/*": "allow",
+      "/private/tmp/*": "allow",
       "/tmp/**/*": "allow",
       "/tmp/*": "allow"
     }
