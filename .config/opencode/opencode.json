@@ -12,7 +12,11 @@
       },
       "models": {
         "glm-5-fp8": {
-          "name": "glm-5-fp8"
+          "name": "glm-5-fp8",
+          "limit": {
+            "context": 200000,
+            "output": 128000
+          }
         }
       }
     }

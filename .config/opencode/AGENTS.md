@@ -1,0 +1,3 @@
+- 수정방식이 정해진 여러파일을 한번에 수정할 경우 @glm-general subagent 를 이용해 병렬로 실행
+- 구현은 @glm-general 에 위임
+- 리뷰는 @sonnet-general 에 위임
