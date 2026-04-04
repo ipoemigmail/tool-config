@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-anthropic-oauth"],
+  "plugin": ["@seonggukchoi/opencode-claude-code-plugin"],
   "provider": {
     "kakao-ai-platform": {
       "npm": "@ai-sdk/openai-compatible",
@@ -18,6 +18,14 @@
             "output": 128000
           }
         }
+      }
+    },
+    "claude-code": {
+      "npm": "@seonggukchoi/opencode-claude-code-provider",
+      "models": {
+        "sonnet": { "id": "claude-sonnet-4-6[1m]" },
+        "opus": { "id": "claude-opus-4-6[1m]" },
+        "haiku": { "id": "claude-haiku-4-5" }
       }
     }
   },
