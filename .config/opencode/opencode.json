@@ -23,8 +23,8 @@
     "claude-code": {
       "npm": "@seonggukchoi/opencode-claude-code-provider",
       "models": {
-        "sonnet": { "id": "claude-sonnet-4-6[1m]" },
-        "opus": { "id": "claude-opus-4-6[1m]" },
+        "sonnet": { "id": "claude-sonnet-4-6" },
+        "opus": { "id": "claude-opus-4-6" },
         "haiku": { "id": "claude-haiku-4-5" }
       }
     }
