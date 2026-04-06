@@ -1,8 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": [
-    "@seonggukchoi/opencode-claude-code-plugin"
-  ],
+  "plugin": ["opencode-anthropic-oauth"],
   "provider": {
     "kakao-ai-platform": {
       "npm": "@ai-sdk/openai-compatible",
@@ -21,32 +19,6 @@
           }
         }
       }
-    },
-    "claude-code": {
-      "npm": "@seonggukchoi/opencode-claude-code-provider",
-      "models": {
-        "sonnet": {
-          "id": "claude-sonnet-4-6",
-          "limit": {
-            "context": 1000000,
-            "output": 16384
-          }
-        },
-        "opus": {
-          "id": "claude-opus-4-6",
-          "limit": {
-            "context": 1000000,
-            "output": 16384
-          }
-        },
-        "haiku": {
-          "id": "claude-haiku-4-5",
-          "limit": {
-            "context": 200000,
-            "output": 8192
-          }
-        }
-      }
     }
   },
   "permission": {
@@ -58,3 +30,4 @@
     }
   }
 }
+
