@@ -1,7 +1,7 @@
 ---
 description: General-purpose subagent using Haiku 4.5
 mode: subagent
-model: claude-code/haiku
+model: anthropic/claude-haiku-4-5
 permission:
   edit: allow
   bash: allow

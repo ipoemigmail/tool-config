@@ -1,7 +1,7 @@
 ---
 description: General-purpose subagent using Sonnet 4.6
 mode: subagent
-model: claude-code/sonnet
+model: anthropic/claude-sonnet-4-6
 permission:
   edit: allow
   bash: allow
