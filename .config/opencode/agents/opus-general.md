@@ -2,6 +2,7 @@
 description: General-purpose subagent using Opus 4.6
 mode: subagent
 model: anthropic/claude-opus-4-6
+variant: high
 permission:
   edit: allow
   bash: allow

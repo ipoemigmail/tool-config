@@ -2,6 +2,7 @@
 description: General-purpose subagent using GPT-5.4
 mode: subagent
 model: openai/gpt-5.4
+variant: high
 permission:
   edit: allow
   bash: allow
