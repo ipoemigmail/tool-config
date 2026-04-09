@@ -59,7 +59,7 @@
     "openai": {
         "models": {
             "gpt-5.4-mini": {
-                "reasoningEffort": "high"
+                "reasoningEffort": "xhigh"
             },
             "gpt-5.4": {
                 "reasoningEffort": "high"
