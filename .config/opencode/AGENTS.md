@@ -1,4 +1,4 @@
 - 수정방식이 정해진 여러파일을 한번에 수정할 경우 @glm-general subagent 를 이용해 병렬로 실행
-- 구현은 @gpt-mini-general 에 위임
+- 구현은 @gpt-mini-general 에 위임 / plan 모드에서는 실행불가
 - 리뷰는 @gpt-general 에 위임
 - commit description 은 한글로 작성
