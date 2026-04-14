@@ -1,5 +1,6 @@
 export WORKS="${HOME}/Develop/Works"
 export COMMERCE="${HOME}/Develop/Works/KakaoCommerce"
 export KCSPARK="$COMMERCE/kc-spark"
+export TOOL_CONFIG="$HOME/Develop/Personal/tool-config"
 
 alias scp="scp -o user=deploy"
