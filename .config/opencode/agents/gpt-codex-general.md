@@ -2,7 +2,6 @@
 description: General-purpose subagent using GPT-5.3 Codex
 mode: subagent
 model: openai/gpt-5.3-codex
-variant: high
 permission:
   edit: allow
   bash: allow

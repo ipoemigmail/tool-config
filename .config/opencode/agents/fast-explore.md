@@ -1,8 +1,7 @@
 ---
-description: Fast read-only agent for exploring codebases using GPT-5.4 mini
+description: Fast read-only agent for exploring codebases
 mode: subagent
 model: openai/gpt-5.4-mini
-variant: high
 permission:
   edit: deny
   bash: deny
