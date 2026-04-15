@@ -46,30 +46,30 @@
       }
     },
     "anthropic": {
-        "models": {
-            "claude-sonnet-4-6": {
-                "reasoningEffort": "high"
-            },
-            "claude-opus-4-6": {
-                "reasoningEffort": "high"
-            },
-            "claude-haiku-4-5": {
-                "reasoningEffort": "high"
-            }
+      "models": {
+        "claude-sonnet-4-6": {
+          "reasoningEffort": "high"
+        },
+        "claude-opus-4-6": {
+          "reasoningEffort": "high"
+        },
+        "claude-haiku-4-5": {
+          "reasoningEffort": "high"
         }
+      }
     },
     "openai": {
-        "models": {
-            "gpt-5.3-codex": {
-                "reasoningEffort": "high"
-            },
-            "gpt-5.4-mini": {
-                "reasoningEffort": "high"
-            },
-            "gpt-5.4": {
-                "reasoningEffort": "high"
-            }
+      "models": {
+        "gpt-5.3-codex": {
+          "reasoningEffort": "high"
+        },
+        "gpt-5.4-mini": {
+          "reasoningEffort": "high"
+        },
+        "gpt-5.4": {
+          "reasoningEffort": "high"
         }
+      }
     }
   },
   "permission": {
