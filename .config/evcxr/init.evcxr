@@ -1,5 +1,5 @@
-:opt 1
-:sccache 1
+:opt "z"
+:cache 1024
 :timing
 :dep tokio = { version = "*", features = ["full"] }
 :dep chrono = "*"
