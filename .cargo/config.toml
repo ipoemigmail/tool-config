@@ -1,6 +1,6 @@
 [build]
-rustflags = ["-Zthreads=14", "-Zshare-generics"]
-incremental = true
+#rustflags = ["-Zthreads=14", "-Zshare-generics"]
+rustc-wrapper = "sccache"
 
 [profile.dev]
 opt-level = "z"
