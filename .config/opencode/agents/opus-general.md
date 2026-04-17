@@ -1,7 +1,7 @@
 ---
-description: General-purpose subagent using Opus 4.6
+description: General-purpose subagent using Opus 4.7
 mode: subagent
-model: anthropic/claude-opus-4-6
+model: anthropic/claude-opus-4-7
 permission:
   edit: allow
   bash: allow
