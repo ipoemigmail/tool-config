@@ -1,8 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-claude-auth"],
-  //"plugin": ["@ex-machina/opencode-anthropic-auth"],
-  "model": "openai/gpt-5.3-codex",
+  //"plugin": ["opencode-claude-auth"],
+  "plugin": ["@ex-machina/opencode-anthropic-auth"],
+  "model": "openai/gpt-5.4",
   "provider": {
     "kakao-ai-platform": {
       "npm": "@ai-sdk/openai-compatible",
@@ -47,10 +47,10 @@
     },
     "anthropic": {
       "models": {
-        "claude-sonnet-4-6": {
+        "claude-opus-4-7": {
           "reasoningEffort": "high"
         },
-        "claude-opus-4-6": {
+        "claude-sonnet-4-6": {
           "reasoningEffort": "high"
         },
         "claude-haiku-4-5": {
@@ -60,9 +60,6 @@
     },
     "openai": {
       "models": {
-        "gpt-5.3-codex": {
-          "reasoningEffort": "high"
-        },
         "gpt-5.4-mini": {
           "reasoningEffort": "high"
         },
