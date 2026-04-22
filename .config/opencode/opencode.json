@@ -1,89 +1,88 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  //"plugin": ["opencode-claude-auth"],
-  "plugin": ["@ex-machina/opencode-anthropic-auth"],
-  "model": "openai/gpt-5.4",
-  "mode": {
-    "plan": {
-      "model": "anthropic/claude-opus-4-7"
+    "$schema": "https://opencode.ai/config.json",
+    "plugin": ["opencode-claude-auth"],
+    //"plugin": ["@ex-machina/opencode-anthropic-auth"],
+    "model": "openai/gpt-5.4",
+    "mode": {
+        "plan": {
+            "model": "anthropic/claude-opus-4-7"
+        },
+        "build": {
+            "model": "anthropic/claude-opus-4-7"
+        }
     },
-    "build": {
-      "model": "anthropic/claude-opus-4-7"
+    "provider": {
+        "kakao-ai-platform": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "kakao-ai-platform",
+            "options": {
+                //"baseURL": "https://api-inference-internal.kap.9rum.cc/v1",
+                "baseURL": "http://localhost:8801/v1",
+                "apiKey": "kap_7gQ2a3wwxkuXh89CRfFaFnuBRb3kZcinHB2ZElDAcrwok5lvTpnUcR9AdtAMSyOT"
+            },
+            "models": {
+                "glm-5-fp8": {
+                    "name": "glm-5-fp8",
+                    "limit": {
+                        "context": 200000,
+                        "output": 128000
+                    }
+                }
+            }
+        },
+        "lm-studio": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "lm-studio",
+            "options": {
+                "baseURL": "http://127.0.0.1:1234/v1"
+            },
+            "models": {
+                "gemma-4-26b-a4b-it": {
+                    "name": "gemma-4-26b-a4b-it",
+                    "limit": {
+                        "context": 160000,
+                        "output": 200000
+                    }
+                },
+                "gemma-4-e4b-it": {
+                    "name": "gemma-4-e4b-it",
+                    "limit": {
+                        "context": 128000,
+                        "output": 200000
+                    }
+                }
+            }
+        },
+        "anthropic": {
+            "models": {
+                "claude-opus-4-7": {
+                    "reasoningEffort": "high"
+                },
+                "claude-sonnet-4-6": {
+                    "reasoningEffort": "high"
+                },
+                "claude-haiku-4-5": {
+                    "reasoningEffort": "high"
+                }
+            }
+        },
+        "openai": {
+            "models": {
+                "gpt-5.4-mini": {
+                    "reasoningEffort": "high"
+                },
+                "gpt-5.4": {
+                    "reasoningEffort": "high"
+                }
+            }
+        }
+    },
+    "permission": {
+        "external_directory": {
+            "/private/tmp/**/*": "allow",
+            "/private/tmp/*": "allow",
+            "/tmp/**/*": "allow",
+            "/tmp/*": "allow"
+        }
     }
-  },
-  "provider": {
-    "kakao-ai-platform": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "kakao-ai-platform",
-      "options": {
-        //"baseURL": "https://api-inference-internal.kap.9rum.cc/v1",
-        "baseURL": "http://localhost:8801/v1",
-        "apiKey": "kap_7gQ2a3wwxkuXh89CRfFaFnuBRb3kZcinHB2ZElDAcrwok5lvTpnUcR9AdtAMSyOT"
-      },
-      "models": {
-        "glm-5-fp8": {
-          "name": "glm-5-fp8",
-          "limit": {
-            "context": 200000,
-            "output": 128000
-          }
-        }
-      }
-    },
-    "lm-studio": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "lm-studio",
-      "options": {
-        "baseURL": "http://127.0.0.1:1234/v1"
-      },
-      "models": {
-        "gemma-4-26b-a4b-it": {
-          "name": "gemma-4-26b-a4b-it",
-          "limit": {
-            "context": 160000,
-            "output": 200000
-          }
-        },
-        "gemma-4-e4b-it": {
-          "name": "gemma-4-e4b-it",
-          "limit": {
-            "context": 128000,
-            "output": 200000
-          }
-        }
-      }
-    },
-    "anthropic": {
-      "models": {
-        "claude-opus-4-7": {
-          "reasoningEffort": "high"
-        },
-        "claude-sonnet-4-6": {
-          "reasoningEffort": "high"
-        },
-        "claude-haiku-4-5": {
-          "reasoningEffort": "high"
-        }
-      }
-    },
-    "openai": {
-      "models": {
-        "gpt-5.4-mini": {
-          "reasoningEffort": "high"
-        },
-        "gpt-5.4": {
-          "reasoningEffort": "high"
-        }
-      }
-    }
-  },
-  "permission": {
-    "external_directory": {
-      "/private/tmp/**/*": "allow",
-      "/private/tmp/*": "allow",
-      "/tmp/**/*": "allow",
-      "/tmp/*": "allow"
-    }
-  }
 }
-
