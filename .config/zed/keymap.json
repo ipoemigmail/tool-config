@@ -174,7 +174,18 @@
     {
         "context": "!ContextEditor && !AcpThread > Editor && mode == full",
         "bindings": {
-            "cmd-1": "pane::RevealInProjectPanel"
-        }
-    }
+            "cmd-1": "pane::RevealInProjectPanel",
+        },
+    },
+    {
+        "context": "Workspace",
+        "bindings": {
+            "ctrl-cmd-r": [
+                "projects::OpenRecent",
+                {
+                    "create_new_window": false,
+                },
+            ],
+        },
+    },
 ]

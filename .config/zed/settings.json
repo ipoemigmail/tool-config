@@ -6,7 +6,20 @@
   // To see all of Zed's default settings without changing your
   // custom settings, run the `open default settings` command
   // from the command palette or from `Zed` application menu.
-  "theme": "Gruvbox Dark",
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "tree_view": true,
+    "dock": "left"
+  },
+  "theme": "One Dark - Darkened",
   "buffer_font_features": {
     "calt": false,
   },
@@ -43,7 +56,11 @@
     },
     "opencode": {
       "favorite_config_option_values": {
-        "model": ["anthropic/claude-sonnet-4-7/high", "openai/gpt-5.4/high"],
+        "model": [
+          "anthropic/claude-sonnet-4-7/high",
+          "openai/gpt-5.4/high",
+          "anthropic/claude-opus-4-7/high"
+        ],
       },
       "default_model": "openai/gpt-5.4/high",
       "type": "registry",
@@ -63,6 +80,8 @@
   "disable_ai": false,
   "base_keymap": "JetBrains",
   "agent": {
+    "sidebar_side": "right",
+    "dock": "right",
     "default_profile": "ask",
     "favorite_models": [
       {
