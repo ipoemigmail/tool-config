@@ -2,7 +2,8 @@
 - 계획, 구현, 변경은 최소한으로 한다
 - 수정방식이 정해진 여러파일을 한번에 수정할 경우 @gpt-mini-general 를 이용해 병렬로 실행
 - Plan 모드가 아닐때 구현은 @gpt-mini-general 에 위임, Plan 모드면 구현을 위해 Build 모드로 전환 요청
-- 리뷰는 @gpt-general 에 위임
+- 리뷰는 @opus-general 에 위임
 - commit description 은 한글로 작성
 - .claude/commands 에서 명령을 읽어서 로드해줘
+- .claude/skills 에서 스킬을 읽을수 있도록 해줘
 
