@@ -1,7 +1,7 @@
 ---
-description: General-purpose subagent using GPT-5.4
+description: General-purpose subagent using GPT-5.5
 mode: subagent
-model: openai/gpt-5.4
+model: openai/gpt-5.5
 permission:
   edit: allow
   bash: allow
