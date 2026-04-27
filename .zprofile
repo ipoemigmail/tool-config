@@ -106,6 +106,8 @@ if [ -z "${_mise_cmd_not_found:-}" ]; then
     }
 fi
 
+export PATH="$HOME/Bin:$PATH"
+
 alias oc="opencode"
 alias cl="claude --allow-dangerously-skip-permissions"
 alias ge="gemini"

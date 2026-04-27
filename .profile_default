@@ -17,7 +17,7 @@ export PERSONAL="$HOME/Develop/Personal"
 export EXTERNAL="$HOME/Develop/External"
 
 export EVCXR_CONFIG_DIR=$HOME/.config/evcxr
-export PATH="$HOME/Bin:$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 export SBT_OPTS="-Xmx8G"
 
