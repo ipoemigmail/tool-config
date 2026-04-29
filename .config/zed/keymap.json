@@ -198,4 +198,21 @@
             ],
         },
     },
+    {
+        "context": "ProjectPanel",
+        "bindings": {
+            "cmd-shift-c": "workspace::CopyPath",
+        },
+    },
+    {
+        "context": "OutlinePanel && not_editing",
+        "bindings": {
+            "cmd-shift-c": "workspace::CopyPath",
+        },
+    },
+    {
+        "unbind": {
+            "cmd-shift-c": "collab_panel::ToggleFocus",
+        },
+    },
 ]
