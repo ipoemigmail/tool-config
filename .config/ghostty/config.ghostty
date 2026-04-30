@@ -1,2 +1,4 @@
-font-family = "KMaple Mono NF"
-theme = Snazzy
+font-family = KMaple Mono NF
+theme = Snazzy Soft
+keybind = super+alt+shift+[=move_tab:-1
+keybind = super+alt+shift+]=move_tab:1
