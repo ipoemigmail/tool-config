@@ -112,7 +112,7 @@ alias oc="opencode"
 alias cl="claude --allow-dangerously-skip-permissions"
 alias ge="gemini"
 
-noc() { new-iterm "oc $*" }
-nge() { new-iterm "ge $*" }
-ncl() { new-iterm "cl $*" }
+noc() { new-ghostty "oc $*" }
+nge() { new-ghostty "ge $*" }
+ncl() { new-ghostty "cl $*" }
 

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+P="$(pwd)"
+
+if [ $# -eq 0 ]; then
+    CMD="cd \"$P\""
+else
+    CMD="cd \"$P\"; $*"
+fi
+
+# Save existing clipboard, then restore it after paste
+OLD_CLIP="$(pbpaste)"
+printf '%s' "$CMD" | pbcopy
+
+osascript <<EOF
+tell application "Ghostty" to activate
+delay 0.15
+tell application "System Events"
+    tell process "Ghostty"
+        keystroke "t" using command down
+        delay 0.2
+        keystroke "v" using command down
+        delay 0.05
+        key code 36
+    end tell
+end tell
+EOF
+
+# Restore previous clipboard after a short delay so paste completes first
+(sleep 0.3; printf '%s' "$OLD_CLIP" | pbcopy) &
