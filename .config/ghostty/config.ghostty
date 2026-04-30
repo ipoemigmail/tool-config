@@ -2,3 +2,5 @@ font-family = KMaple Mono NF
 theme = Snazzy Soft
 keybind = super+alt+shift+[=move_tab:-1
 keybind = super+alt+shift+]=move_tab:1
+shell-integration-features = no-cursor
+cursor-style = block_hollow
