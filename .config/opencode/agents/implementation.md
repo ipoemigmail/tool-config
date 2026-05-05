@@ -1,7 +1,11 @@
 ---
-description: General-purpose subagent using GPT-5.5
+description: General-purpose subagent
 mode: subagent
-model: openai/gpt-5.5
+#model: anthropic/claude-opus-4-7
+#model: openai/gpt-5.5
+#model: openai/gpt-5.4-mini
+model: opencode-go/deepseek-v4-pro
+#variant: high
 permission:
   edit: allow
   bash: allow

@@ -1,7 +1,11 @@
 ---
-description: General-purpose subagent using Opus 4.7
+description: General-purpose subagent
 mode: subagent
-model: anthropic/claude-opus-4-7
+#model: anthropic/claude-opus-4-7
+#model: openai/gpt-5.5
+#model: openai/gpt-5.4-mini
+model: opencode-go/deepseek-v4-pro
+#variant: high
 permission:
   edit: allow
   bash: allow
