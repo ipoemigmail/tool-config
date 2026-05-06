@@ -18,3 +18,4 @@
 .config/menus
 .config/pnpsecure
 .config/wireshark
+__pycache__
