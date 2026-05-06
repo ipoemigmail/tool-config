@@ -1,0 +1,20 @@
+[tools]
+node = "latest"
+python = "latest"
+java = "zulu-21"
+usage = "latest"
+kotlin = "latest"
+zig = "latest"
+scala = "2.13.16"
+sbt = "latest"
+bun = "latest"
+
+[settings]
+experimental = true
+idiomatic_version_file_enable_tools = ["python"]
+
+[settings.python]
+compile = false
+
+[settings.node]
+compile = false
