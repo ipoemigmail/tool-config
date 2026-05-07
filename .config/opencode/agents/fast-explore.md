@@ -3,8 +3,8 @@ description: Fast read-only agent for exploring codebases
 mode: subagent
 #model: kakao-ai-platform/glm-5-fp8
 #model: openai/gpt-5.4-mini
-#model: anthropic/claude-haiku-4-5
-model: opencode-go/deepseek-v4-flash
+model: anthropic/claude-haiku-4-5
+#model: opencode-go/deepseek-v4-flash
 permission:
   edit: deny
   bash: deny
