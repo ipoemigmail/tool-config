@@ -2,6 +2,7 @@
 description: General-purpose subagent
 mode: subagent
 #model: anthropic/claude-opus-4-7
+#model: anthropic/claude-sonnet-4-6
 #model: openai/gpt-5.5
 #model: openai/gpt-5.4-mini
 #model: opencode-go/deepseek-v4-flash
