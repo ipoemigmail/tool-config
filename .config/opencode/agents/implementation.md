@@ -14,7 +14,8 @@ mode: subagent
 #model: opencode-go/minimax-m2.7
 #model: opencode-go/qwen3.5-plus
 #model: opencode-go/qwen3.6-plus
-model: kakao-ai-platform/glm-5-fp8
+model: kakao-ai-platform-proxy/glm-5-fp8
+#model: kakao-ai-platform/qwen3-coder-480b-instruct
 #variant: max
 permission:
   edit: allow
