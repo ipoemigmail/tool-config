@@ -7,7 +7,7 @@
             "models": {
                 "gpt-5.5": {
                     "limit": {
-                        "context": 500000,
+                        "context": 512000,
                         "output": 128000
                     }
                 }
@@ -17,7 +17,7 @@
             "models": {
                 "claude-opus-4-7": {
                     "limit": {
-                        "context": 500000,
+                        "context": 512000,
                         "output": 128000
                     }
                 }
@@ -27,13 +27,13 @@
             "models": {
                 "deepseek-v4-pro": {
                     "limit": {
-                        "context": 500000,
+                        "context": 512000,
                         "output": 384000
                     }
                 },
                 "deepseek-v4-flash": {
                     "limit": {
-                        "context": 500000,
+                        "context": 512000,
                         "output": 384000
                     }
                 }
