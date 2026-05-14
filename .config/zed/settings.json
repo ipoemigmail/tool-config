@@ -7,6 +7,11 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+    "languages": {
+        "YAML": {
+            "tab_size": 2
+        }
+    },
     "cli_default_open_behavior": "new_window",
     "agent_buffer_font_size": 13.0,
     "buffer_font_size": 13.0,
