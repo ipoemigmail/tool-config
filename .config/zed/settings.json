@@ -9,8 +9,8 @@
 {
     "languages": {
         "YAML": {
-            "tab_size": 2
-        }
+            "tab_size": 2,
+        },
     },
     "cli_default_open_behavior": "new_window",
     "agent_buffer_font_size": 13.0,
@@ -48,7 +48,7 @@
     "edit_predictions": {
         "open_ai_compatible_api": {
             "max_output_tokens": 64,
-            "model": "qwen2.5-coder-3b",
+            "model": "sweep-next-edit-1.5b",
             "prompt_format": "qwen",
             "api_url": "http://localhost:1234/v1/completions",
         },
