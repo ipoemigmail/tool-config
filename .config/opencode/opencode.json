@@ -110,16 +110,21 @@
         },
         "models": {
           "global.anthropic.claude-opus-4-7[1m]": {
-            "name": "Opus 4.7 (1M)"
+            "name": "Opus 4.7 (1M)",
+            "limit": {
+              "context": 512000,
+              "output": 128000
+            }
           },
           "global.anthropic.claude-sonnet-4-6[1m]": {
-            "name": "Sonnet 4.6 (1M)"
+            "name": "Sonnet 4.6 (1M)",
+            "limit": {
+              "context": 512000,
+              "output": 128000
+            }
           },
           "global.anthropic.claude-haiku-4-5-20251001-v1:0": {
             "name": "Haiku 4.5"
-          },
-          "global.anthropic.claude-opus-4-6-v1[1m]": {
-            "name": "Opus 4.6 (1M)"
           }
         }
       }
