@@ -109,15 +109,15 @@
           "chunkTimeout": 1800000
         },
         "models": {
-          "global.anthropic.claude-opus-4-7[1m]": {
-            "name": "Opus 4.7 (1M)",
+          "global.anthropic.claude-opus-4-7": {
+            "name": "Opus 4.7",
             "limit": {
               "context": 512000,
               "output": 128000
             }
           },
-          "global.anthropic.claude-sonnet-4-6[1m]": {
-            "name": "Sonnet 4.6 (1M)",
+          "global.anthropic.claude-sonnet-4-6": {
+            "name": "Sonnet 4.6",
             "limit": {
               "context": 512000,
               "output": 128000
