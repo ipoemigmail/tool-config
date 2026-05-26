@@ -108,11 +108,20 @@ fi
 
 export PATH="$HOME/Bin:$PATH"
 
-alias oc="opencode"
 alias cl="claude --allow-dangerously-skip-permissions"
 alias ge="gemini"
+
+oc() {
+    export AWS_BEARER_TOKEN_BEDROCK="$(~/Bin/get-gateway-token.sh)"
+    opencode "$*"
+}
 
 noc() { new-ghostty "oc $*" }
 nge() { new-ghostty "ge $*" }
 ncl() { new-ghostty "cl $*" }
+nagy() { new-ghostty "agy $*" }
 
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/ben.jeong1/.local/bin:$PATH"
