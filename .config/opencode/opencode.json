@@ -10,9 +10,6 @@
   ],
   "provider": {
     "openai": {
-      "options": {
-        "baseURL": "http://localhost:3000/v1"
-      },
       "models": {
         "gpt-5.5": {
           "limit": {
