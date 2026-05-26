@@ -123,14 +123,16 @@
           "global.anthropic.claude-opus-4-7": {
             "name": "Opus 4.7",
             "limit": {
-              "context": 1000000,
+              //"context": 1000000,
+              "context": 5120000,
               "output": 128000
             }
           },
           "global.anthropic.claude-sonnet-4-6": {
             "name": "Sonnet 4.6",
             "limit": {
-              "context": 1000000,
+              //"context": 1000000,
+              "context": 5120000,
               "output": 64000
             }
           },
