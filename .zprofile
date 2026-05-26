@@ -113,13 +113,13 @@ alias ge="gemini"
 
 oc() {
     export AWS_BEARER_TOKEN_BEDROCK="$(~/Bin/get-gateway-token.sh)"
-    opencode "$*"
+    opencode "$@"
 }
 
-noc() { new-ghostty "oc $*" }
-nge() { new-ghostty "ge $*" }
-ncl() { new-ghostty "cl $*" }
-nagy() { new-ghostty "agy $*" }
+noc() { new-ghostty "oc $@" }
+nge() { new-ghostty "ge $@" }
+ncl() { new-ghostty "cl $@" }
+nagy() { new-ghostty "agy $@" }
 
 
 
