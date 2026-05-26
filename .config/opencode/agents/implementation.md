@@ -1,6 +1,7 @@
 ---
 description: General-purpose subagent
 mode: subagent
+#model: amazon-bedrock/global.anthropic.claude-sonnet-4-6
 #model: anthropic/claude-opus-4-7
 #model: anthropic/claude-sonnet-4-6
 #model: openai/gpt-5.5
