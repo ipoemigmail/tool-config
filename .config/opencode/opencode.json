@@ -38,6 +38,13 @@
             "input": 272000,
             "output": 128000
           }
+        },
+        "gpt-5.3-codex": {
+          "limit": {
+            "context": 400000,
+            "input": 272000,
+            "output": 128000
+          }
         }
       }
     },
