@@ -10,10 +10,31 @@
   ],
   "provider": {
     "openai": {
+      //"options": {
+      //  "timeout": 30000
+      //},
       "models": {
         "gpt-5.5": {
           "limit": {
             "context": 512000,
+            "output": 128000
+          }
+        },
+        "gpt-5.5-fast": {
+          "limit": {
+            "context": 512000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4-mini": {
+          "limit": {
+            "context": 256000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4-mini-fast": {
+          "limit": {
+            "context": 256000,
             "output": 128000
           }
         }
