@@ -113,8 +113,8 @@ alias ge="gemini"
 
 oc() {
     export AWS_BEARER_TOKEN_BEDROCK="$(~/Bin/get-gateway-token.sh)"
-    export HTTP_PROXY=http://127.0.0.1:3131
-    export HTTPS_PROXY=http://127.0.0.1:3131
+    #export HTTP_PROXY=http://127.0.0.1:3131
+    #export HTTPS_PROXY=http://127.0.0.1:3131
     opencode "$@"
 }
 
