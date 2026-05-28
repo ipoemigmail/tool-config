@@ -1,7 +1,7 @@
-exclude_commands = [
-  "git diff", "git show", "diff",
-  "cat", "read", "sed", "nl", "head", "tail", "less",
-  "curl", "wget",
-  "psql", "mysql", "sqlite3", "redis-cli", "mongo", "mongosh",
-  "docker logs", "docker compose logs", "kubectl logs", "journalctl",
-]
+#exclude_commands = [
+#  "git diff", "git show", "diff",
+#  "cat", "read", "sed", "nl", "head", "tail", "less",
+#  "curl", "wget",
+#  "psql", "mysql", "sqlite3", "redis-cli", "mongo", "mongosh",
+#  "docker logs", "docker compose logs", "kubectl logs", "journalctl",
+#]
