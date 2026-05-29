@@ -131,6 +131,14 @@
                 "chunkTimeout": 1800000
             },
             "models": {
+                "global.anthropic.claude-opus-4-8": {
+                    "name": "Opus 4.8",
+                    "limit": {
+                        //"context": 1000000,
+                        "context": 5120000,
+                        "output": 128000
+                    }
+                },
                 "global.anthropic.claude-opus-4-7": {
                     "name": "Opus 4.7",
                     "limit": {
@@ -158,7 +166,8 @@
             "/private/tmp/**/*": "allow",
             "/private/tmp/*": "allow",
             "/tmp/**/*": "allow",
-            "/tmp/*": "allow"
+            "/tmp/*": "allow",
+            "/**/tee/*": "allow"
         }
     }
 }
