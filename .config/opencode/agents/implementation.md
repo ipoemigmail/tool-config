@@ -7,6 +7,7 @@ mode: subagent
 #model: openai/gpt-5.5
 #model: openai/gpt-5.4
 model: openai/gpt-5.4-mini-fast
+#model: openai/gpt-5.3-codex
 #model: opencode-go/deepseek-v4-flash
 #model: opencode-go/deepseek-v4-pro
 #model: opencode-go/glm-5.1
