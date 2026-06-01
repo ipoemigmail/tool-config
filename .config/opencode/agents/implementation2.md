@@ -7,8 +7,10 @@ mode: subagent
 #model: openai/gpt-5.5
 #model: openai/gpt-5.4
 #model: openai/gpt-5.4-mini-fast
-model: opencode-go/deepseek-v4-flash
+#model: opencode-go/deepseek-v4-flash
 #model: opencode-go/deepseek-v4-pro
+#model: ollama-cloud/deepseek-v4-flash
+model: ollama-cloud/kimi-k2.6
 #model: opencode-go/glm-5.1
 #model: opencode-go/kimi-k2.5
 #model: opencode-go/kimi-k2.6
@@ -19,7 +21,7 @@ model: opencode-go/deepseek-v4-flash
 #model: kakao-ai-platform-proxy/glm-5-fp8
 #model: kakao-ai-platform/qwen3-coder-480b-instruct
 #variant: max
-variant: max
+#variant: max
 permission:
   edit: allow
   bash: allow
