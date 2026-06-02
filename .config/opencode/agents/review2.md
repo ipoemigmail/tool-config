@@ -6,7 +6,8 @@ mode: subagent
 #model: openai/gpt-5.4-mini
 #model: opencode-go/deepseek-v4-pro
 #model: ollama-cloud/deepseek-v4-flash
-model: ollama-cloud/kimi-k2.6
+#model: ollama-cloud/kimi-k2.6
+model: ollama-cloud/minimax-m3
 #model: amazon-bedrock/global.anthropic.claude-opus-4-7
 #variant: max
 permission:

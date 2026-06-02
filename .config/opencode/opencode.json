@@ -8,6 +8,7 @@
         "@ex-machina/opencode-anthropic-auth",
         "opencode-antigravity-auth@latest"
     ],
+    "disabled_providers": ["opencode-go"],
     "provider": {
         "openai": {
             "options": {
