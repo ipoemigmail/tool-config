@@ -8,8 +8,9 @@ mode: subagent
 #model: openai/gpt-5.4
 #model: openai/gpt-5.4-mini-fast
 #model: opencode-go/deepseek-v4-flash
-model: opencode-go/deepseek-v4-pro
+#model: opencode-go/deepseek-v4-pro
 #model: ollama-cloud/deepseek-v4-flash
+model: ollama-cloud/deepseek-v4-pro
 #model: ollama-cloud/kimi-k2.6
 #model: opencode-go/glm-5.1
 #model: opencode-go/kimi-k2.5

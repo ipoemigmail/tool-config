@@ -7,7 +7,7 @@ mode: subagent
 #model: openai/gpt-5.4-mini-fast
 #model: openai/gpt-5.3-codex
 #model: anthropic/claude-haiku-4-5
-model: opencode-go/deepseek-v4-flash
+model: ollama-cloud/deepseek-v4-flash
 permission:
   edit: deny
   bash: deny
