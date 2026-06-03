@@ -1,5 +1,5 @@
 ---
-name: light-harness
+name: general-harness
 model: haiku
 description: "explore, implement, review 를 가벼운 모델을 사용하도록 변경"
 ---
