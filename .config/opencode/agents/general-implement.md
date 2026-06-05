@@ -20,7 +20,7 @@ model: openai/gpt-5.4-mini-fast
 #model: kakao-ai-platform-proxy/glm-5-fp8
 #model: kakao-ai-platform/qwen3-coder-480b-instruct
 #variant: max
-variant: high
+#variant: high
 permission:
   edit: allow
   bash: allow
