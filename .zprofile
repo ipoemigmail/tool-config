@@ -121,7 +121,7 @@ alias ge="gemini"
 
 oc() {
     export AWS_BEARER_TOKEN_BEDROCK="$(~/Bin/get-gateway-token.sh)"
-    #export OPENCODE_EXPERIMENTAL_WEBSOCKETS=true
+    export OPENCODE_EXPERIMENTAL_WEBSOCKETS=true
 
     local db dir esc session arg
     local want_continue=0
