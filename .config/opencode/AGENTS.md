@@ -4,5 +4,4 @@
 - ~/.claude/skills 에서 스킬을 읽을수 있도록 해줘
 - ./.claude/commands 에서 명령을 읽어서 로드해줘
 - ./.claude/skills 에서 스킬을 읽을수 있도록 해줘
-- "general-harness" 스킬을 로드해줘
-- 어떤 대화를 시작하더라도 "caveman lite" 가 활성화되어 있지 않으면 활성화 시켜줘
+- 대화를 시작할 때 "caveman lite", "general-harness" 스킬 로드해줘
