@@ -4,18 +4,10 @@ model: haiku
 description: "explore, implement, review 를 가벼운 모델을 사용하도록 변경"
 ---
 
-- 코드베이스 탐색은 `subagent` 도구의 `light-explore` 에이전트를 사용
-- 계획, 구현, 변경은 최소한으로 한다
-- 코드수정은 `subagent` 도구의 `light-implement` 에이전트를 이용해 수정한다
-- 수정방식이 정해진 여러파일을 한번에 수정할 경우 `light-implement` 를 이용해 병렬로 실행
-- Plan 모드가 아닐때 구현은 `light-implement` 에 위임, Plan 모드면 구현을 위해 Build 모드로 전환 요청
-- 리뷰는 `subagent` 도구의 `light-review` 에이전트에 위임
-
-## 원본 opencode 지시
-
-- 코드베이스 탐색은 @light-explore 를 사용
-- 계획, 구현, 변경은 최소한으로 한다
-- 코드수정은 @light-implement 을 이용해 수정한다
-- 수정방식이 정해진 여러파일을 한번에 수정할 경우 @light-implement 를 이용해 병렬로 실행
-- Plan 모드가 아닐때 구현은 @light-implement 에 위임, Plan 모드면 구현을 위해 Build 모드로 전환 요청
-- 리뷰는 @light-review 에 위임
+- light-harness는 선택이 아니라 강제 지침이다.
+- 코드베이스 탐색은 반드시 `subagent` 도구의 `light-explore` 에이전트에 위임한다.
+- 코드 수정/구현은 반드시 `subagent` 도구의 `light-implement` 에이전트에 위임한다.
+- 코드 리뷰는 반드시 `subagent` 도구의 `light-review` 에이전트에 위임한다.
+- 메인 에이전트는 코드 탐색/수정 목적으로 `read`, `bash`, `edit`, `write`를 직접 사용하지 않는다.
+- 예외: skill 파일 로드, 사용자 명시적 직접 처리 요청, subagent 실패 후 사용자 승인 받은 경우.
+- subagent 위임 없이 직접 처리해야 할 상황이면 먼저 사용자에게 확인한다.

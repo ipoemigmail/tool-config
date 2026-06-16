@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "issue": {
+    "key": "KCDL-5192",
+    "url": "https://jira.daumkakao.com/browse/KCDL-5192",
+    "summary": "✅ 선물하기 > META 협력광고 대응 위한 첫구매 여부 로깅",
+    "epic_name": "✅ 선물하기 > META 협력광고 대응 위한 첫구매 여부 로깅",
+    "issue_type": "Epic",
+    "status": "Open",
+    "priority": "Medium",
+    "created_at": "2026-03-17",
+    "assignee": {
+      "username": "ben.jeong1",
+      "display_name": "ben.jeong1(정병준)/kakao"
+    },
+    "reporter": {
+      "username": "ben.jeong1",
+      "display_name": "ben.jeong1(정병준)/kakao"
+    },
+    "parent_key": "KCDL-4991",
+    "end_date": null,
+    "due_date": null,
+    "labels": ["광고", "선물하기"],
+    "components": ["ActionBase", "kc-spark"],
+    "links": [
+      {
+        "direction": "outward",
+        "relationship": "relates to",
+        "key": "KCDL-5200",
+        "summary": "Gift buyer segment validation"
+      },
+      {
+        "direction": "inward",
+        "relationship": "is blocked by",
+        "key": "KCDL-5101",
+        "summary": "META campaign upstream data readiness"
+      }
+    ]
+  },
+  "description_markdown": "## 배경\n\n선물하기 유입 고객의 신규 여부를 식별하고 로그로 남겨 광고 유입 효과와 잔존율을 추적한다.\n\n## 목표\n\n- META 협력광고 대응을 위한 첫구매 여부 로깅\n- 광고 집행 이후 성과 추적 기준 데이터 확보\n\n## 기대 효과\n\n- 신규 구매자 유입 효과 측정\n- 복귀 고객 분석 기반 확보\n\n## 개발범위\n\n- 첫구매 여부 조회 API 제공\n- Tiarra 로그 적재 포맷 정의\n\n## 요청 정보\n\n- 요청일: 2026-01-21\n- 요청자 (기획): @chie.real\n- 요청자 (개발): @edina.a\n- 요청 조직: 선물컨텍스트스쿼드\n\n## 연동 정보\n\n- 데이터 소스: `gift_buyer_segment_v1`, `gift_sent_v4`\n\n## 관련 링크\n\n- [액션베이스 업무 요청](https://kakao.agit.in/g/300092401/wall/450536754)\n\n## 완료보고\n\n- 담당자: @ben.jeong1 / PM: @chie.real\n- 내용: META 협력광고 대응을 위한 첫구매 여부 로깅 지원 인프라 개발 완료",
+  "md_force_fields": [
+    "status",
+    "links"
+  ],
+  "checklists": {
+    "todo": [
+      {
+        "id": 10,
+        "name": "요구사항 분석",
+        "checked": true,
+        "completed_date": "03/17",
+        "linked_issue_key": "KCDL-5193",
+        "assignee_username": "ben.jeong1",
+        "status_name": null,
+        "status_id": "none"
+      },
+      {
+        "id": 11,
+        "name": "설계문서",
+        "checked": true,
+        "completed_date": "03/17",
+        "linked_issue_key": "KCDL-5194",
+        "assignee_username": "ben.jeong1",
+        "status_name": null,
+        "status_id": "none"
+      },
+      {
+        "id": 12,
+        "name": "Dev",
+        "checked": false,
+        "completed_date": null,
+        "linked_issue_key": "KCDL-5195",
+        "assignee_username": "edina.a",
+        "status_name": "In Progress",
+        "status_id": "inProgress"
+      },
+      {
+        "id": 13,
+        "name": "Beta",
+        "checked": false,
+        "completed_date": null,
+        "linked_issue_key": "KCDL-5196",
+        "assignee_username": "eden.yoon",
+        "status_name": "To Do",
+        "status_id": "toDo"
+      }
+    ],
+    "acceptance_criteria": [
+      {
+        "id": 20,
+        "name": "첫구매 여부 조회 결과가 API 응답에 포함된다",
+        "checked": true,
+        "completed_date": "03/18",
+        "linked_issue_key": null,
+        "assignee_username": "ben.jeong1",
+        "status_name": null,
+        "status_id": "none"
+      },
+      {
+        "id": 21,
+        "name": "광고 유입 식별 로그가 티아라에 적재된다",
+        "checked": false,
+        "completed_date": null,
+        "linked_issue_key": null,
+        "assignee_username": "eden.yoon",
+        "status_name": "In Progress",
+        "status_id": "inProgress"
+      }
+    ]
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "jira_dsl.schema.json",
+  "title": "Jira DSL",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "issue",
+    "description_markdown",
+    "checklists"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "url",
+        "summary",
+        "epic_name",
+        "issue_type",
+        "status",
+        "priority",
+        "created_at",
+        "assignee",
+        "reporter",
+        "parent_key",
+        "labels",
+        "components",
+        "links"
+      ],
+      "properties": {
+        "key": {
+          "type": ["string", "null"]
+        },
+        "url": {
+          "type": ["string", "null"]
+        },
+        "summary": {
+          "type": "string"
+        },
+        "epic_name": {
+          "type": ["string", "null"]
+        },
+        "issue_type": {
+          "type": ["string", "null"]
+        },
+        "status": {
+          "type": ["string", "null"]
+        },
+        "priority": {
+          "type": ["string", "null"]
+        },
+        "created_at": {
+          "type": ["string", "null"]
+        },
+        "assignee": {
+          "$ref": "#/$defs/userOrNull"
+        },
+        "reporter": {
+          "$ref": "#/$defs/userOrNull"
+        },
+        "parent_key": {
+          "type": ["string", "null"]
+        },
+        "end_date": {
+          "type": ["string", "null"]
+        },
+        "due_date": {
+          "type": ["string", "null"]
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/link"
+          }
+        }
+      }
+    },
+    "description_markdown": {
+      "type": "string"
+    },
+    "md_force_fields": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "key",
+          "url",
+          "summary",
+          "epic_name",
+          "issue_type",
+          "status",
+          "priority",
+          "created_at",
+          "assignee",
+          "reporter",
+          "parent_key",
+          "end_date",
+           "due_date",
+           "labels",
+           "components",
+           "links"
+         ]
+       },
+      "uniqueItems": true
+    },
+    "checklists": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["todo", "acceptance_criteria"],
+      "properties": {
+        "todo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/checklistItem"
+          }
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/checklistItem"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "user": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["username", "display_name"],
+      "properties": {
+        "username": {
+          "type": ["string", "null"]
+        },
+        "display_name": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "userOrNull": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/user"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["direction", "relationship", "key", "summary"],
+      "properties": {
+        "direction": {
+          "type": ["string", "null"]
+        },
+        "relationship": {
+          "type": ["string", "null"]
+        },
+        "key": {
+          "type": ["string", "null"]
+        },
+        "summary": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "checklistItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "checked"
+      ],
+      "properties": {
+        "id": {
+          "type": ["integer", "null"],
+          "description": "Jira checklist item unique ID. Merge key for matching items."
+        },
+        "name": {
+          "type": "string"
+        },
+        "checked": {
+          "type": "boolean"
+        },
+        "completed_date": {
+          "type": ["string", "null"]
+        },
+        "linked_issue_key": {
+          "type": ["string", "null"],
+          "description": "Jira issue key linked to this checklist item (maps from MD linkedIssueKey attribute)."
+        },
+        "assignee_username": {
+          "type": ["string", "null"]
+        },
+        "status_name": {
+          "type": ["string", "null"]
+        },
+        "status_id": {
+          "type": ["string", "null"]
+        }
+      }
+    }
+  }
+}
