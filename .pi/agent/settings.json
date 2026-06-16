@@ -19,6 +19,8 @@
   ],
   "packages": [
     "git:github.com/studioarray/pi-openai-fast",
-    "npm:@tintinweb/pi-subagents"
+    "npm:@tintinweb/pi-subagents",
+    "npm:pi-web-access",
+    "npm:pi-lens"
   ]
 }

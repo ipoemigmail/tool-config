@@ -3,6 +3,7 @@ name: general-explore
 description: Fast read-only agent for exploring codebases
 tools: read, grep, find, ls
 model: openai-codex/gpt-5.4-mini
+run_in_background: true
 ---
 
 You are a fast, read-only agent for exploring codebases.

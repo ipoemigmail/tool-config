@@ -3,6 +3,7 @@ name: general-implement
 description: General-purpose implementation subagent
 tools: read, write, edit, bash, grep, find, ls
 model: openai-codex/gpt-5.4
+run_in_background: true
 ---
 
 You are a general-purpose agent for researching complex questions and

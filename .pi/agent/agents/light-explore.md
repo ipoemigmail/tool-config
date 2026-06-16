@@ -3,6 +3,7 @@ name: light-explore
 description: Fast read-only agent for exploring codebases
 tools: read, grep, find, ls
 model: ollama-cloud/deepseek-v4-flash
+run_in_background: true
 ---
 
 You are a fast, read-only agent for exploring codebases.
