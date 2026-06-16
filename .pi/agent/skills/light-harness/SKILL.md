@@ -5,7 +5,7 @@ description: "explore, implement, review 를 가벼운 모델을 사용하도록
 ---
 
 - light-harness는 선택이 아니라 강제 지침이다.
-- 코드 수정/구현 계획은 `subagent` 에게 위임하지 않고 직접처리한다.
+- 코드 수정/구현 계획은 반드시 `subagent` 에게 위임하지 않고 직접처리한다.
 - 코드베이스 탐색은 반드시 `subagent` 도구의 `light-explore` 에이전트에 위임한다.
 - 코드 수정/구현은 반드시 `subagent` 도구의 `light-implement` 에이전트에 위임한다.
 - 코드 리뷰는 반드시 `subagent` 도구의 `light-review` 에이전트에 위임한다.
