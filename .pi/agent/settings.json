@@ -1,0 +1,23 @@
+{
+  "lastChangelogVersion": "0.79.4",
+  "theme": "dark",
+  "defaultProvider": "kakao-aws-bedrock",
+  "defaultModel": "global.anthropic.claude-opus-4-8",
+  "defaultThinkingLevel": "high",
+  "hideThinkingBlock": false,
+  "enabledModels": [
+    "openai-codex/gpt-5.5",
+    "openai-codex/gpt-5.4-mini",
+    "ollama-cloud/kimi-k2.7-code",
+    "ollama-cloud/minimax-m3",
+    "ollama-cloud/glm-5.1",
+    "ollama-cloud/deepseek-v4-flash",
+    "ollama-cloud/deepseek-v4-pro",
+    "ollama-cloud/kimi-k2.6",
+    "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",
+    "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6"
+  ],
+  "packages": [
+    "git:github.com/studioarray/pi-openai-fast"
+  ]
+}

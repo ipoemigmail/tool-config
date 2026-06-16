@@ -1,0 +1,7 @@
+- 한글로 얘기해줘
+- commit description 은 한글로 작성
+- ~/.claude/commands 에서 명령을 읽어서 로드해줘
+- ~/.claude/skills 에서 스킬을 읽을수 있도록 해줘
+- ./.claude/commands 에서 명령을 읽어서 로드해줘
+- ./.claude/skills 에서 스킬을 읽을수 있도록 해줘
+- 대화를 시작할 때 "caveman lite", "general-harness" 스킬 로드해줘

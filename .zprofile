@@ -111,6 +111,11 @@ export PATH="$HOME/Bin:$PATH"
 alias cl="claude --allow-dangerously-skip-permissions"
 alias ge="gemini"
 
+p() {
+    export AWS_BEARER_TOKEN_BEDROCK="$(~/Bin/get-gateway-token.sh)"
+    pi --fast "$@"
+}
+
 #oc() {
 #    export AWS_BEARER_TOKEN_BEDROCK="$(~/Bin/get-gateway-token.sh)"
 #    #export HTTP_PROXY=http://127.0.0.1:3131
@@ -162,6 +167,7 @@ oc() {
     fi
 }
 
+np() { new-ghostty "p" "$@"; }
 noc() { new-ghostty "oc" "$@"; }
 nge() { new-ghostty "ge" "$@"; }
 ncl() { new-ghostty "cl" "$@"; }
