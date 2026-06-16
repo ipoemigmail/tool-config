@@ -18,6 +18,7 @@
     "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6"
   ],
   "packages": [
-    "git:github.com/studioarray/pi-openai-fast"
+    "git:github.com/studioarray/pi-openai-fast",
+    "npm:@tintinweb/pi-subagents"
   ]
 }
