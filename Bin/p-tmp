@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+source ~/.zprofile
+cd ~/Tmp/dummy
+p -c
