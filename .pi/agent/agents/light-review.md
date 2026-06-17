@@ -2,7 +2,7 @@
 name: light-review
 description: General-purpose review subagent
 tools: read, write, edit, bash, grep, find, ls
-model: ollama-cloud/minimax-m3
+model: ollama-cloud/minimax-m3:xhigh
 run_in_background: true
 ---
 

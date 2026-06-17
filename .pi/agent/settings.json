@@ -1,26 +1,39 @@
 {
-  "lastChangelogVersion": "0.79.4",
+  "lastChangelogVersion": "0.79.6",
   "theme": "dark",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
+  "defaultProvider": "kakao-aws-bedrock",
+  "defaultModel": "global.anthropic.claude-opus-4-8",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "enabledModels": [
     "openai-codex/gpt-5.5",
     "openai-codex/gpt-5.4-mini",
-    "ollama-cloud/kimi-k2.7-code",
-    "ollama-cloud/minimax-m3",
-    "ollama-cloud/glm-5.1",
-    "ollama-cloud/deepseek-v4-flash",
-    "ollama-cloud/deepseek-v4-pro",
-    "ollama-cloud/kimi-k2.6",
     "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",
-    "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6"
+    "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6",
+    "ollama-cloud/glm-5.2",
+    "ollama-cloud/minimax-m3",
+    "ollama-cloud/deepseek-v4-flash",
+    "ollama-cloud/kimi-k2.6",
+    "ollama-cloud/kimi-k2.7-code",
+    "ollama-cloud/deepseek-v4-pro"
   ],
   "packages": [
-    "git:github.com/studioarray/pi-openai-fast",
     "npm:@tintinweb/pi-subagents",
     "npm:pi-web-access",
-    "npm:pi-lens"
-  ]
+    "npm:pi-lens",
+    "git:github.com/edxeth/pi-gpt-config",
+    "npm:pi-ollama-cloud"
+  ],
+  "gptConfig": {
+    "fastMode": true,
+    "personality": "none",
+    "verbosity": "medium",
+    "summary": "auto",
+    "toolDiscipline": "off",
+    "showFooter": true
+  },
+  "editorPaddingX": 1,
+  "terminal": {
+    "showTerminalProgress": false
+  }
 }

@@ -113,7 +113,7 @@ alias ge="gemini"
 
 p() {
     export AWS_BEARER_TOKEN_BEDROCK="$(~/Bin/get-gateway-token.sh)"
-    pi --fast "$@"
+    pi "$@"
 }
 
 #oc() {
