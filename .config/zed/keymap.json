@@ -94,7 +94,7 @@
     {
         "context": "ProjectPanel",
         "bindings": {
-            "enter": "project_panel::Open",
+            "space": "project_panel::Open",
             "cmd-backspace": ["project_panel::Trash", { "skip_prompt": false }],
             "backspace": ["project_panel::Trash", { "skip_prompt": false }],
             "delete": ["project_panel::Trash", { "skip_prompt": false }],
@@ -213,6 +213,11 @@
     {
         "unbind": {
             "cmd-shift-c": "collab_panel::ToggleFocus",
+        },
+    },
+    {
+        "bindings": {
+            "cmd-shift-ctrl-q": "workspace::CloseWindow",
         },
     },
 ]

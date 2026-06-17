@@ -7,7 +7,17 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+    "diff_view_style": "split",
     "languages": {
+        "Scala": {
+            "enable_language_server": false,
+            "completions": {
+                "lsp": false
+            },
+            "tasks": {
+                "prefer_lsp": true
+            }
+        },
         "YAML": {
             "tab_size": 2,
         },
@@ -56,6 +66,9 @@
         "mode": "eager",
     },
     "agent_servers": {
+        "pi-acp": {
+            "type": "registry"
+        },
         "gemini": {
             "type": "registry",
         },
@@ -65,20 +78,6 @@
         "codex-acp": {
             "type": "registry",
             "favorite_models": ["gpt-5.3-codex/medium"],
-        },
-        "opencode": {
-            "favorite_config_option_values": {
-                "model": [
-                    "anthropic/claude-opus-4-7/high",
-                    "openai/gpt-5.5/high",
-                ],
-            },
-            "favorite_models": [
-                "anthropic/claude-opus-4-7/high",
-                "openai/gpt-5.5/high",
-            ],
-            "type": "registry",
-            "default_model": "openai/gpt-5.5/high",
         },
     },
     "tab_size": 4,
