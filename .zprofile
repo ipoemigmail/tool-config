@@ -167,6 +167,7 @@ oc() {
     fi
 }
 
+n() { new-ghostty "$@"; }
 np() { new-ghostty "p" "$@"; }
 noc() { new-ghostty "oc" "$@"; }
 nge() { new-ghostty "ge" "$@"; }
