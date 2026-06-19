@@ -1,5 +1,5 @@
-.config/nvim/.netrwhist
 .DS_Store
+
 .claude/backups
 .claude/plans
 .claude/cache
@@ -10,6 +10,11 @@
 .claude/shell-snapshots
 .claude/telemetry
 .claude/todos
+.claude/.last-cleanup
+.claude/history.jsonl
+.claude/plugins
+
+.config/nvim/.netrwhist
 .config/coc
 .config/configstore
 .config/irust
@@ -19,3 +24,4 @@
 .config/pnpsecure
 .config/wireshark
 __pycache__
+/.claude/stats-cache.json

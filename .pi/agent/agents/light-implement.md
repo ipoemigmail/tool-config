@@ -2,7 +2,8 @@
 name: light-implement
 description: General-purpose implementation subagent
 tools: read, write, edit, bash, grep, find, ls
-model: ollama-cloud/deepseek-v4-pro:xhigh
+model: ollama-cloud/deepseek-v4-pro
+thinking: xhigh
 run_in_background: true
 ---
 
