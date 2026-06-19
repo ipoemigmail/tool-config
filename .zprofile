@@ -168,11 +168,6 @@ oc() {
 }
 
 n() { new-ghostty "$@"; }
-np() { new-ghostty "p" "$@"; }
-noc() { new-ghostty "oc" "$@"; }
-nge() { new-ghostty "ge" "$@"; }
-ncl() { new-ghostty "cl" "$@"; }
-nagy() { new-ghostty "agy" "$@"; }
 
 # Added by Antigravity CLI installer
 export PATH="/Users/ben.jeong1/.local/bin:$PATH"
