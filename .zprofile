@@ -168,6 +168,7 @@ oc() {
 }
 
 n() { new-ghostty "$@"; }
+np() { n p "$@"; }
 
 # Added by Antigravity CLI installer
 export PATH="/Users/ben.jeong1/.local/bin:$PATH"
