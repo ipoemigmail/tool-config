@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.79.8",
   "theme": "dark",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
+  "defaultProvider": "kakao-aws-bedrock",
+  "defaultModel": "global.anthropic.claude-opus-4-8",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "enabledModels": [
@@ -23,10 +23,11 @@
     "npm:pi-lens",
     "git:github.com/edxeth/pi-gpt-config",
     "npm:pi-ollama-cloud",
-    "npm:@entelligentsia/pi-claude-compat"
+    "npm:@entelligentsia/pi-claude-compat",
+    "git:github.com/tmustier/pi-extensions"
   ],
   "gptConfig": {
-    "fastMode": true,
+    "fastMode": false,
     "personality": "none",
     "verbosity": "medium",
     "summary": "auto",
