@@ -7,5 +7,5 @@
 - 첫 응답 전 반드시 `caveman/SKILL.md`, `change-harness/SKILL.md`를 read 도구로 로드하고(caveman은 lite 레벨), 로드 완료를 한 줄로 보고할 것 (change-harness는 param 을 뭘로 처리했는지 보여줄것).
 - 변경은 최소한으로 해주고 하드코딩, 매직넘버 같은 안티패턴으로 구현하지 말아줘
 - 스켈레톤 (trait 또는 interface 같은) 부터 작성, 스켈레톤끼리 조합해서 구조를 잡은 후 내부 구현하는 방식으로 처리해줘
-- subagent 위임 시 작업 성격에 맞춰 `max_turns`를 걸되, `(turn limit)`으로 끝난 작업은 결과가 미완인지 판단하고, 미완이면 `resume`으로 이어서 완료할 것.
+- subagent 위임 시에는 작업 성격에 맞는 기본 `max_turns` 값의 2배를 지정하되, `(turn limit)`으로 끝난 작업은 결과가 미완인지 판단하고, 미완이면 `resume`으로 이어서 완료할 것.
 - 주석은 장황하지 않게 핵심만 간단히 작성해줘
