@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.79.9",
+  "lastChangelogVersion": "0.79.10",
   "theme": "dark",
   "defaultProvider": "kakao-aws-bedrock",
   "defaultModel": "global.anthropic.claude-opus-4-8",
@@ -23,8 +23,7 @@
     "npm:pi-lens",
     "git:github.com/edxeth/pi-gpt-config",
     "npm:pi-ollama-cloud",
-    "npm:@entelligentsia/pi-claude-compat",
-    "git:github.com/tmustier/pi-extensions"
+    "npm:@entelligentsia/pi-claude-compat"
   ],
   "gptConfig": {
     "fastMode": false,

@@ -111,9 +111,9 @@ export PATH="$HOME/Bin:$PATH"
 alias cl="claude --allow-dangerously-skip-permissions"
 alias ge="gemini"
 
-p() {
+pi() {
     export AWS_BEARER_TOKEN_BEDROCK="$(~/Bin/get-gateway-token.sh)"
-    pi "$@"
+    /Users/ben.jeong1/.local/share/mise/installs/node/latest/bin/pi "$@"
 }
 
 #oc() {
@@ -168,7 +168,7 @@ oc() {
 }
 
 n() { new-ghostty "$@"; }
-np() { n p "$@"; }
+npi() { n pi "$@"; }
 
 # Added by Antigravity CLI installer
 export PATH="/Users/ben.jeong1/.local/bin:$PATH"
