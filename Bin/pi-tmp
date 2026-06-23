@@ -2,4 +2,4 @@
 
 source ~/.zprofile
 cd ~/Tmp/dummy
-p -c
+pi -c

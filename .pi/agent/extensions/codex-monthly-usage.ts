@@ -14,7 +14,7 @@ import { join } from "node:path";
 const STATUS_KEY = "codex-usage";
 const AUTH_PATH = join(homedir(), ".codex", "auth.json");
 const API_BASE = "https://chatgpt.com/backend-api";
-const REFRESH_INTERVAL_MS = 1 * 60 * 1000; // 5 minutes
+const REFRESH_INTERVAL_MS = 1 * 60 * 1000; // 1 minute
 const FETCH_TIMEOUT_MS = 10_000;
 
 interface CodexTokens {
@@ -89,23 +89,37 @@ export default function (pi: ExtensionAPI) {
     }
 
     pi.on("session_start", async (_event, ctx) => {
-        lastFetchAt = 0;
-        await refresh(ctx);
-
-        intervalHandle = setInterval(async () => {
-            lastFetchAt = 0; // force fetch on timer tick
+        try {
+            lastFetchAt = 0;
             await refresh(ctx);
-        }, REFRESH_INTERVAL_MS);
+
+            intervalHandle = setInterval(() => {
+                lastFetchAt = 0; // force fetch on timer tick
+                void refresh(ctx).catch((err) =>
+                    console.warn("[codex-monthly-usage] interval refresh error:", err),
+                );
+            }, REFRESH_INTERVAL_MS);
+        } catch (err) {
+            console.warn("[codex-monthly-usage] session_start error:", err);
+        }
     });
 
     pi.on("turn_end", async (_event, ctx) => {
-        await refresh(ctx);
+        try {
+            await refresh(ctx);
+        } catch (err) {
+            console.warn("[codex-monthly-usage] turn_end error:", err);
+        }
     });
 
     pi.on("session_shutdown", async (_event, _ctx) => {
-        if (intervalHandle !== null) {
-            clearInterval(intervalHandle);
-            intervalHandle = null;
+        try {
+            if (intervalHandle !== null) {
+                clearInterval(intervalHandle);
+                intervalHandle = null;
+            }
+        } catch (err) {
+            console.warn("[codex-monthly-usage] session_shutdown error:", err);
         }
     });
 }
