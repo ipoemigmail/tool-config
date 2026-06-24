@@ -1,6 +1,6 @@
 ---
 name: change-harness
-description: "explore, implement, review 를 지정한 모델을 사용하도록 변경"
+description: "explore, implement, review 를 지정한 모델을 사용하도록 변경 (anth, gpt, ollama)"
 ---
 
 - change-harness 는 선택이 아니라 강제 지침이다.
