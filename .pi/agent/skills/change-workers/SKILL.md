@@ -1,9 +1,9 @@
 ---
-name: change-harness
+name: change-workers
 description: "explore, implement, review 를 지정한 모델을 사용하도록 변경 (anth, gpt, ollama)"
 ---
 
-- change-harness 는 선택이 아니라 강제 지침이다.
+- change-workers 는 선택이 아니라 강제 지침이다.
 - `{param}` 은 스킬 호출 시 전달받은 하네스 접두사다. (예: `anth`, `gpt`, `ollama`)
 - `{param}` 이 전달되지 않으면 default 는 `gpt` 이다.
 - 계획문서작성은 반드시 직접처리한다.
