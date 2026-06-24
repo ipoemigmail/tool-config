@@ -174,7 +174,7 @@ function defaultDateRange(): { start: string; end: string } {
 }
 
 function statusUnknown(): string {
-    return "[Claude usage ?]";
+    return "[claude usage ?]";
 }
 
 function isStaleCtxError(err: unknown): boolean {
@@ -656,7 +656,7 @@ function formatClaudeUsageStatus(
     const detail = remaining
         ? `${formatPercent(pct)}, ${remaining}`
         : formatPercent(pct);
-    return `[Claude ${formatDisplayNumber(safeUsed)}/${formatDisplayNumber(safeLimit)} (${detail})]`;
+    return `[claude ${formatDisplayNumber(safeUsed)}/${formatDisplayNumber(safeLimit)} (${detail})]`;
 }
 
 function quotaWindowLabel(window: QuotaWindow): string {

@@ -188,7 +188,7 @@ function formatStatus(data: MonthlyUsageResponse | null): string {
     const used = data?.current_month_usage;
     const limit = data?.effective_monthly_limit?.limit;
     if (typeof used !== "number" || typeof limit !== "number") {
-        return "[Codex usage ?]";
+        return "[gpt usage ?]";
     }
 
     const pct = limit > 0 ? (used / limit) * 100 : 0;
@@ -196,7 +196,7 @@ function formatStatus(data: MonthlyUsageResponse | null): string {
     const detail = remaining
         ? `${formatPercent(pct)}, ${remaining}`
         : formatPercent(pct);
-    return `[Codex ${formatDisplayNumber(used)}/${formatDisplayNumber(limit)} (${detail})]`;
+    return `[gpt ${formatDisplayNumber(used)}/${formatDisplayNumber(limit)} (${detail})]`;
 }
 
 function isStaleCtxError(err: unknown): boolean {
@@ -249,7 +249,7 @@ export default function (pi: ExtensionAPI) {
 
             warnOnce(
                 "setStatusIfActive",
-                "[codex-monthly-usage] setStatus error:",
+                "[gpt-monthly-usage] setStatus error:",
                 err,
             );
         }
@@ -276,7 +276,7 @@ export default function (pi: ExtensionAPI) {
 
             setStatusIfActive(session, formatStatus(data));
         } catch (err) {
-            warnOnce("refresh", "[codex-monthly-usage] refresh error:", err);
+            warnOnce("refresh", "[gpt-monthly-usage] refresh error:", err);
         }
     }
 
@@ -300,13 +300,13 @@ export default function (pi: ExtensionAPI) {
                 lastFetchAt = 0; // force fetch on timer tick
                 void refresh(session).catch((err) =>
                     console.warn(
-                        "[codex-monthly-usage] interval refresh error:",
+                        "[gpt-monthly-usage] interval refresh error:",
                         err,
                     ),
                 );
             }, REFRESH_INTERVAL_MS);
         } catch (err) {
-            console.warn("[codex-monthly-usage] session_start error:", err);
+            console.warn("[gpt-monthly-usage] session_start error:", err);
         }
     });
 
@@ -317,7 +317,7 @@ export default function (pi: ExtensionAPI) {
                 return;
             await refresh(session);
         } catch (err) {
-            console.warn("[codex-monthly-usage] turn_end error:", err);
+            console.warn("[gpt-monthly-usage] turn_end error:", err);
         }
     });
 
@@ -332,7 +332,7 @@ export default function (pi: ExtensionAPI) {
                 deactivateSession(session);
             } catch (err) {
                 console.warn(
-                    "[codex-monthly-usage] session_shutdown error:",
+                    "[gpt-monthly-usage] session_shutdown error:",
                     err,
                 );
             }
