@@ -4,7 +4,7 @@ import type { ReadonlySessionManager } from "@earendil-works/pi-coding-agent";
 
 const EXTENSION_MARKER = "[pi-extension:auto-load-team-command]";
 const PROMPT_PATH = "/Users/ben.jeong1/.pi/agent/prompts/change-team.md";
-const STATUS_KEY = "team-command";
+const STATUS_KEY = "zteam-command";
 const DEFAULT_TEAM = "gpt";
 const TEAM_ENV_KEYS = ["PI_SELECTED_TEAM", "PI_TEAM", "TEAM"] as const;
 const KNOWN_TEAMS = ["gpt", "claude", "ollama"] as const;
@@ -102,24 +102,26 @@ function stripFrontmatter(raw: string): string {
  * Handles: ${1:-default}, $1, $@, $ARGUMENTS, ${@:N}
  */
 function applyTemplateSubstitution(body: string, team: string): string {
-    return body
-        // ${1:-default} → team
-        .replace(/\$\{1:-[^}]*\}/g, team)
-        // ${@:N} → team
-        .replace(/\$\{@:[^}]*\}/g, team)
-        // $1 → team
-        .replace(/\$1\b/g, team)
-        // $@ → team
-        .replace(/\$@/g, team)
-        // $ARGUMENTS → team
-        .replace(/\$ARGUMENTS\b/g, team);
+    return (
+        body
+            // ${1:-default} → team
+            .replace(/\$\{1:-[^}]*\}/g, team)
+            // ${@:N} → team
+            .replace(/\$\{@:[^}]*\}/g, team)
+            // $1 → team
+            .replace(/\$1\b/g, team)
+            // $@ → team
+            .replace(/\$@/g, team)
+            // $ARGUMENTS → team
+            .replace(/\$ARGUMENTS\b/g, team)
+    );
 }
 
 type StatusCtx = { ui: { setStatus: (key: string, value: string) => void } };
 
 function safeSetTeamStatus(ctx: StatusCtx, team: string): void {
     try {
-        ctx.ui.setStatus(STATUS_KEY, `[team:${team}]`);
+        ctx.ui.setStatus(STATUS_KEY, `| team: ${team}`);
     } catch (e) {
         console.warn("[auto-load-team-command] failed to set status:", e);
     }

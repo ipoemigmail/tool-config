@@ -11,7 +11,7 @@ import { getAgentDir } from "@earendil-works/pi-coding-agent";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-const STATUS_KEY = "codex-usage";
+const STATUS_KEY = "zgpt-usage";
 const AUTH_PATH = join(getAgentDir(), "auth.json");
 const API_BASE = "https://chatgpt.com/backend-api";
 const REFRESH_INTERVAL_MS = 1 * 60 * 1000; // 1 minute
@@ -205,7 +205,7 @@ function formatStatus(data: MonthlyUsageResponse | null): string {
     const used = data?.current_month_usage;
     const limit = data?.effective_monthly_limit?.limit;
     if (typeof used !== "number" || typeof limit !== "number") {
-        return "[gpt usage ?]";
+        return "| gpt usage ?";
     }
 
     const pct = limit > 0 ? (used / limit) * 100 : 0;
@@ -213,7 +213,7 @@ function formatStatus(data: MonthlyUsageResponse | null): string {
     const detail = remaining
         ? `${formatPercent(pct)}, ${remaining}`
         : formatPercent(pct);
-    return `[gpt ${formatDisplayNumber(used)}/${formatDisplayNumber(limit)} (${detail})]`;
+    return `| gpt ${formatDisplayNumber(used)}/${formatDisplayNumber(limit)} (${detail})`;
 }
 
 function isStaleCtxError(err: unknown): boolean {

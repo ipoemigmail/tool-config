@@ -16,7 +16,7 @@ import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
 
-const STATUS_KEY = "claude-remaining-usage";
+const STATUS_KEY = "zclaude-remaining-usage";
 const DEFAULT_BASE_URL = "https://llm-dashboard.onkakao.net";
 const DEFAULT_AWS_PROFILE = "bedrock-gateway";
 const DEFAULT_AWS_REGION = "ap-northeast-2";
@@ -174,7 +174,7 @@ function defaultDateRange(): { start: string; end: string } {
 }
 
 function statusUnknown(): string {
-    return "[claude usage ?]";
+    return "| claude usage ?";
 }
 
 function isStaleCtxError(err: unknown): boolean {
@@ -656,7 +656,7 @@ function formatClaudeUsageStatus(
     const detail = remaining
         ? `${formatPercent(pct)}, ${remaining}`
         : formatPercent(pct);
-    return `[claude ${formatDisplayNumber(safeUsed)}/${formatDisplayNumber(safeLimit)} (${detail})]`;
+    return `| claude ${formatDisplayNumber(safeUsed)}/${formatDisplayNumber(safeLimit)} (${detail})`;
 }
 
 function quotaWindowLabel(window: QuotaWindow): string {
