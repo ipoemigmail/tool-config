@@ -7,7 +7,6 @@
   "hideThinkingBlock": false,
   "enabledModels": [
     "openai-codex/gpt-5.5",
-    "openai-codex/gpt-5.4-mini",
     "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",
     "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6",
     "ollama-cloud/glm-5.2",
@@ -15,7 +14,8 @@
     "ollama-cloud/deepseek-v4-flash",
     "ollama-cloud/kimi-k2.6",
     "ollama-cloud/kimi-k2.7-code",
-    "ollama-cloud/deepseek-v4-pro"
+    "ollama-cloud/deepseek-v4-pro",
+    "openai-codex/gpt-5.4"
   ],
   "packages": [
     "npm:@tintinweb/pi-subagents",

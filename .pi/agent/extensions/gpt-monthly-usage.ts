@@ -1,18 +1,18 @@
 /**
  * ChatGPT monthly usage in Pi status line.
- * Reads ~/.codex/auth.json tokens.{account_id, access_token}.
+ * Reads Pi agent auth.json tokens.{account_id, access_token}.
  */
 
 import type {
     ExtensionAPI,
     ExtensionContext,
 } from "@earendil-works/pi-coding-agent";
+import { getAgentDir } from "@earendil-works/pi-coding-agent";
 import { readFile } from "node:fs/promises";
-import { homedir } from "node:os";
 import { join } from "node:path";
 
 const STATUS_KEY = "codex-usage";
-const AUTH_PATH = join(homedir(), ".codex", "auth.json");
+const AUTH_PATH = join(getAgentDir(), "auth.json");
 const API_BASE = "https://chatgpt.com/backend-api";
 const REFRESH_INTERVAL_MS = 1 * 60 * 1000; // 1 minute
 const FETCH_TIMEOUT_MS = 10_000;
