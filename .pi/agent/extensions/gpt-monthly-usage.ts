@@ -1,6 +1,6 @@
 /**
  * ChatGPT monthly usage in Pi status line.
- * Reads Pi agent auth.json tokens.{account_id, access_token}.
+ * Reads Pi agent auth.json openai-codex.{accountId, access}.
  */
 
 import type {
@@ -22,6 +22,18 @@ const MONTHLY_RESET_DAY = 4;
 interface CodexTokens {
     account_id: string;
     access_token: string;
+    refresh_token?: string;
+}
+
+interface OpenAICodexAuth {
+    access: string;
+    accountId: string;
+    refresh?: string;
+    [key: string]: unknown;
+}
+
+interface PiAgentAuth {
+    "openai-codex"?: OpenAICodexAuth;
     [key: string]: unknown;
 }
 
@@ -59,10 +71,15 @@ interface RefreshSessionState {
 async function loadTokens(): Promise<CodexTokens | null> {
     try {
         const raw = await readFile(AUTH_PATH, "utf8");
-        const parsed = JSON.parse(raw) as { tokens?: CodexTokens };
-        const t = parsed?.tokens;
-        if (t?.account_id && t?.access_token) return t;
-        return null;
+        const parsed = JSON.parse(raw) as PiAgentAuth;
+        const auth = parsed?.["openai-codex"];
+        if (!auth?.accountId || !auth?.access) return null;
+
+        return {
+            account_id: auth.accountId,
+            access_token: auth.access,
+            ...(auth.refresh ? { refresh_token: auth.refresh } : {}),
+        };
     } catch {
         return null;
     }
