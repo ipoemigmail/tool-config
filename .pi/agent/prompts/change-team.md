@@ -13,3 +13,4 @@ argument-hint: "[claude|gpt|ollama]"
 - 메인 에이전트는 코드 탐색/수정 목적으로 `read`, `bash`, `edit`, `write`를 직접 사용하지 않는다.
 - 예외: skill 파일 로드, 사용자 명시적 직접 처리 요청, subagent 실패 후 사용자 승인 받은 경우.
 - subagent 위임 없이 직접 처리해야 할 상황이면 먼저 사용자에게 확인한다.
+- 현재 team 은 `${1:-gpt}` 다

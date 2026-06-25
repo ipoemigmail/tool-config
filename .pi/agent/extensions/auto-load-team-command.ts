@@ -10,23 +10,27 @@ const TEAM_ENV_KEYS = ["PI_SELECTED_TEAM", "PI_TEAM", "TEAM"] as const;
 const KNOWN_TEAMS = ["gpt", "claude", "ollama"] as const;
 type KnownTeam = (typeof KNOWN_TEAMS)[number];
 
-// Session-scoped team state — no global persistence file
-let currentTeam: string = (() => {
+// Resolve team from environment variables, falling back to the default.
+function resolveTeamFromEnv(): string {
     for (const key of TEAM_ENV_KEYS) {
         const val = process.env[key]?.trim();
         if (val) return val;
     }
     return DEFAULT_TEAM;
-})();
+}
+
+// Session-scoped team state — no global persistence file
+let currentTeam: string = resolveTeamFromEnv();
 
 /**
  * Detect a team change from user-provided text (raw input or session history).
  *
- * Two patterns only — must not be polluted by prompt template body examples:
+ * Three patterns only — must not be polluted by prompt template body examples:
  * 1. Exact single known team token (user typed just "claude").
  * 2. `/change-team <team>` slash command — first known team token
  *    immediately following the command name. This form appears verbatim in
  *    raw user input and session history, so it is safe to match.
+ * 3. Expanded marker line: `현재 team 은 `<team>` 다`.
  *
  * Whole-text / last-token scans are intentionally absent: the expanded
  * prompt body contains example team names (e.g. "예: `claude`, `gpt`, `ollama`")
@@ -42,6 +46,12 @@ function detectTeamChange(text: string): string | undefined {
     // 2. /change-team <team> — first argument of the slash command only
     const m = text.match(/\/change-team\s+(\S+)/);
     if (m && KNOWN_TEAMS.includes(m[1] as KnownTeam)) return m[1];
+
+    // 3. Expanded marker line: 현재 team 은 `<team>` 다
+    const markerMatch = text.match(/현재\s*team\s*은\s*`(\w+)`\s*다/);
+    if (markerMatch && KNOWN_TEAMS.includes(markerMatch[1] as KnownTeam)) {
+        return markerMatch[1];
+    }
 
     return undefined;
 }
@@ -174,17 +184,21 @@ function applyTeamChange(detected: string, ctx: StatusCtx): void {
 }
 
 export default function (pi: ExtensionAPI) {
-    // Show status at session start; restore team from history for resume/reload/fork
+    // Show status at session start; deterministically confirm team first, then render.
+    // Resolution order: session history → environment → default. Assigned unconditionally
+    // so in-process session switches (/resume, /new) never carry a stale team value.
     pi.on("session_start", (_event, ctx) => {
+        let resolved = resolveTeamFromEnv();
         try {
             const fromHistory = resolveTeamFromSession(ctx.sessionManager);
-            if (fromHistory) currentTeam = fromHistory;
+            if (fromHistory) resolved = fromHistory;
         } catch (e) {
             console.warn(
                 "[auto-load-team-command] session_start resolution error:",
                 e,
             );
         }
+        currentTeam = resolved;
         safeSetTeamStatus(ctx as StatusCtx, currentTeam);
     });
 
