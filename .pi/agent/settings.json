@@ -1,9 +1,9 @@
 {
   "lastChangelogVersion": "0.80.2",
   "theme": "dark",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "xhigh",
+  "defaultProvider": "kakao-aws-bedrock",
+  "defaultModel": "global.anthropic.claude-opus-4-8",
+  "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "enabledModels": [
     "openai-codex/gpt-5.5",
@@ -37,34 +37,34 @@
   "subagents": {
     "agentOverrides": {
       "scout": {
-        "model": "ollama-cloud/deepseek-v4-flash",
+        "model": "kakao-aws-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0",
         "thinking": "medium"
       },
       "researcher": {
-        "model": "ollama-cloud/deepseek-v4-flash",
+        "model": "kakao-aws-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0",
         "thinking": "medium"
       },
       "context-builder": {
-        "model": "ollama-cloud/deepseek-v4-flash",
+        "model": "kakao-aws-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0",
         "thinking": "medium"
       },
       "worker": {
-        "model": "ollama-cloud/deepseek-v4-pro",
-        "thinking": "xhigh"
+        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6",
+        "thinking": "high"
       },
       "delegate": {
-        "model": "ollama-cloud/deepseek-v4-pro"
+        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6"
       },
       "reviewer": {
-        "model": "ollama-cloud/minimax-m3",
+        "model": "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",
         "thinking": "high"
       },
       "oracle": {
-        "model": "ollama-cloud/minimax-m3",
+        "model": "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",
         "thinking": "high"
       },
       "planner": {
-        "model": "ollama-cloud/minimax-m3",
+        "model": "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",
         "thinking": "high"
       }
     }

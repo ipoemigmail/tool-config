@@ -1,5 +1,5 @@
 {
-  "active": "ollama",
+  "active": "claude",
   "profiles": {
     "gpt": {
       "scout": {
