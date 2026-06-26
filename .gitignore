@@ -25,3 +25,4 @@
 .config/wireshark
 __pycache__
 /.claude/stats-cache.json
+/.pi/agent/sessions
