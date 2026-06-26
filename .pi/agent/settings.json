@@ -1,9 +1,9 @@
 {
   "lastChangelogVersion": "0.80.2",
   "theme": "dark",
-  "defaultProvider": "kakao-aws-bedrock",
-  "defaultModel": "global.anthropic.claude-opus-4-8",
-  "defaultThinkingLevel": "high",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "xhigh",
   "hideThinkingBlock": false,
   "enabledModels": [
     "openai-codex/gpt-5.5",
@@ -12,18 +12,15 @@
     "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6",
     "ollama-cloud/glm-5.2",
     "ollama-cloud/minimax-m3",
-    "ollama-cloud/deepseek-v4-flash",
-    "ollama-cloud/kimi-k2.6",
-    "ollama-cloud/kimi-k2.7-code",
     "ollama-cloud/deepseek-v4-pro"
   ],
   "packages": [
-    "npm:@tintinweb/pi-subagents",
     "npm:pi-web-access",
     "npm:pi-lens",
     "git:github.com/edxeth/pi-gpt-config",
     "npm:pi-ollama-cloud",
-    "npm:@entelligentsia/pi-claude-compat"
+    "npm:@entelligentsia/pi-claude-compat",
+    "npm:pi-subagents"
   ],
   "gptConfig": {
     "fastMode": false,
@@ -36,5 +33,40 @@
   "editorPaddingX": 1,
   "terminal": {
     "showTerminalProgress": false
+  },
+  "subagents": {
+    "agentOverrides": {
+      "scout": {
+        "model": "ollama-cloud/deepseek-v4-flash",
+        "thinking": "medium"
+      },
+      "researcher": {
+        "model": "ollama-cloud/deepseek-v4-flash",
+        "thinking": "medium"
+      },
+      "context-builder": {
+        "model": "ollama-cloud/deepseek-v4-flash",
+        "thinking": "medium"
+      },
+      "worker": {
+        "model": "ollama-cloud/deepseek-v4-pro",
+        "thinking": "xhigh"
+      },
+      "delegate": {
+        "model": "ollama-cloud/deepseek-v4-pro"
+      },
+      "reviewer": {
+        "model": "ollama-cloud/minimax-m3",
+        "thinking": "high"
+      },
+      "oracle": {
+        "model": "ollama-cloud/minimax-m3",
+        "thinking": "high"
+      },
+      "planner": {
+        "model": "ollama-cloud/minimax-m3",
+        "thinking": "high"
+      }
+    }
   }
 }
