@@ -50,7 +50,7 @@
       },
       "worker": {
         "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6",
-        "thinking": "high"
+        "thinking": "medium"
       },
       "delegate": {
         "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6"
