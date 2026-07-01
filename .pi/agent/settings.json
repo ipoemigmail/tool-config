@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.80.2",
   "theme": "dark",
-  "defaultProvider": "kakao-aws-bedrock",
-  "defaultModel": "global.anthropic.claude-opus-4-8",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "enabledModels": [
@@ -37,34 +37,34 @@
   "subagents": {
     "agentOverrides": {
       "scout": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "model": "openai-codex/gpt-5.4-mini",
         "thinking": "medium"
       },
       "researcher": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "model": "openai-codex/gpt-5.4-mini",
         "thinking": "medium"
       },
       "context-builder": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "model": "openai-codex/gpt-5.4-mini",
         "thinking": "medium"
       },
       "worker": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6",
+        "model": "openai-codex/gpt-5.4",
         "thinking": "medium"
       },
       "delegate": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6"
+        "model": "openai-codex/gpt-5.4"
       },
       "reviewer": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",
+        "model": "openai-codex/gpt-5.5",
         "thinking": "high"
       },
       "oracle": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",
+        "model": "openai-codex/gpt-5.5",
         "thinking": "high"
       },
       "planner": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",
+        "model": "openai-codex/gpt-5.5",
         "thinking": "high"
       }
     }

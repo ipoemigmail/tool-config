@@ -14,10 +14,10 @@ import { join } from "node:path";
 const STATUS_KEY = "zgpt-usage";
 const AUTH_PATH = join(getAgentDir(), "auth.json");
 const API_BASE = "https://chatgpt.com/backend-api";
-const REFRESH_INTERVAL_MS = 1 * 60 * 1000; // 1 minute
+const REFRESH_INTERVAL_MS = 30 * 1000; // 30 seconds
 const FETCH_TIMEOUT_MS = 10_000;
 const STALE_CTX_ERROR_FRAGMENT = "This extension ctx is stale";
-const MONTHLY_RESET_DAY = 4;
+const MONTHLY_RESET_DAY = 1;
 
 interface CodexTokens {
     account_id: string;
