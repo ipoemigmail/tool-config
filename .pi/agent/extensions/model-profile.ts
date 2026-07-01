@@ -1,28 +1,33 @@
-import {
-    getAgentDir,
-    type ExtensionAPI,
-    type ExtensionContext,
+import type {
+    ExtensionAPI,
+    ExtensionContext,
 } from "@earendil-works/pi-coding-agent";
+import type { AutocompleteItem } from "@earendil-works/pi-tui";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
-import { basename, dirname, extname, join } from "node:path";
+import { homedir } from "node:os";
+import { join, dirname } from "node:path";
 
 const STATUS_KEY = "zmodel-profile";
-const PROFILES_PATH = join(getAgentDir(), "model-profiles.json");
-const GLOBAL_SETTINGS_PATH = join(getAgentDir(), "settings.json");
-const PROJECT_SETTINGS_PATH = ".pi/settings.json";
-const SESSION_SETTINGS_FALLBACK_NAME = "subagents-settings.json";
-const SESSION_SETTINGS_SUFFIX = ".subagents-settings.json";
 const STALE_CTX_ERROR_FRAGMENT = "This extension ctx is stale";
 const JSON_INDENT_SPACES = 2;
-const INVALID_PROFILE_STATUS = "(invalid)";
-const INHERITED_MODEL_LABEL = "기본값 상속";
-const SESSION_SCOPE_LABEL = "session";
-const PROJECT_SCOPE_LABEL = "project";
-const GLOBAL_SCOPE_LABEL = "global";
+const PI_CONFIG_DIR = ".pi";
+const AGENT_DIR_NAME = "agent";
+const SETTINGS_FILE = "settings.json";
+const SESSION_MODEL_LABEL = "세션모델 상속";
+const PROFILE_FILE_EXT = ".json";
 const GLOBAL_FLAG = "--global";
 const PROJECT_FLAG = "--project";
-const LOCAL_FLAG = "--local";
-const VALID_THINKING_LEVELS = ["off", "minimal", "low", "medium", "high", "xhigh"] as const;
+const SCOPE_FLAGS = [GLOBAL_FLAG, PROJECT_FLAG] as const;
+const INHERIT_NAME = "inherit";
+
+const VALID_THINKING_LEVELS = [
+    "off",
+    "minimal",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+] as const;
 const BUILTIN_AGENT_NAMES = [
     "scout",
     "worker",
@@ -36,109 +41,70 @@ const BUILTIN_AGENT_NAMES = [
 
 type BuiltinAgentName = (typeof BUILTIN_AGENT_NAMES)[number];
 type ThinkingLevel = (typeof VALID_THINKING_LEVELS)[number];
-type ProfileScope = "session" | "project" | "global";
+type ProfileScope = "project" | "global";
 
-type BuiltinEntryRaw = string | { model: string; thinking?: string };
+interface ActiveProfile {
+    name: string;
+    scope: ProfileScope;
+}
 
-interface BuiltinEntry {
+interface AgentOverrideEntry {
     model: string;
     thinking?: ThinkingLevel;
 }
 
-type AgentOverrideEntry = { model: string; thinking?: ThinkingLevel };
-type BuiltinProfileRaw = Record<BuiltinAgentName, BuiltinEntryRaw>;
-type ProfilesByName = Record<string, BuiltinProfileRaw>;
-type AgentOverrides = Record<string, AgentOverrideEntry>;
+/** 프로필 파일 내용 = settings.json 의 subagents 섹션 */
+interface ProfileFileContent {
+    subagents?: {
+        agentOverrides?: Record<string, AgentOverrideEntry>;
+        [key: string]: unknown;
+    };
+    [key: string]: unknown;
+}
 
-interface ModelProfilesFile {
-    active: string;
-    profiles: ProfilesByName;
+interface ProfileEntry {
+    name: string;
+    path: string;
+    overrides: Record<string, AgentOverrideEntry>;
 }
 
 interface SettingsFile {
     subagents?: {
-        agentOverrides?: AgentOverrides;
+        agentOverrides?: Record<string, AgentOverrideEntry>;
         [key: string]: unknown;
     };
     [key: string]: unknown;
 }
 
-interface SessionProfileFile {
-    active?: string;
-    subagents?: {
-        agentOverrides?: AgentOverrides;
-        [key: string]: unknown;
-    };
-    [key: string]: unknown;
-}
-
-interface SessionState {
-    generation: number;
-    active: boolean;
-    ctx: ExtensionContext;
-}
-
-interface SettingsReadResult<T> {
+interface SettingsReadResult {
     status: "ok" | "missing" | "invalid";
-    data: T;
+    settings: SettingsFile;
 }
 
-interface ParsedProfileCommandArgs {
+/** 설정 읽기/쓰기 추상화 — project/global 경로 차이만 캡슐화 */
+interface SettingsStore {
+    readonly scope: ProfileScope;
+    readonly path: string;
+    read(): Promise<SettingsReadResult>;
+    writeOverrides(overrides: Record<string, AgentOverrideEntry>): Promise<boolean>;
+    clearOverrides(): Promise<boolean>;
+}
+
+/** 프로필 목록 조회 추상화 — 매 호출마다 디스크 재조회 */
+interface ProfileRegistry {
+    list(): Promise<ProfileEntry[]>;
+    get(name: string): Promise<ProfileEntry | null>;
+}
+
+interface ParsedArgs {
     profileName: string;
     scope: ProfileScope;
-}
-
-interface SessionSidecarPathResult {
-    path: string;
-    fallbackPath: string;
-}
-
-interface ProfileScopeState {
-    scope: ProfileScope;
-    label: string;
-    active?: string;
-    overrides: AgentOverrides;
 }
 
 function asRecord(value: unknown): Record<string, unknown> {
     return value && typeof value === "object" && !Array.isArray(value)
         ? (value as Record<string, unknown>)
         : {};
-}
-
-function isPlainObject(value: unknown): value is Record<string, unknown> {
-    return value !== null && typeof value === "object" && !Array.isArray(value);
-}
-
-function getProjectSettingsPath(ctx: ExtensionContext): string {
-    return join(ctx.cwd, PROJECT_SETTINGS_PATH);
-}
-
-function getScopeLabel(scope: ProfileScope): string {
-    switch (scope) {
-        case "session":
-            return SESSION_SCOPE_LABEL;
-        case "project":
-            return PROJECT_SCOPE_LABEL;
-        default:
-            return GLOBAL_SCOPE_LABEL;
-    }
-}
-
-function parseProfileCommandArgs(args: string): ParsedProfileCommandArgs {
-    const tokens = args
-        .split(/\s+/)
-        .map((token) => token.trim())
-        .filter(Boolean);
-    const scope = tokens.includes(GLOBAL_FLAG)
-        ? "global"
-        : tokens.includes(PROJECT_FLAG) || tokens.includes(LOCAL_FLAG)
-            ? "project"
-            : "session";
-    const profileName = tokens
-        .filter((token) => ![GLOBAL_FLAG, PROJECT_FLAG, LOCAL_FLAG].includes(token))
-        .join(" ");
-    return { profileName, scope };
 }
 
 function isStaleCtxError(err: unknown): boolean {
@@ -151,67 +117,74 @@ function isValidThinkingLevel(value: string): value is ThinkingLevel {
     return (VALID_THINKING_LEVELS as readonly string[]).includes(value);
 }
 
-function isBuiltinEntry(value: unknown): value is BuiltinEntryRaw {
-    if (typeof value === "string") return value.trim().length > 0;
+/** agentOverrideEntry 유효성: model 필수, thinking은 known 레벨만 */
+function isValidOverrideEntry(value: unknown): value is AgentOverrideEntry {
     const record = asRecord(value);
-    return typeof record.model === "string" && (record.model as string).trim().length > 0;
-}
-
-function parseBuiltinEntry(raw: BuiltinEntryRaw): BuiltinEntry {
-    if (typeof raw === "string") return { model: raw };
-    const r = raw as { model: string; thinking?: string };
-    const { model, thinking } = r;
-    if (thinking !== undefined && !isValidThinkingLevel(thinking)) {
-        console.warn(`[model-profile] unknown thinking level "${thinking}", ignoring`);
-        return { model };
+    if (typeof record.model !== "string" || !record.model.trim()) {
+        return false;
     }
-    return thinking ? { model, thinking: thinking as ThinkingLevel } : { model };
+    if (record.thinking !== undefined) {
+        return (
+            typeof record.thinking === "string" &&
+            isValidThinkingLevel(record.thinking)
+        );
+    }
+    return true;
 }
 
-function isBuiltinProfile(value: unknown): value is BuiltinProfileRaw {
+function extractOverrides(
+    content: ProfileFileContent,
+): Record<string, AgentOverrideEntry> | null {
+    const subagents = asRecord(content.subagents);
+    const raw = asRecord(subagents.agentOverrides);
+    const overrides: Record<string, AgentOverrideEntry> = {};
+    for (const name of BUILTIN_AGENT_NAMES) {
+        const entry = raw[name];
+        if (!isValidOverrideEntry(entry)) return null;
+        overrides[name] = entry;
+    }
+    return overrides;
+}
+
+/** 프로필 파일이 빌트인 8개 에이전트를 모두 유효하게 정의하는지 검증 */
+function isValidProfileFile(value: unknown): value is ProfileFileContent {
     const record = asRecord(value);
-    return BUILTIN_AGENT_NAMES.every((name) => isBuiltinEntry(record[name]));
-}
-
-function isModelProfilesFile(value: unknown): value is ModelProfilesFile {
-    const record = asRecord(value);
-    if (typeof record.active !== "string") return false;
-
-    const profiles = asRecord(record.profiles);
-    const names = Object.keys(profiles);
-    if (names.length === 0) return false;
-
-    return names.every((name) => isBuiltinProfile(profiles[name]));
-}
-
-function listProfileNames(profiles: ModelProfilesFile): string[] {
-    return Object.keys(profiles.profiles).sort();
+    return extractOverrides(record as ProfileFileContent) !== null;
 }
 
 function formatProfileList(names: string[]): string {
-    return names.join(", ");
+    return names.length > 0 ? names.join(", ") : "(없음)";
 }
 
-function formatCurrentModels(overrides: AgentOverrides): string {
+function formatCurrentModels(
+    overrides: Record<string, AgentOverrideEntry>,
+): string {
     const lines = BUILTIN_AGENT_NAMES.map((name) => {
         const entry = overrides[name];
-        if (!entry?.model) return `  ${name}: ${INHERITED_MODEL_LABEL}`;
-        const thinkingLabel = entry.thinking ? ` (thinking: ${entry.thinking})` : "";
+        if (!entry?.model) return `  ${name}: ${SESSION_MODEL_LABEL}`;
+        const thinkingLabel = entry.thinking
+            ? ` (thinking: ${entry.thinking})`
+            : "";
         return `  ${name}: ${entry.model}${thinkingLabel}`;
     });
     return `빌트인 모델:\n${lines.join("\n")}`;
 }
 
-function formatStatusValue(profileName: string, scope: ProfileScope): string {
-    return `${profileName} (${getScopeLabel(scope)})`;
-}
-
-function setStatus(ctx: ExtensionContext, active: string | undefined): void {
+function setStatus(
+    ctx: ExtensionContext,
+    active: ActiveProfile | undefined,
+): void {
     if (!active) return;
-    ctx.ui.setStatus(STATUS_KEY, `| profile: ${active}`);
+    ctx.ui.setStatus(
+        STATUS_KEY,
+        `| profile: ${active.name} (${active.scope})`,
+    );
 }
 
-function safeSetStatus(ctx: ExtensionContext, active: string | undefined): void {
+function safeSetStatus(
+    ctx: ExtensionContext,
+    active: ActiveProfile | undefined,
+): void {
     if (!active) return;
     try {
         setStatus(ctx, active);
@@ -239,349 +212,191 @@ async function readJsonFile(path: string): Promise<unknown | null> {
     }
 }
 
-async function readProfiles(): Promise<ModelProfilesFile | null> {
-    const parsed = await readJsonFile(PROFILES_PATH);
-    return isModelProfilesFile(parsed) ? parsed : null;
-}
-
-async function readSettingsForWrite<T extends Record<string, unknown>>(
-    path: string,
-): Promise<SettingsReadResult<T>> {
-    try {
-        const raw = await readFile(path, "utf8");
-        const parsed = JSON.parse(raw) as unknown;
-        return {
-            status: "ok",
-            data: asRecord(parsed) as T,
-        };
-    } catch (err) {
-        const code =
-            err && typeof err === "object" && "code" in err
-                ? err.code
-                : undefined;
-        if (code === "ENOENT") {
-            return { status: "missing", data: {} as T };
-        }
-        return { status: "invalid", data: {} as T };
-    }
-}
-
-async function ensureParentDirectory(path: string): Promise<void> {
-    await mkdir(dirname(path), { recursive: true });
-}
-
-async function writeProfiles(profiles: ModelProfilesFile): Promise<void> {
-    await ensureParentDirectory(PROFILES_PATH);
-    await writeFile(
-        PROFILES_PATH,
-        `${JSON.stringify(profiles, null, JSON_INDENT_SPACES)}\n`,
-        "utf8",
-    );
-}
-
-function buildAgentOverrides(profile: BuiltinProfileRaw): AgentOverrides {
-    const overrides: AgentOverrides = {};
-    for (const builtin of BUILTIN_AGENT_NAMES) {
-        const entry = parseBuiltinEntry(profile[builtin]);
+function buildAgentOverrides(
+    overrides: Record<string, AgentOverrideEntry>,
+): Record<string, AgentOverrideEntry> {
+    const result: Record<string, AgentOverrideEntry> = {};
+    for (const name of BUILTIN_AGENT_NAMES) {
+        const entry = overrides[name];
+        if (!entry) continue;
         const override: AgentOverrideEntry = { model: entry.model };
         if (entry.thinking) override.thinking = entry.thinking;
-        overrides[builtin] = override;
+        result[name] = override;
     }
-    return overrides;
+    return result;
 }
 
-function matchesProfile(
-    overrides: AgentOverrides,
-    profile: BuiltinProfileRaw,
-): boolean {
-    return BUILTIN_AGENT_NAMES.every((builtin) => {
-        const expected = parseBuiltinEntry(profile[builtin]);
-        const current = overrides[builtin];
-        return current?.model === expected.model && current?.thinking === expected.thinking;
-    });
-}
-
-function findMatchingProfileName(
-    profiles: ModelProfilesFile,
-    overrides: AgentOverrides,
-): string | undefined {
-    return listProfileNames(profiles).find((name) =>
-        matchesProfile(overrides, profiles.profiles[name]),
-    );
-}
-
-function cloneOverrides(overrides: AgentOverrides): AgentOverrides {
-    const next: AgentOverrides = {};
-    for (const [name, entry] of Object.entries(overrides)) {
-        if (!entry?.model) continue;
-        next[name] = entry.thinking
-            ? { model: entry.model, thinking: entry.thinking }
-            : { model: entry.model };
-    }
-    return next;
-}
-
-function mergeOverrides(...sources: AgentOverrides[]): AgentOverrides {
-    const merged: AgentOverrides = {};
-    for (const source of sources) {
-        for (const [name, entry] of Object.entries(source)) {
-            if (!entry?.model) continue;
-            merged[name] = entry.thinking
-                ? { model: entry.model, thinking: entry.thinking }
-                : { model: entry.model };
-        }
-    }
-    return merged;
-}
-
-function hasBuiltinOverrides(overrides: AgentOverrides): boolean {
-    return BUILTIN_AGENT_NAMES.some((name) => Boolean(overrides[name]?.model));
-}
-
-async function writeSettingsOverrides(
-    settingsPath: string,
-    profile: BuiltinProfileRaw,
-): Promise<boolean> {
-    const settingsResult = await readSettingsForWrite<SettingsFile>(settingsPath);
-    if (settingsResult.status === "invalid") return false;
-
-    const { data: settings } = settingsResult;
-    const nextSubagents = asRecord(settings.subagents);
-    const nextOverrides = asRecord(nextSubagents.agentOverrides);
-    const profileOverrides = buildAgentOverrides(profile);
-
-    for (const builtin of BUILTIN_AGENT_NAMES) {
-        nextOverrides[builtin] = profileOverrides[builtin];
+/** 디렉토리 기반 프로필 레지스트리 — list/get 매번 디스크 재조회 */
+function createProfileRegistry(dir: string): ProfileRegistry {
+    async function loadEntry(
+        name: string,
+        path: string,
+    ): Promise<ProfileEntry | null> {
+        const parsed = await readJsonFile(path);
+        if (!isValidProfileFile(parsed)) return null;
+        const overrides = extractOverrides(parsed as ProfileFileContent);
+        return overrides ? { name, path, overrides } : null;
     }
 
-    const nextSettings: SettingsFile = {
-        ...settings,
-        subagents: {
-            ...nextSubagents,
-            agentOverrides: nextOverrides as AgentOverrides,
+    return {
+        async list() {
+            let files: string[];
+            try {
+                files = await readdir(dir);
+            } catch {
+                return [];
+            }
+            const entries: ProfileEntry[] = [];
+            for (const file of files.sort()) {
+                if (!file.endsWith(PROFILE_FILE_EXT)) continue;
+                const name = file.slice(0, -PROFILE_FILE_EXT.length);
+                const entry = await loadEntry(name, join(dir, file));
+                if (entry) entries.push(entry);
+            }
+            return entries;
+        },
+        async get(name) {
+            const path = join(dir, `${name}${PROFILE_FILE_EXT}`);
+            return loadEntry(name, path);
         },
     };
-
-    await ensureParentDirectory(settingsPath);
-    await writeFile(
-        settingsPath,
-        `${JSON.stringify(nextSettings, null, JSON_INDENT_SPACES)}\n`,
-        "utf8",
-    );
-
-    return true;
 }
 
-function getSessionSidecarFallbackPath(ctx: ExtensionContext): string {
-    return join(ctx.sessionManager.getSessionDir(), SESSION_SETTINGS_FALLBACK_NAME);
-}
-
-function buildSessionSidecarPathFromSessionFile(sessionFile: string): string {
-    const extension = extname(sessionFile);
-    const sessionBase = basename(sessionFile, extension);
-    return join(dirname(sessionFile), `${sessionBase}${SESSION_SETTINGS_SUFFIX}`);
-}
-
-async function findSessionSidecarBySessionId(
-    ctx: ExtensionContext,
-    sessionId: string,
-): Promise<string | undefined> {
-    try {
-        const sessionDir = ctx.sessionManager.getSessionDir();
-        const suffix = `_${sessionId}${SESSION_SETTINGS_SUFFIX}`;
-        const entries = await readdir(sessionDir, { withFileTypes: true });
-        const matched = entries.find(
-            (entry: { isFile(): boolean; name: string }) =>
-                entry.isFile() && entry.name.endsWith(suffix),
-        );
-        return matched ? join(sessionDir, matched.name) : undefined;
-    } catch {
-        return undefined;
-    }
-}
-
-async function resolveSessionSidecarPath(
-    ctx: ExtensionContext,
-    sessionIdHint?: string,
-): Promise<SessionSidecarPathResult> {
-    const fallbackPath = getSessionSidecarFallbackPath(ctx);
-
-    if (sessionIdHint) {
-        const hintedPath = await findSessionSidecarBySessionId(ctx, sessionIdHint);
-        if (hintedPath) return { path: hintedPath, fallbackPath };
-    }
-
-    const sessionFile = ctx.sessionManager.getSessionFile();
-    if (sessionFile) {
-        return {
-            path: buildSessionSidecarPathFromSessionFile(sessionFile),
-            fallbackPath,
-        };
-    }
-
-    return { path: fallbackPath, fallbackPath };
-}
-
-async function readSettingsOverrides(settingsPath: string): Promise<AgentOverrides> {
-    const parsed = await readJsonFile(settingsPath);
-    const settings = asRecord(parsed);
-    const subagents = asRecord(settings.subagents);
-    return cloneOverrides(asRecord(subagents.agentOverrides) as AgentOverrides);
-}
-
-async function readSessionProfileFile(
-    ctx: ExtensionContext,
-    sessionIdHint?: string,
-): Promise<SessionProfileFile | null> {
-    const sidecar = await resolveSessionSidecarPath(ctx, sessionIdHint);
-    const parsed = await readJsonFile(sidecar.path);
-    if (parsed !== null) return asRecord(parsed) as SessionProfileFile;
-    return null;
-}
-
-async function readSessionOverrides(
-    ctx: ExtensionContext,
-    sessionIdHint?: string,
-): Promise<AgentOverrides> {
-    const sessionFile = await readSessionProfileFile(ctx, sessionIdHint);
-    const subagents = asRecord(sessionFile?.subagents);
-    return cloneOverrides(asRecord(subagents.agentOverrides) as AgentOverrides);
-}
-
-async function writeSessionProfile(
-    ctx: ExtensionContext,
-    profileName: string,
-    profile: BuiltinProfileRaw,
-): Promise<boolean> {
-    const sidecar = await resolveSessionSidecarPath(ctx);
-    const sidecarResult = await readSettingsForWrite<SessionProfileFile>(sidecar.path);
-    if (sidecarResult.status === "invalid") return false;
-
-    const existing = sidecarResult.data;
-    const nextSubagents = asRecord(existing.subagents);
-    const nextSidecar: SessionProfileFile = {
-        ...existing,
-        active: profileName,
-        subagents: {
-            ...nextSubagents,
-            agentOverrides: buildAgentOverrides(profile),
-        },
-    };
-
-    await ensureParentDirectory(sidecar.path);
-    await writeFile(
-        sidecar.path,
-        `${JSON.stringify(nextSidecar, null, JSON_INDENT_SPACES)}\n`,
-        "utf8",
-    );
-
-    return true;
-}
-
-function getResolvedProfileName(
-    profiles: ModelProfilesFile,
+/** SettingsStore 구현 — 경로에 따라 project/global */
+function createSettingsStore(
     scope: ProfileScope,
-    overrides: AgentOverrides,
-    activeHint?: string,
-): string | undefined {
-    return findMatchingProfileName(profiles, overrides)
-        ?? (scope === "global" && activeHint && profiles.profiles[activeHint] ? activeHint : undefined)
-        ?? activeHint;
-}
-
-async function readScopeState(
-    profiles: ModelProfilesFile,
-    scope: ProfileScope,
-    ctx: ExtensionContext,
-    sessionIdHint?: string,
-): Promise<ProfileScopeState> {
-    if (scope === "session") {
-        const sessionFile = await readSessionProfileFile(ctx, sessionIdHint);
-        const sessionOverrides = await readSessionOverrides(ctx, sessionIdHint);
-        const activeHint = typeof sessionFile?.active === "string" ? sessionFile.active : undefined;
-        return {
-            scope,
-            label: getScopeLabel(scope),
-            active: getResolvedProfileName(profiles, scope, sessionOverrides, activeHint),
-            overrides: sessionOverrides,
-        };
-    }
-
-    const settingsPath = scope === "project" ? getProjectSettingsPath(ctx) : GLOBAL_SETTINGS_PATH;
-    const overrides = await readSettingsOverrides(settingsPath);
-    const activeHint = scope === "global" ? profiles.active : undefined;
+    path: string,
+): SettingsStore {
     return {
         scope,
-        label: getScopeLabel(scope),
-        active: getResolvedProfileName(profiles, scope, overrides, activeHint),
-        overrides,
+        path,
+        async read() {
+            try {
+                const raw = await readFile(path, "utf8");
+                const parsed = JSON.parse(raw) as unknown;
+                return {
+                    status: "ok",
+                    settings: asRecord(parsed) as SettingsFile,
+                };
+            } catch (err) {
+                const code =
+                    err && typeof err === "object" && "code" in err
+                        ? err.code
+                        : undefined;
+                if (code === "ENOENT") {
+                    return { status: "missing", settings: {} };
+                }
+                return { status: "invalid", settings: {} };
+            }
+        },
+        async writeOverrides(overrides) {
+            const result = await this.read();
+            if (result.status === "invalid") return false;
+
+            const { settings } = result;
+            const nextSubagents = asRecord(settings.subagents);
+            const nextOverrides = asRecord(
+                nextSubagents.agentOverrides,
+            ) as Record<string, AgentOverrideEntry>;
+            const profileOverrides = buildAgentOverrides(overrides);
+
+            for (const builtin of BUILTIN_AGENT_NAMES) {
+                nextOverrides[builtin] = profileOverrides[builtin];
+            }
+
+            const nextSettings: SettingsFile = {
+                ...settings,
+                subagents: {
+                    ...nextSubagents,
+                    agentOverrides: nextOverrides,
+                },
+            };
+
+            await mkdir(dirname(path), { recursive: true });
+            await writeFile(
+                path,
+                `${JSON.stringify(nextSettings, null, JSON_INDENT_SPACES)}\n`,
+                "utf8",
+            );
+            return true;
+        },
+        async clearOverrides() {
+            const result = await this.read();
+            if (result.status === "invalid") return false;
+
+            const { settings } = result;
+            const subagents = asRecord(settings.subagents);
+            const nextSubagents = { ...subagents };
+            delete nextSubagents.agentOverrides;
+
+            const nextSettings: SettingsFile =
+                Object.keys(nextSubagents).length > 0
+                    ? { ...settings, subagents: nextSubagents }
+                    : { ...settings, subagents: undefined };
+
+            await mkdir(dirname(path), { recursive: true });
+            await writeFile(
+                path,
+                `${JSON.stringify(nextSettings, null, JSON_INDENT_SPACES)}\n`,
+                "utf8",
+            );
+            return true;
+        },
     };
 }
 
-async function readResolvedScopeState(
-    profiles: ModelProfilesFile,
+function resolveStore(
+    scope: ProfileScope,
     ctx: ExtensionContext,
-): Promise<ProfileScopeState> {
-    const sessionState = await readScopeState(profiles, "session", ctx);
-    if (hasBuiltinOverrides(sessionState.overrides)) return sessionState;
-
-    const projectState = await readScopeState(profiles, "project", ctx);
-    if (hasBuiltinOverrides(projectState.overrides)) return projectState;
-
-    const globalState = await readScopeState(profiles, "global", ctx);
-    if (hasBuiltinOverrides(globalState.overrides) || globalState.active) return globalState;
-
-    return {
-        scope: "global",
-        label: getScopeLabel("global"),
-        active: profiles.profiles[profiles.active] ? profiles.active : undefined,
-        overrides: globalState.overrides,
-    };
+    agentDir: string,
+): SettingsStore {
+    const path =
+        scope === "global"
+            ? join(agentDir, SETTINGS_FILE)
+            : join(ctx.cwd, PI_CONFIG_DIR, SETTINGS_FILE);
+    return createSettingsStore(scope, path);
 }
 
-async function readEffectiveOverrides(
-    ctx: ExtensionContext,
-    parentSessionId?: string,
-): Promise<AgentOverrides> {
-    const globalOverrides = await readSettingsOverrides(GLOBAL_SETTINGS_PATH);
-    const projectOverrides = await readSettingsOverrides(getProjectSettingsPath(ctx));
-    const sessionOverrides = await readSessionOverrides(ctx, parentSessionId);
-    return mergeOverrides(globalOverrides, projectOverrides, sessionOverrides);
+/** /profile <name> [--global|--project] 파싱. 기본 scope = project */
+function parseArgs(args: string): ParsedArgs {
+    const tokens = args.trim().split(/\s+/).filter(Boolean);
+    let scope: ProfileScope = "project";
+    const positional: string[] = [];
+    for (const token of tokens) {
+        if (token === GLOBAL_FLAG) scope = "global";
+        else if (token === PROJECT_FLAG) scope = "project";
+        else positional.push(token);
+    }
+    return { profileName: positional[0] ?? "", scope };
 }
 
 async function applyProfile(
     profileName: string,
     scope: ProfileScope,
+    registry: ProfileRegistry,
     ctx: ExtensionContext,
+    agentDir: string,
+    current: { active: ActiveProfile | undefined },
 ): Promise<void> {
-    const profiles = await readProfiles();
-    if (!profiles) {
-        await notify(ctx, "프로필 정의를 읽지 못했어.");
-        return;
-    }
-
-    const profile = profiles.profiles[profileName];
+    const profile = await registry.get(profileName);
     if (!profile) {
+        const names = (await registry.list()).map((e) => e.name);
         await notify(
             ctx,
-            `없는 프로필이야: ${profileName} (가능: ${formatProfileList(listProfileNames(profiles))})`,
+            `없는 프로필이야: ${profileName} (가능: ${formatProfileList(names)})`,
         );
         return;
     }
 
+    const store = resolveStore(scope, ctx, agentDir);
     try {
-        const didWrite = scope === "session"
-            ? await writeSessionProfile(ctx, profileName, profile)
-            : await writeSettingsOverrides(
-                scope === "global" ? GLOBAL_SETTINGS_PATH : getProjectSettingsPath(ctx),
-                profile,
-            );
+        const didWrite = await store.writeOverrides(profile.overrides);
         if (!didWrite) {
-            await notify(ctx, "설정 파일 파싱 실패로 프로필 적용 취소");
+            await notify(
+                ctx,
+                `${store.path} 파싱 실패로 프로필 적용 취소`,
+            );
             return;
-        }
-        if (scope === "global") {
-            await writeProfiles({ ...profiles, active: profileName });
         }
     } catch (err) {
         console.warn("[model-profile] failed to apply profile:", err);
@@ -589,139 +404,178 @@ async function applyProfile(
         return;
     }
 
-    const changedScopeState = await readScopeState(profiles, scope, ctx);
-    const resolvedScopeState = await readResolvedScopeState(profiles, ctx);
-    if (resolvedScopeState.active) {
-        safeSetStatus(ctx, formatStatusValue(resolvedScopeState.active, resolvedScopeState.scope));
-    }
+    current.active = { name: profileName, scope };
+    safeSetStatus(ctx, current.active);
+    const result = await store.read();
+    const overrides =
+        result.status === "ok"
+            ? (asRecord(asRecord(result.settings.subagents).agentOverrides) as Record<
+                  string,
+                  AgentOverrideEntry
+              >)
+            : {};
     await notify(
         ctx,
         [
-            `프로필 바꿨어: ${profileName} (${changedScopeState.label})`,
-            `현재 적용: ${resolvedScopeState.active ?? INVALID_PROFILE_STATUS} (${resolvedScopeState.label})`,
-            formatCurrentModels(changedScopeState.overrides),
+            `프로필 바꿨어: ${profileName} (${scope})`,
+            formatCurrentModels(overrides),
         ].join("\n"),
     );
 }
 
-async function syncStatus(ctx: ExtensionContext): Promise<void> {
+async function clearProfile(
+    scope: ProfileScope,
+    ctx: ExtensionContext,
+    agentDir: string,
+    current: { active: ActiveProfile | undefined },
+): Promise<void> {
+    const store = resolveStore(scope, ctx, agentDir);
     try {
-        const profiles = await readProfiles();
-        if (!profiles) return;
-
-        const resolved = await readResolvedScopeState(profiles, ctx);
-        if (resolved.active) {
-            safeSetStatus(ctx, formatStatusValue(resolved.active, resolved.scope));
+        const didWrite = await store.clearOverrides();
+        if (!didWrite) {
+            await notify(
+                ctx,
+                `${store.path} 파싱 실패로 inherit 적용 취소`,
+            );
             return;
         }
-
-        safeSetStatus(ctx, INVALID_PROFILE_STATUS);
     } catch (err) {
-        console.warn("[model-profile] failed to sync status:", err);
+        console.warn("[model-profile] failed to clear profile:", err);
+        await notify(ctx, "inherit 적용 실패");
+        return;
     }
+
+    current.active = undefined;
+    safeSetStatus(ctx, undefined);
+    await notify(ctx, `inherit 적용: ${scope} settings 의 agentOverrides 제거`);
 }
 
-function isSubagentChildProcess(): boolean {
-    return process.env.PI_SUBAGENT_CHILD === "1" && typeof process.env.PI_SUBAGENT_CHILD_AGENT === "string";
+function readOverridesFrom(
+    result: SettingsReadResult,
+): Record<string, AgentOverrideEntry> {
+    if (result.status !== "ok") return {};
+    return asRecord(
+        asRecord(result.settings.subagents).agentOverrides,
+    ) as Record<string, AgentOverrideEntry>;
+}
+
+/** 두 override 집합이 빌트인 8개 모두 동일한지 비교 */
+function overridesMatch(
+    a: Record<string, AgentOverrideEntry>,
+    b: Record<string, AgentOverrideEntry>,
+): boolean {
+    return BUILTIN_AGENT_NAMES.every((name) => {
+        const x = a[name];
+        const y = b[name];
+        return (
+            !!x &&
+            !!y &&
+            x.model === y.model &&
+            (x.thinking ?? undefined) === (y.thinking ?? undefined)
+        );
+    });
+}
+
+/** 현재 적용된 settings(project 우선, 없으면 global)와 일치하는 프로필명 추론 */
+async function detectActiveProfile(
+    registry: ProfileRegistry,
+    ctx: ExtensionContext,
+    agentDir: string,
+): Promise<ActiveProfile | undefined> {
+    const projectOverrides = readOverridesFrom(
+        await resolveStore("project", ctx, agentDir).read(),
+    );
+    const useProject = Object.keys(projectOverrides).length > 0;
+    const scope: ProfileScope = useProject ? "project" : "global";
+    const effective = useProject
+        ? projectOverrides
+        : readOverridesFrom(
+              await resolveStore("global", ctx, agentDir).read(),
+          );
+    if (Object.keys(effective).length === 0) return undefined;
+
+    for (const profile of await registry.list()) {
+        if (overridesMatch(effective, profile.overrides)) {
+            return { name: profile.name, scope };
+        }
+    }
+    return undefined;
 }
 
 export default function (pi: ExtensionAPI) {
-    let currentGeneration = 0;
-    let currentSession: SessionState | null = null;
-
-    function isSessionActive(session: SessionState): boolean {
-        return (
-            session.active &&
-            currentSession === session &&
-            session.generation === currentGeneration
-        );
-    }
-
-    function deactivateSession(session: SessionState): void {
-        session.active = false;
-        if (currentSession === session) currentSession = null;
-    }
+    const agentDir = join(homedir(), PI_CONFIG_DIR, AGENT_DIR_NAME);
+    const registry = createProfileRegistry(
+        join(agentDir, "profiles", "pi-subagents"),
+    );
+    const current = { active: undefined as ActiveProfile | undefined };
 
     pi.registerCommand("profile", {
-        description: "빌트인 subagent 모델 프로필 전환 (기본: session, --project: 프로젝트, --global: 전역)",
+        description: "빌트인 subagent 모델 프로필 전환 (기본 project, --global 시 global)",
+        getArgumentCompletions: async (
+            argumentPrefix: string,
+        ): Promise<AutocompleteItem[] | null> => {
+            const prefix = argumentPrefix.trim().toLowerCase();
+            const names = (await registry.list()).map((e) => e.name);
+            const candidates = [...names, INHERIT_NAME, ...SCOPE_FLAGS];
+            const items = candidates
+                .filter((c) => c.toLowerCase().startsWith(prefix))
+                .map((c) => ({
+                    value: c,
+                    label: c,
+                    description: names.includes(c)
+                        ? "프로필"
+                        : c === INHERIT_NAME
+                          ? "기본값 복귀 (override 삭제)"
+                          : "적용 대상",
+                }));
+            return items.length > 0 ? items : null;
+        },
         handler: async (args: string, ctx: ExtensionContext) => {
-            const parsedArgs = parseProfileCommandArgs(args);
-            const profiles = await readProfiles();
+            const { profileName, scope } = parseArgs(args);
+            const entries = await registry.list();
 
-            if (!profiles) {
-                await notify(ctx, "프로필 정의를 읽지 못했어.");
-                return;
-            }
-
-            if (!parsedArgs.profileName) {
-                const resolved = await readResolvedScopeState(profiles, ctx);
+            if (!profileName) {
+                const names = entries.map((e) => e.name);
+                if (names.length === 0) {
+                    await notify(ctx, "사용가능한 프로필이 없어.");
+                    return;
+                }
                 await notify(
                     ctx,
-                    [
-                        `현재 범위: ${resolved.label}`,
-                        `현재 프로필: ${resolved.active ?? INVALID_PROFILE_STATUS}`,
-                        `사용가능: ${formatProfileList(listProfileNames(profiles))}`,
-                        formatCurrentModels(resolved.overrides),
-                    ].join("\n"),
+                    `프로필 ${names.length}개: ${formatProfileList(names)}`,
                 );
+                let choice: string | undefined;
+                try {
+                    choice = await ctx.ui.select("프로필 선택:", names);
+                } catch (err) {
+                    if (isStaleCtxError(err)) return;
+                    console.warn("[model-profile] select failed:", err);
+                }
+                if (!choice) return;
+                await applyProfile(choice, scope, registry, ctx, agentDir, current);
                 return;
             }
 
-            await applyProfile(parsedArgs.profileName, parsedArgs.scope, ctx);
+            if (profileName === INHERIT_NAME) {
+                await clearProfile(scope, ctx, agentDir, current);
+            } else {
+                await applyProfile(profileName, scope, registry, ctx, agentDir, current);
+            }
         },
-    });
-
-    pi.on("before_provider_request", async (event: { payload: unknown }, ctx: ExtensionContext) => {
-        try {
-            if (!isSubagentChildProcess()) return;
-
-            const agentName = process.env.PI_SUBAGENT_CHILD_AGENT;
-            if (!agentName) return;
-
-            const parentSessionId = process.env.PI_SUBAGENT_PARENT_SESSION;
-            const overrides = await readEffectiveOverrides(ctx, parentSessionId);
-            const override = overrides[agentName];
-            if (!override?.model) return;
-
-            if (!isPlainObject(event.payload)) return;
-            if (typeof event.payload.model !== "string") return;
-            if (event.payload.model === override.model) return;
-
-            return {
-                ...event.payload,
-                model: override.model,
-            };
-        } catch (err) {
-            console.warn("[model-profile] before_provider_request error:", err);
-            return;
-        }
     });
 
     pi.on("session_start", async (_event: unknown, ctx: ExtensionContext) => {
         try {
-            if (currentSession) deactivateSession(currentSession);
-
-            const session: SessionState = {
-                generation: ++currentGeneration,
-                active: true,
-                ctx,
-            };
-            currentSession = session;
-            await syncStatus(ctx);
+            if (!current.active) {
+                current.active = await detectActiveProfile(
+                    registry,
+                    ctx,
+                    agentDir,
+                );
+            }
+            safeSetStatus(ctx, current.active);
         } catch (err) {
             console.warn("[model-profile] session_start error:", err);
-        }
-    });
-
-    pi.on("turn_end", async (_event: unknown, ctx: ExtensionContext) => {
-        try {
-            const session = currentSession;
-            if (!session || session.ctx !== ctx || !isSessionActive(session)) {
-                return;
-            }
-            await syncStatus(ctx);
-        } catch (err) {
-            console.warn("[model-profile] turn_end error:", err);
         }
     });
 
@@ -729,12 +583,9 @@ export default function (pi: ExtensionAPI) {
         "session_shutdown",
         async (_event: unknown, ctx: ExtensionContext) => {
             try {
-                const session = currentSession;
-                if (!session || session.ctx !== ctx) return;
-
-                currentGeneration += 1;
-                deactivateSession(session);
+                if (ctx.hasUI) ctx.ui.setStatus(STATUS_KEY, "");
             } catch (err) {
+                if (isStaleCtxError(err)) return;
                 console.warn("[model-profile] session_shutdown error:", err);
             }
         },

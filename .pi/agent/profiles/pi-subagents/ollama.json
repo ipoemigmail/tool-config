@@ -1,0 +1,37 @@
+{
+  "subagents": {
+    "agentOverrides": {
+      "scout": {
+        "model": "ollama-cloud/deepseek-v4-flash",
+        "thinking": "medium"
+      },
+      "researcher": {
+        "model": "ollama-cloud/deepseek-v4-flash",
+        "thinking": "medium"
+      },
+      "context-builder": {
+        "model": "ollama-cloud/deepseek-v4-flash",
+        "thinking": "medium"
+      },
+      "worker": {
+        "model": "ollama-cloud/deepseek-v4-pro",
+        "thinking": "xhigh"
+      },
+      "delegate": {
+        "model": "ollama-cloud/deepseek-v4-pro"
+      },
+      "reviewer": {
+        "model": "ollama-cloud/minimax-3",
+        "thinking": "high"
+      },
+      "oracle": {
+        "model": "ollama-cloud/minimax-3",
+        "thinking": "high"
+      },
+      "planner": {
+        "model": "ollama-cloud/minimax-3",
+        "thinking": "high"
+      }
+    }
+  }
+}

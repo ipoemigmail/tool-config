@@ -1,0 +1,37 @@
+{
+  "subagents": {
+    "agentOverrides": {
+      "scout": {
+        "model": "openai-codex/gpt-5.4-mini",
+        "thinking": "medium"
+      },
+      "researcher": {
+        "model": "openai-codex/gpt-5.4-mini",
+        "thinking": "medium"
+      },
+      "context-builder": {
+        "model": "openai-codex/gpt-5.4-mini",
+        "thinking": "medium"
+      },
+      "worker": {
+        "model": "openai-codex/gpt-5.4",
+        "thinking": "medium"
+      },
+      "delegate": {
+        "model": "openai-codex/gpt-5.4"
+      },
+      "reviewer": {
+        "model": "openai-codex/gpt-5.5",
+        "thinking": "high"
+      },
+      "oracle": {
+        "model": "openai-codex/gpt-5.5",
+        "thinking": "high"
+      },
+      "planner": {
+        "model": "openai-codex/gpt-5.5",
+        "thinking": "high"
+      }
+    }
+  }
+}

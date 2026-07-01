@@ -1,40 +1,4 @@
 {
-  "lastChangelogVersion": "0.80.3",
-  "theme": "dark",
-  "defaultProvider": "ollama-cloud",
-  "defaultModel": "minimax-m3",
-  "defaultThinkingLevel": "high",
-  "hideThinkingBlock": false,
-  "enabledModels": [
-    "openai-codex/gpt-5.5",
-    "openai-codex/gpt-5.4",
-    "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",
-    "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6",
-    "ollama-cloud/glm-5.2",
-    "ollama-cloud/minimax-m3",
-    "ollama-cloud/deepseek-v4-pro",
-    "kap-inference/glm-5.2-fp8"
-  ],
-  "packages": [
-    "npm:pi-web-access",
-    "npm:pi-lens",
-    "git:github.com/edxeth/pi-gpt-config",
-    "npm:pi-ollama-cloud",
-    "npm:@entelligentsia/pi-claude-compat",
-    "npm:pi-subagents"
-  ],
-  "gptConfig": {
-    "fastMode": false,
-    "personality": "none",
-    "verbosity": "medium",
-    "summary": "auto",
-    "toolDiscipline": "off",
-    "showFooter": true
-  },
-  "editorPaddingX": 1,
-  "terminal": {
-    "showTerminalProgress": false
-  },
   "subagents": {
     "agentOverrides": {
       "scout": {

@@ -1,0 +1,37 @@
+{
+  "subagents": {
+    "agentOverrides": {
+      "scout": {
+        "model": "kap-inference/glm-5.2-fp8",
+        "thinking": "medium"
+      },
+      "researcher": {
+        "model": "kap-inference/glm-5.2-fp8",
+        "thinking": "medium"
+      },
+      "context-builder": {
+        "model": "kap-inference/glm-5.2-fp8",
+        "thinking": "medium"
+      },
+      "worker": {
+        "model": "kap-inference/glm-5.2-fp8",
+        "thinking": "medium"
+      },
+      "delegate": {
+        "model": "kap-inference/glm-5.2-fp8"
+      },
+      "reviewer": {
+        "model": "kap-inference/glm-5.2-fp8",
+        "thinking": "high"
+      },
+      "oracle": {
+        "model": "kap-inference/glm-5.2-fp8",
+        "thinking": "high"
+      },
+      "planner": {
+        "model": "kap-inference/glm-5.2-fp8",
+        "thinking": "high"
+      }
+    }
+  }
+}

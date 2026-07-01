@@ -30,6 +30,25 @@
           "maxTokens": 64000
         }
       ]
+    },
+    "kap-inference": {
+      "api": "openai-completions",
+      "baseUrl": "https://api-inference-internal.kap.9rum.cc/v1",
+      "apiKey": "$KAP_API_KEY",
+      "compat": {
+        "supportsDeveloperRole": false,
+        "supportsReasoningEffort": true
+      },
+      "models": [
+        {
+          "id": "glm-5.2-fp8",
+          "name": "GLM 5.2 FP8",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 530000,
+          "maxTokens": 128000
+        }
+      ]
     }
   }
 }
