@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.80.3",
   "theme": "dark",
-  "defaultProvider": "ollama-cloud",
-  "defaultModel": "minimax-m3",
+  "defaultProvider": "kakao-aws-bedrock",
+  "defaultModel": "global.anthropic.claude-opus-4-8",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "enabledModels": [

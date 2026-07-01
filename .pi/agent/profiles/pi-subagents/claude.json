@@ -14,11 +14,11 @@
         "thinking": "medium"
       },
       "worker": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6",
+        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-5",
         "thinking": "medium"
       },
       "delegate": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6"
+        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-5"
       },
       "reviewer": {
         "model": "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",

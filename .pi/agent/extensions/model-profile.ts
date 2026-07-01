@@ -40,6 +40,7 @@ const BUILTIN_AGENT_NAMES = [
 ] as const;
 
 type BuiltinAgentName = (typeof BUILTIN_AGENT_NAMES)[number];
+const PLANNER_AGENT_NAME: BuiltinAgentName = "planner";
 type ThinkingLevel = (typeof VALID_THINKING_LEVELS)[number];
 type ProfileScope = "project" | "global";
 
@@ -371,6 +372,7 @@ function parseArgs(args: string): ParsedArgs {
 }
 
 async function applyProfile(
+    pi: ExtensionAPI,
     profileName: string,
     scope: ProfileScope,
     registry: ProfileRegistry,
@@ -421,6 +423,15 @@ async function applyProfile(
             formatCurrentModels(overrides),
         ].join("\n"),
     );
+
+    // effective scope(project 변경, 또는 project 미설정 상태의 global 변경)면 현재 모델도 planner 와 동일하게
+    if (await isEffectiveScope(scope, ctx, agentDir)) {
+        await syncCurrentModelToPlanner(
+            pi,
+            ctx,
+            profile.overrides[PLANNER_AGENT_NAME],
+        );
+    }
 }
 
 async function clearProfile(
@@ -474,6 +485,40 @@ function overridesMatch(
             (x.thinking ?? undefined) === (y.thinking ?? undefined)
         );
     });
+}
+
+/** 현재 세션 모델을 planner override 모델과 동일하게 맞춤 */
+async function syncCurrentModelToPlanner(
+    pi: ExtensionAPI,
+    ctx: ExtensionContext,
+    planner: AgentOverrideEntry,
+): Promise<void> {
+    const model = ctx.modelRegistry
+        .getAll()
+        .find((m) => `${m.provider}/${m.id}` === planner.model);
+    if (!model) {
+        await notify(ctx, `planner 모델을 못 찾음: ${planner.model}`);
+        return;
+    }
+    const ok = await pi.setModel(model);
+    if (!ok) {
+        await notify(ctx, `현재 모델 변경 실패(인증 없음): ${planner.model}`);
+        return;
+    }
+    if (planner.thinking) pi.setThinkingLevel(planner.thinking);
+}
+
+/** 적용 scope 가 실제 유효한지 — project 는 항상, global 은 project override 없을 때만 */
+async function isEffectiveScope(
+    scope: ProfileScope,
+    ctx: ExtensionContext,
+    agentDir: string,
+): Promise<boolean> {
+    if (scope === "project") return true;
+    const projectOverrides = readOverridesFrom(
+        await resolveStore("project", ctx, agentDir).read(),
+    );
+    return Object.keys(projectOverrides).length === 0;
 }
 
 /** 현재 적용된 settings(project 우선, 없으면 global)와 일치하는 프로필명 추론 */
@@ -552,14 +597,14 @@ export default function (pi: ExtensionAPI) {
                     console.warn("[model-profile] select failed:", err);
                 }
                 if (!choice) return;
-                await applyProfile(choice, scope, registry, ctx, agentDir, current);
+                await applyProfile(pi, choice, scope, registry, ctx, agentDir, current);
                 return;
             }
 
             if (profileName === INHERIT_NAME) {
                 await clearProfile(scope, ctx, agentDir, current);
             } else {
-                await applyProfile(profileName, scope, registry, ctx, agentDir, current);
+                await applyProfile(pi, profileName, scope, registry, ctx, agentDir, current);
             }
         },
     });

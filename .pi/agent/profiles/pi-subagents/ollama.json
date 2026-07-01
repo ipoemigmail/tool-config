@@ -21,15 +21,15 @@
         "model": "ollama-cloud/deepseek-v4-pro"
       },
       "reviewer": {
-        "model": "ollama-cloud/minimax-3",
+        "model": "ollama-cloud/minimax-m3",
         "thinking": "high"
       },
       "oracle": {
-        "model": "ollama-cloud/minimax-3",
+        "model": "ollama-cloud/minimax-m3",
         "thinking": "high"
       },
       "planner": {
-        "model": "ollama-cloud/minimax-3",
+        "model": "ollama-cloud/minimax-m3",
         "thinking": "high"
       }
     }
