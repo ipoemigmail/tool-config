@@ -25,4 +25,13 @@
 .config/wireshark
 __pycache__
 /.claude/stats-cache.json
+
 /.pi/agent/sessions
+/.pi/agent/git
+/.pi/agent/npm
+/.pi/agent/run-history.*
+/.pi/agent/trust.json
+/.pi/agent/auth.json
+/.pi/agent/cache
+/.pi/agent/bin
+/.pi/web-search.json
