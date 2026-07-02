@@ -18,7 +18,6 @@
   "packages": [
     "npm:pi-web-access",
     "npm:pi-lens",
-    "git:github.com/edxeth/pi-gpt-config",
     "npm:pi-ollama-cloud",
     "npm:@entelligentsia/pi-claude-compat",
     "npm:pi-subagents",
