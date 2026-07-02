@@ -35,3 +35,4 @@ __pycache__
 /.pi/agent/cache
 /.pi/agent/bin
 /.pi/web-search.json
+/.pi/agent/intercom
