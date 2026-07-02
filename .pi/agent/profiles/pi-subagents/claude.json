@@ -18,7 +18,7 @@
         "thinking": "medium"
       },
       "delegate": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-5"
+        "model": "kakao-aws-bedrock/global.anthropic.claude-opus-4-8"
       },
       "reviewer": {
         "model": "kakao-aws-bedrock/global.anthropic.claude-opus-4-8",

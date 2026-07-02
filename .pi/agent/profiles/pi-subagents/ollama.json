@@ -18,7 +18,7 @@
         "thinking": "xhigh"
       },
       "delegate": {
-        "model": "ollama-cloud/deepseek-v4-pro"
+        "model": "ollama-cloud/minimax-m3"
       },
       "reviewer": {
         "model": "ollama-cloud/minimax-m3",
