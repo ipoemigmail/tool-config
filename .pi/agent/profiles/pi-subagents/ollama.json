@@ -18,18 +18,18 @@
         "thinking": "xhigh"
       },
       "delegate": {
-        "model": "ollama-cloud/minimax-m3"
+        "model": "ollama-cloud/glm-5.2"
       },
       "reviewer": {
-        "model": "ollama-cloud/minimax-m3",
+        "model": "ollama-cloud/glm-5.2",
         "thinking": "high"
       },
       "oracle": {
-        "model": "ollama-cloud/minimax-m3",
+        "model": "ollama-cloud/glm-5.2",
         "thinking": "high"
       },
       "planner": {
-        "model": "ollama-cloud/minimax-m3",
+        "model": "ollama-cloud/glm-5.2",
         "thinking": "high"
       }
     }

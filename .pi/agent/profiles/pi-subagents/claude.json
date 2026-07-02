@@ -14,7 +14,7 @@
         "thinking": "medium"
       },
       "worker": {
-        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-5",
+        "model": "kakao-aws-bedrock/global.anthropic.claude-sonnet-4-6",
         "thinking": "medium"
       },
       "delegate": {
