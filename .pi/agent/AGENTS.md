@@ -20,4 +20,5 @@
   - [강제지침] 직접처리는 없음
   - [강제지침] 직접 처리는 없지만 위임/직접 처리 전 한 줄로 "왜 위임/직접인지" 판단 근거를 남긴다.
 - [강제지침] 주석은 장황하지 않게 핵심만 간단히 작성해줘
+- [강제지침] async/background subagent에는 `timeoutMs`/`maxRuntimeMs`를 넣지 않는다. 장시간 무응답 감지는 `control.needsAttentionAfterMs`만 사용한다. timeout 필요 시 `async: false` foreground로 실행한다.
 - [강제지침] ./.pi 는 커밋하지않는다
